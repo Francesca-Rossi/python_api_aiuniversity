@@ -32,7 +32,8 @@ def get_students_original_data():
     students_data = sheet.worksheet('Laureando').get_all_records()
     df_students = pd.DataFrame(students_data)
     print("students shape:", df_students.shape)
-    df_students.to_json('doc/students_original_dataset.json')  #salvo nel documento json //mi serve per node.js
+    df=df_students.apply(lambda col: col.str.lower())
+    df.to_json('doc/students_original_dataset.json')  #salvo nel documento json //mi serve per node.js
     return df_students
 #TODO ha senso richiamare questa funzione solo quando viene aggiunto un nuovo dato, altrimenti si usa il file json
 
@@ -42,6 +43,7 @@ def get_graduate_original_data():
     graduate_data = sheet.worksheet('Laureato').get_all_records()
     df_graduate = pd.DataFrame(graduate_data)
     print("graduates shape:", df_graduate.shape)
+    df = df_graduate.apply(lambda col: col.str.lower())
     df_graduate.to_json('doc/graduates_original_dataset.json')  #salvo nel documento json
     return df_graduate
 #TODO ha senso richiamare questa funzione solo quando viene aggiunto un nuovo dato, altrimenti si usa il file json

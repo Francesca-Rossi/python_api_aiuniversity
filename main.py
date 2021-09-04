@@ -6,6 +6,7 @@
 from fastapi import FastAPI,  HTTPException
 from api import apiClass
 from request import predict_request
+from recovery_data import *
 from db.db_operations import  *
 
 
@@ -50,5 +51,5 @@ async def get_prediction(payload: apiClass.UserInfo):
 if __name__ == '__main__':
     client=dbOpenConnection()
     db = client.get_database("ai_university_db")
-    getAllStudents(db)
+    getAllSubject('economia', db)
     dbCloseConnection(client)
