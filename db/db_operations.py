@@ -1,6 +1,8 @@
 import pandas as pd
 import pymongo
 from bson.json_util import *
+from commons_func.generic_func import  *
+from datetime import datetime
 
 '''
 --------------------------
@@ -550,3 +552,166 @@ def getNumberOfPeopleStudyOutsideProvince(db):
     print(total)
 
 
+def getMarkAveragebyCourse(course, uni, db):
+    dictionary=db.subscriptions.find({'$and':
+       [{'university': uni },
+        {'degree_course': course}]})
+    avg=average_dict(dictionary, 'average_grade')
+    print(avg)
+
+def getMarkAveragebyCourseAndYear(course, uni, year,  db):
+    dictionary = db.subscriptions.find({'$and':
+                                      [{'university': uni},
+                                       {'degree_course': course},
+                                       {'degree_year': year}
+                                       ]})
+    avg = average_dict(dictionary, 'average_grade')
+    print(avg)
+
+def getGradeAveragebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                      [{'university': uni},
+                                       {'degree_course': course}
+                                       ]})
+    avg = average_dict(dictionary, 'graduation_grade')
+    print(avg)
+
+def getDurationAveragebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                      [{'university': uni},
+                                       {'degree_course': course}
+                                       ]})
+    duration = set()
+    for i in dictionary:
+        if int(i['end_year']) & int(i['enrolment_year']):
+            if len(str(i['end_year']))==4 & len(str(i['enrolment_year']))==4:
+                difference=i['end_year']-i['enrolment_year']
+                duration.add(difference)
+    if len(duration)>0:
+        avg = average_list(duration)
+        print(fromFloatToYearAndMonth(avg))
+
+def getExamNotDoneAveragebyCourse(course, uni, db):
+     dictionary = db.subscriptions.find({'$and':
+                                             [{'university': uni},
+                                              {'degree_course': course}
+                                              ]})
+     avg = average_dict(dictionary, 'numb_exams_not_done')
+     print(avg)
+
+def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course},
+                                             {'degree_year': year}
+                                             ]})
+    avg = average_dict(dictionary, 'numb_exams_not_done')
+    print(avg)
+
+def getReviewListbyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    for i in dictionary:
+        if i['review'] !="":
+            print(i['review'])
+
+def getReviewListbyCourseAndYear(course, uni, year,  db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course},
+                                             {'degree_year': year}
+                                             ]})
+    for i in dictionary:
+        if i['review'] != "":
+            print(i['review'])
+
+def getReviewAverangebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    avg = average_dict(dictionary, 'stars')
+    print(avg)
+
+def getReviewAverangebyCourseAndYear(course, uni, year,  db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course},
+                                             {'degree_year': year}
+                                             ]})
+    avg = average_dict(dictionary, 'stars')
+    print(avg)
+
+def getReviewAverangebyUni(uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni}
+                                             ]})
+    avg = average_dict(dictionary, 'stars')
+    print(avg)
+
+def getDidacticQualityAverangebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    avg = average_dict(dictionary, 'didactic_quality')
+    print(avg)
+
+def getTeachingQualityAverangebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    avg = average_dict(dictionary, 'teaching_quality')
+    print(avg)
+
+def getExamDifficultAverangebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    avg = average_dict(dictionary, 'exams_difficulties')
+    print(avg)
+
+def getSubjectsDifficultAverangebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    avg = average_dict(dictionary, 'subjects_difficulties')
+    print(avg)
+
+def getEnviromentalQualityAverangebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    avg = average_dict(dictionary, 'environment_quality')
+    print(avg)
+
+def getStudentsRelationshipAverangebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    avg = average_dict(dictionary, 'students_relationship')
+    print(avg)
+
+def getDateOfLastSubscription(db):
+    dictionary = db.subscriptions.find({})
+    df=pd.DataFrame()
+    date_list=set()
+    for dict in dictionary:
+        date_str= dict['subscription_date']
+        dto = datetime.strptime(date_str, '%d-%m-%Y').date()
+        date_list.add(dto)
+    most_recent=max(date_list)
+    print(most_recent)
+
+
+def getSubscriptionByDate(date, db):
+    dictionary = db.subscriptions.find({'subscription_date': date})
+    for i in dictionary:
+        print(i)
