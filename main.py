@@ -49,7 +49,12 @@ async def get_prediction(payload: apiClass.UserInfo):
     return response_object
 
 if __name__ == '__main__':
+    #TODO: METTI NEL DATABASE SOLO LE LAUREE DEL PRIMO CICLO
+    #TODO: FAI LO STRIP DI TUTTE LE CELLE PRIMA DI INSERIRE IN DATABASE
+    #TODO: INSERIRE DATA SOTTOSCRIZIONE
+    #TODO: INSERIRE EMAIL/ CODICE IDENTIFICATIVO UUID PER NUOVE SOTTOSCRIZIONI DI UTENTI REGISTRATI
     client=dbOpenConnection()
     db = client.get_database("ai_university_db")
-    getAllSubject('economia', db)
+    getNumberOfWomanWhitSameRegionOfUni('università degli studi di parma', db)
+    getNumberOfWomanByUNi('università degli studi di parma', db)
     dbCloseConnection(client)

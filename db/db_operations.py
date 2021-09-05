@@ -139,41 +139,85 @@ def getAllCourse(uni, db):
     except Exception as e:
         print(e)
 
-def getAllHomeRegion(db):
+def getAllRegion(db):
     #recupero tutti le regioni del db ( sia studenti che laureati)
     try:
-        cursor = db.subscriptions.distinct('home_region')
-        for i in cursor:
+        home = db.subscriptions.distinct('home_region')
+        study = db.subscriptions.distinct('study_region')
+        region_list=set()
+        for item in home:
+            region_list.add(item)
+        for item in study:
+            if item not in region_list:
+                region_list.add(item)
+        for i in region_list:
+            print(i)
+        return region_list
+    except Exception as e:
+        print(e)
+
+def getRegionFromUni(uni, db):
+    #recupero la regione di un università
+    try:
+        study = db.subscriptions.distinct('study_region', {"university": uni})
+        home = db.subscriptions.distinct('home_region', {"university": uni})
+        if len(study) > 1:
+            print(len(study))
+            for item in study:
+                if (len(home)>0):
+                    if item != '':
+                        for item1 in home:
+                            if (item == item1):
+                                print(item)
+                                return item
+                else:
+                    print(item)
+                    return item
+        else:
+            print("NO REGION FOUND")
+
+    except Exception as e:
+        print(e)
+
+def getAllProvince(db):
+    #recupero tutti le regioni del db ( sia studenti che laureati)
+    try:
+        home = db.subscriptions.distinct('home_province')
+        study = db.subscriptions.distinct('study_province')
+        province_list=set()
+        for item in home:
+            province_list.add(item.upper())
+        for item in study:
+            if item not in province_list:
+                province_list.add(item.upper())
+        for i in province_list:
             print(i)
     except Exception as e:
         print(e)
 
-def getAllStudyRegion(db):
-    #recupero tutti le regioni del db ( sia studenti che laureati)
+def getProvinceFromUni(uni, db):
+    #recupero la regione di un università
     try:
-        cursor = db.subscriptions.distinct('study_region')
-        for i in cursor:
-            print(i)
+        study = db.subscriptions.distinct('study_province', {"university": uni})
+        home = db.subscriptions.distinct('home_province', {"university": uni})
+        if len(study) > 0:
+            print(len(study))
+            for item in study:
+                if (len(home)>0):
+                    for item1 in home:
+                        if (item == item1):
+                            print(item)
+                            return item
+                else:
+                    print(item)
+                    return item
+        else:
+            print('NO PROVINCE FOUND')
+
     except Exception as e:
         print(e)
 
-def getAllHomeProvince(db):
-    #recupero tutti le regioni del db ( sia studenti che laureati)
-    try:
-        cursor = db.subscriptions.distinct('home_province')
-        for i in cursor:
-            print(i)
-    except Exception as e:
-        print(e)
 
-def getAllStudyProvince(db):
-    #recupero tutti le regioni del db ( sia studenti che laureati)
-    try:
-        cursor = db.subscriptions.distinct('study_province')
-        for i in cursor:
-            print(i)
-    except Exception as e:
-        print(e)
 
 def getAllSubject(course, db):
     #recupero tutte le materie dato un corso generico
@@ -192,19 +236,8 @@ def getAllSubject(course, db):
 
 def getAllSubjectWhitUni(course, db, uni):
     #recupero tutte le materie dato un corso specifico di un università
-    capital_course= course.capitalize()
     try:
-        cursor = db.subscriptions.distinct('subject_area',  {'$and': [
-               {
-                 '$or': [
-                         {"degree_course" : course},
-                         {"degree_course" : capital_course}
-                       ]
-               },
-               {
-                 "university": uni
-               }
-             ]})
+        cursor = db.subscriptions.distinct('subject_area',  {'$and': [{"degree_course": course},{"university": uni}]})
         for i in cursor:
             list= i.split(',')
             subject_list=set()
@@ -215,27 +248,305 @@ def getAllSubjectWhitUni(course, db, uni):
     except Exception as e:
         print(e)
 
-#TODO: def getAllEasyExam(course, db)
-#recupero tutte gli esami facili dato un corso
+def getAllEasyExam(course, uni, db):
+    #recupero tutte gli esami facili dato un corso di un'università
+    try:
+        easy_exam = db.subscriptions.distinct('easy_exams',{'$and': [{"university": uni}, {'degree_course': course}]})
+        exams_list = set()
+        for exams in easy_exam:
+            list= exams.split(',')
+            for item in list:
+                if item.strip() not in exams_list:
+                    exams_list.add(item.strip())
+                    print(item.strip())
+    except Exception as e:
+        print(e)
 
-#TODO: def getAllDifficultExam(course, db)
-#recupero tutte gli esami difficili dato un corso
+def getAllDifficultExam(course, uni,  db):
+    #recupero tutte gli esami difficili dato un corso
+    # recupero tutte gli esami facili dato un corso di un'università
+    try:
+        hard_exams = db.subscriptions.distinct('hard_exams', {'$and': [{"university": uni}, {'degree_course': course}]})
+        exams_list = set()
+        for exams in hard_exams:
+            list = exams.split(',')
+            for item in list:
+                if item.strip() not in exams_list:
+                    exams_list.add(item.strip())
+                    print(item.strip())
+    except Exception as e:
+        print(e)
 
-#TODO: def getNumberOfMan(course, db)
-#recupero numero maschi in un corso
-#TODO: def getNumberOfMan(uni, db)
-#recupero numero maschi in un università
-#TODO: def getNumberOfMan(region, db)
-#recupero numero maschi in una regione iscritti all'uni
-#TODO: def getNumberOfWoman(course, db)
-#recupero numero femmine in un corso
-#TODO: def getNumberOfWoman(uni, db)
-#recupero numero femmine in un università
-#TODO: def getNumberOfWoman(region, db)
-#recupero numero maschi in una regione iscritti all'uni
-#TODO: def getNumberOfSubscrives(course, db)
-#recupero numero totali sottoscrizioni ( studenti + laureati) per quel corso
-#TODO: def getNumberOfSubscrives(uni, db)
-#recupero numero totali sottoscrizioni ( studenti + laureati) in un università
-#TODO: def totalNumberOfSubscriver(db)
-#recupero numero totali sottoscrizioni ( studenti + laureati) ricevute al questionario
+'''
+MAN QUERY
+'''
+def getNumberOfManByCourseAndUni(course, uni, db):
+    #recupero numero maschi in un corso
+    man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'m'}]})
+    print(man)
+def getNumberOfManByCourse(course, db):
+    #recupero numero maschi in un corso
+    man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'm'}]})
+    print(man)
+
+def getNumberOfManByUNi(uni, db):
+    #recupero numero maschi in un università
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'm'}]})
+    print(man)
+
+def getNumberOfManWhitSameProvinceOfUni(uni, db):
+    #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
+    province=getProvinceFromUni(uni, db)
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'm'}]})
+    print(man)
+
+def getNumberOfManWhitSameRegionOfUni(uni, db):
+    #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
+    region=getRegionFromUni(uni, db)
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'm'}]})
+    print(man)
+
+def getNumberOfManByRegion(home_region, db):
+    #recupero numero maschi in una regione iscritti all'uni
+    man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'm'}]})
+    print(man)
+
+def getNumberOfManGroupbyRegion(db):
+    #da che regione provengono i ragazzi che studiano all'uni
+    region_list=getAllRegion(db)
+    region_dict={}
+    for region in region_list:
+        if region != "":
+            n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'm'}]})
+            region_dict[region]=n_man
+    print(region_dict)
+
+def getNumberOfManStudyatHomeRegion(db):
+    #quanti sono i ragazzi che studiano nella loro regione di provenienza
+    man = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'm'}]})
+    print(man)
+
+def getNumberOfManStudyOutsideRegion(db):
+    #quanti sono i ragazzi che studiano fuori regione ragruppati per re
+    region_list=getAllRegion(db)
+    total=0
+    for region in region_list:
+        if region != "":
+            n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'm'}]})
+            total = total + n_man
+    print(total)
+
+def getNumberOfManByProvince(home_province, db):
+    #recupero numero maschi in una regione iscritti all'uni
+    man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'm'}]})
+    print(man)
+
+def getNumberOfManGroupbyProvince(db):
+    #da che regione provengono i ragazzi che studiano all'uni
+    province_list=getAllProvince(db)
+    province_dict={}
+    for province in province_list:
+        if province != "":
+            n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'm'}]})
+            province_dict[province]=n_man
+    print(province_dict)
+
+def getNumberOfManStudyatHomeProvince(db):
+    #quanti sono i ragazzi che studiano nella loro regione di provenienza
+    man = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'm'}]})
+    print(man)
+
+def getNumberOfManStudyOutsideProvince(db):
+    #quanti sono i ragazzi che studiano fuori regione
+    province_list=getAllProvince(db)
+    total=0
+    for province in province_list:
+        if province != "":
+            n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'm'}]})
+            total = total + n_man
+    print(total)
+
+
+
+'''
+WOMAN QUERY
+'''
+def getNumberOfWomanByCourseAndUni(course, uni, db):
+    #recupero numero maschi in un corso
+    man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'f'}]})
+    print(man)
+def getNumberOfWomanByCourse(course, db):
+    #recupero numero maschi in un corso
+    man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'f'}]})
+    print(man)
+
+def getNumberOfWomanByUNi(uni, db):
+    #recupero numero maschi in un università
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'f'}]})
+    print(man)
+
+def getNumberOfWomanWhitSameProvinceOfUni(uni, db):
+    #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
+    province=getProvinceFromUni(uni, db)
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'f'}]})
+    print(man)
+
+def getNumberOfWomanWhitSameRegionOfUni(uni, db):
+    #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
+    region=getRegionFromUni(uni, db)
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'f'}]})
+    print(man)
+
+def getNumberOfWomanByRegion(home_region, db):
+    #recupero numero maschi in una regione iscritti all'uni
+    man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'f'}]})
+    print(man)
+
+def getNumberOfWomanGroupbyRegion(db):
+    #da che regione provengono i ragazzi che studiano all'uni
+    region_list=getAllRegion(db)
+    region_dict={}
+    for region in region_list:
+        if region != "":
+            n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'f'}]})
+            region_dict[region]=n_man
+    print(region_dict)
+
+def getNumberOfWomanStudyatHomeRegion(db):
+    #quanti sono i ragazzi che studiano nella loro regione di provenienza
+    man = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'f'}]})
+    print(man)
+
+def getNumberOfWomanStudyOutsideRegion(db):
+    #quanti sono i ragazzi che studiano fuori regione ragruppati per re
+    region_list=getAllRegion(db)
+    total=0
+    for region in region_list:
+        if region != "":
+            n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'f'}]})
+            total = total + n_man
+    print(total)
+
+def getNumberOfWomanByProvince(home_province, db):
+    #recupero numero maschi in una regione iscritti all'uni
+    man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'f'}]})
+    print(man)
+
+def getNumberOfWomanGroupbyProvince(db):
+    #da che regione provengono i ragazzi che studiano all'uni
+    province_list=getAllProvince(db)
+    province_dict={}
+    for province in province_list:
+        if province != "":
+            n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'f'}]})
+            province_dict[province]=n_man
+    print(province_dict)
+
+def getNumberOfWomanStudyatHomeProvince(db):
+    #quanti sono i ragazzi che studiano nella loro regione di provenienza
+    man = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'f'}]})
+    print(man)
+
+def getNumberOfWomanStudyOutsideProvince(db):
+    #quanti sono i ragazzi che studiano fuori regione
+    province_list=getAllProvince(db)
+    total=0
+    for province in province_list:
+        if province != "":
+            n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'f'}]})
+            total = total + n_man
+    print(total)
+
+
+
+'''
+SUBSCRIBERS QUERY
+'''
+def getNumberOfPeopleByCourseAndUni(course, uni, db):
+    #recupero numero maschi in un corso
+    man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}]})
+    print(man)
+def getNumberOfPeopleByCourse(course, db):
+    #recupero numero maschi in un corso
+    man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}]})
+    print(man)
+
+def getNumberOfPeopleByUNi(uni, db):
+    #recupero numero maschi in un università
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}]})
+    print(man)
+
+def getNumberOfPeopleWhitSameProvinceOfUni(uni, db):
+    #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
+    province=getProvinceFromUni(uni, db)
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}]})
+    print(man)
+
+def getNumberOfPeopleWhitSameRegionOfUni(uni, db):
+    #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
+    region=getRegionFromUni(uni, db)
+    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}]})
+    print(man)
+
+def getNumberOfPeopleByRegion(home_region, db):
+    #recupero numero maschi in una regione iscritti all'uni
+    man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}]})
+    print(man)
+
+
+def getNumberOfPeopleGroupbyRegion(db):
+    #da che regione provengono i ragazzi che studiano all'uni
+    region_list=getAllRegion(db)
+    region_dict={}
+    for region in region_list:
+        if region != "":
+            n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}]})
+            region_dict[region]=n_man
+    print(region_dict)
+
+def getNumberOfPeopleStudyatHomeRegion(db):
+    #quanti sono i ragazzi che studiano nella loro regione di provenienza
+    man = db.subscriptions.count_documents({'$and': [{'study_region': ''}]})
+    print(man)
+
+def getNumberOfPeopleStudyOutsideRegion(db):
+    #quanti sono i ragazzi che studiano fuori regione
+    region_list=getAllRegion(db)
+    total=0
+    for region in region_list:
+        if region != "":
+            n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}]})
+            total = total + n_man
+    print(total)
+
+def getNumberOfPeopleByProvince(home_province, db):
+    #recupero numero maschi in una regione iscritti all'uni
+    man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}]})
+    print(man)
+
+def getNumberOfPeopleGroupbyProvince(db):
+    #da che regione provengono i ragazzi che studiano all'uni
+    province_list=getAllProvince(db)
+    province_dict={}
+    for province in province_list:
+        if province != "":
+            n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}]})
+            province_dict[province]=n_man
+    print(province_dict)
+
+def getNumberOfPeopleStudyatHomeProvince(db):
+    #quanti sono i ragazzi che studiano nella loro regione di provenienza
+    man = db.subscriptions.count_documents({'$and': [{'study_province': ''}]})
+    print(man)
+
+def getNumberOfPeopleStudyOutsideProvince(db):
+    #quanti sono i ragazzi che studiano fuori regione
+    province_list=getAllProvince(db)
+    total=0
+    for province in province_list:
+        if province != "":
+            n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}]})
+            total = total + n_man
+    print(total)
+
+
