@@ -1,4 +1,6 @@
 import  json as js
+from datetime import date
+
 def get_slug_degree_course():
     file = open("doc\slug_degree.json", 'r')
     slug_degree_course = js.load(file)
@@ -52,3 +54,8 @@ def fromFloatToYearAndMonth(float_n):
         return(str(year) + ' anni e '+ str(month) +' mesi')
     else:
         return( str(year) + ' anni')
+
+def todayToString():
+    today = date.today()
+    date_today = today.strftime("%d-%m-%Y")
+    return date_today

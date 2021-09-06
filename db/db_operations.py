@@ -23,23 +23,29 @@ def dbCloseConnection(client):
 INSERT METHOD
 --------------------------
 '''
-def addNewStudent(student_info, db):
+async def addNewStudent(student_info, db):
     try:
         db.students.insert_one(student_info) #student_info is a dict
+        return True
     except:
-        print('exception to insert students')
+        print(e)
+        return False
 
-def addNewGraduate(graduate_info, db):
+async def addNewGraduate(graduate_info, db):
     try:
         db.graduates.insert_one(graduate_info) #graduate_info is a dict
+        return True
     except:
-        print('exception to insert graduate')
+        print(e)
+        return False
 
-def addNewSubscriptions(subscriptions_info, db):
+async def addNewSubscriptions(subscriptions_info, db):
     try:
         db.subscriptions.insert_one(subscriptions_info)
+        return True
     except Exception as e:
-        print( e)
+        print(e)
+        return False
 
 
 '''
@@ -72,93 +78,106 @@ def getAllSubscription(db):
     df=pd.read_json(dumps(cursor))
     df.to_json('doc/subscriptions_original_dataset.json')
 
-#TODO: def countAllSubscription(db)
 
-def getAllUni(db):
+
+async def getAllUni(db):
     #recupero tutte le università del database ( sia studenti che laureati)
+    uni_list = set()
     try:
         cursor = db.subscriptions.distinct('university')
-        for i in cursor:
-            print(i)
+        for item in cursor:
+            if item !="":
+                uni_list.add(item)
+        return uni_list
     except Exception as e:
         print(e)
 
-def getAllUni(course, db):
+async def getAllUnByCourse(course, db):
     #recupero tutte le università che hanno quel corso di laurea ( sia studenti che laureati)
+    uni_list = set()
     try:
         cursor = db.subscriptions.distinct('university', {"degree_course": course})
-        for i in cursor:
-            print(i)
+        for item in cursor:
+            if item != "":
+                uni_list.add(item)
+        return uni_list
     except Exception as e:
         print(e)
 
-def getAllUni(region, db):
+async def getAllUniByRegion(region, db):
     # recupero tutte le università che si trovano in quella regione ( sia studenti che laureati)
+    uni_list = set()
     try:
         home_region_list = db.subscriptions.distinct('university', { '$or': [{ "study_region": '' ,"home_region": region}]})
         study_region_list= db.subscriptions.distinct('university', {'$or': [{"study_region": region}]})
         for i in home_region_list:
             for j in study_region_list:
                 if ( j==i ):
-                    print(j)
+                    if i != "":
+                        uni_list.add(i)
+        return uni_list
     except Exception as e:
         print(e)
 
-def getAllUni(province, db):
+async def getAllUniByProvince(province, db):
     #recupero tutte le università che si trovano in quella provincia ( sia studenti che laureati)
+    uni_list = set()
     try:
         home_province_list = db.subscriptions.distinct('university', { '$or': [{ "study_province": '' ,"home_province": province}]})
         study_province_list = db.subscriptions.distinct('university', {'$or': [{"study_province": province}]})
         for i in home_province_list:
             for j in study_province_list:
                 if ( j==i ):
-                    print(j)
+                    if i != "":
+                        uni_list.add(i)
+        return uni_list
     except Exception as e:
         print(e)
 
-def getAllCourse(db):
+async def getAllCourse(db):
     #recupero tutti i corsi del db ( sia studenti che laureati)
+    degree_course_list = set()
     try:
         cursor = db.subscriptions.distinct('degree_course')
-        degree_course_list=set()
         for item in cursor:
             if item not in degree_course_list:
-                degree_course_list.add(item)
-                print(item)
+                if item != "":
+                    degree_course_list.add(item)
+        return degree_course_list
 
     except Exception as e:
         print(e)
 
-def getAllCourse(uni, db):
+async def getAllCourseByUni(uni, db):
     #recupero tutti i corsi di un università ( sia studenti che laureati)
+    degree_course_list = set()
     try:
         cursor = db.subscriptions.distinct('degree_course', {"university": uni})
         degree_course_list = set()
         for item in cursor:
             if item not in degree_course_list:
-                degree_course_list.add(item)
-                print(item)
+                if item != "":
+                    degree_course_list.add(item)
+        return degree_course_list
     except Exception as e:
         print(e)
 
-def getAllRegion(db):
+async def getAllRegion(db):
     #recupero tutti le regioni del db ( sia studenti che laureati)
+    region_list = set()
     try:
         home = db.subscriptions.distinct('home_region')
         study = db.subscriptions.distinct('study_region')
-        region_list=set()
         for item in home:
             region_list.add(item)
         for item in study:
             if item not in region_list:
                 region_list.add(item)
-        for i in region_list:
-            print(i)
         return region_list
     except Exception as e:
         print(e)
 
-def getRegionFromUni(uni, db):
+async def getRegionByUni(uni, db):
     #recupero la regione di un università
     try:
         study = db.subscriptions.distinct('study_region', {"university": uni})
@@ -170,13 +189,12 @@ def getRegionFromUni(uni, db):
                     if item != '':
                         for item1 in home:
                             if (item == item1):
-                                print(item)
                                 return item
                 else:
-                    print(item)
                     return item
         else:
-            print("NO REGION FOUND")
+            item="NO REGION FOUND"
+            print(item)
 
     except Exception as e:
         print(e)
@@ -715,3 +733,31 @@ def getSubscriptionByDate(date, db):
     dictionary = db.subscriptions.find({'subscription_date': date})
     for i in dictionary:
         print(i)
+
+
+def getLaboratoryAverangebyCourse(course, uni, db):
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    avg = average_dict(dictionary, 'laboratory')
+    print(avg)
+
+#TODO: def getDifficultAspectList(course, uni, db):
+
+#TODO: def getCountRedoChoice(course, uni, db):
+#Quanti studenti rifarebbero la scelta
+
+#TODO: def getNumberOfStudentsDoErasmusByCourse(course, uni, db):
+#Contare quanti hanno fatto un esperienza all'estero
+
+#TODO: def getNumberOfStudentsDoErasmusByUni(uni, db):
+
+#TODO: def getNumberOfStudentsDoPreviousDegree(course, uni, db):
+#Quanti studenti avevano già fatto una precedente carriera incompleta
+
+#TODO: def getNumberOfCourse( db):
+#Total number of course in the db
+
+#TODO: def getNumberOfCourseInUni(uni, db):
+#Total number of course in an university

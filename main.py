@@ -3,8 +3,8 @@
 # Press Maiusc+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-from fastapi import FastAPI,  HTTPException
-from api import apiClass
+from fastapi import FastAPI,  HTTPException, routing
+from api.apiClass import  *
 from request import predict_request
 from recovery_data import *
 from db.db_operations import  *
@@ -12,6 +12,7 @@ from datetime import date
 
 
 app = FastAPI()
+
 
 # pydantic models
 
@@ -21,9 +22,93 @@ app = FastAPI()
 def pong():
     return {"ping": "pong!"}
 
-@app.post("/predict", response_model= apiClass.DegreeResult, status_code=200)
-async def get_prediction(payload: apiClass.UserInfo):
+@app.get("/getAllUni")
+async def get_all_uni():
+    '''Get all the university present in the db'''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    list = await getAllUni(db)
+    dbCloseConnection(client)
+    return list
+
+@app.get("/getAllUniByCourse")
+async def get_all_uni_by_course(course: str):
+    '''Get all the university by course'''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    input= course.lower()
+    input = input.strip()
+    list = await getAllUnByCourse(input, db)
+    dbCloseConnection(client)
+    return list
+
+@app.get("/getAllUniByRegion")
+async def get_all_uni_by_region(region: str):
+    '''Get all the university by region'''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    input = region.lower()
+    input = input.strip()
+    list = await getAllUniByRegion(input, db)
+    dbCloseConnection(client)
+    return list
+
+@app.get("/getAllUniByProvince")
+async def get_all_uni_by_province(province: str):
+    '''Get all the university by region'''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    input = province.lower()
+    input = input.strip()
+    list = await getAllUniByProvince(input, db)
+    dbCloseConnection(client)
+    return list
+
+@app.get("/getAllCourse")
+async def get_all_course():
+    '''Get all italian course in the DB'''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    list = await getAllCourse(db)
+    dbCloseConnection(client)
+    return list
+
+@app.get("/getAllCourseByUni")
+async def get_all_course_by_uni(university: str):
+    '''Get all the course given a university'''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    input = university.lower()
+    input = input.strip()
+    list =  await getAllCourseByUni(input, db)
+    dbCloseConnection(client)
+    return list
+
+@app.get("/getAllRegion")
+async def get_all_region():
+    '''Get all the region from the db'''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    list =  await getAllRegion(db)
+    dbCloseConnection(client)
+    return list
+
+@app.get("/getRegionByUni")
+async def get_region_by_uni(university: str):
+    '''Get all the region from the db'''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    input = university.lower()
+    input = input.strip()
+    list =  await getRegionByUni(input, db)
+    dbCloseConnection(client)
+    return list
+
+
+@app.get("/predict", response_model= DegreeResult, status_code=200)
+async def prediction_degree(payload: UserInfo):
     '''api per prevedere una laurea dato le informazioni in ingresso ( da usare sia per studenti superiori sia come check per gli studenti universitari)'''
+    #TODO: Questo codice si può migliorare
     high_school = payload.high_school
     main_subject = payload.main_subject
     prefered_subject = payload.prefered_subject
@@ -49,6 +134,48 @@ async def get_prediction(payload: apiClass.UserInfo):
          }
     return response_object
 
+@app.post("/addNewSubscriptions", response_model= BoolResult, status_code=200)
+async def add_new_subscription(payload: SubscriptionInfo):
+    '''Aggiunta di una compilazione al database'''
+    user_info_dict=SubscriptionInfo(** payload.dict())
+    print(user_info_dict.dict())
+
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    result= addNewSubscriptions(user_info_dict.dict(), db)
+    dbCloseConnection(client)
+
+    response_object = {"result": result}
+    return response_object
+
+@app.post("/addNewStudent", response_model= BoolResult, status_code=200)
+async def add_new_students(payload: SubscriptionInfo):
+    '''Aggiunta di uno studente al database'''
+    user_info_dict=SubscriptionInfo(** payload.dict())
+    print(user_info_dict.dict())
+
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    result= addNewStudent(user_info_dict.dict(), db)
+    dbCloseConnection(client)
+
+    response_object = {"result": result}
+    return response_object
+
+@app.post("/AddNewGraduate", response_model= BoolResult, status_code=200)
+async def add_new_graduate(payload: SubscriptionInfo):
+    '''Aggiunta di un laureato al database'''
+    user_info_dict=SubscriptionInfo(** payload.dict())
+    print(user_info_dict.dict())
+
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    result= addNewGraduate(user_info_dict.dict(), db)
+    dbCloseConnection(client)
+
+    response_object = {"result": result}
+    return response_object
+
 
 
 
@@ -56,7 +183,7 @@ if __name__ == '__main__':
     #TODO: INSERIRE EMAIL/ CODICE IDENTIFICATIVO UUID PER NUOVE SOTTOSCRIZIONI DI UTENTI REGISTRATI
     client=dbOpenConnection()
     db = client.get_database("ai_university_db")
-    getSubscriptionByDate('05-09-2021', db)
+    #getSubscriptionByDate('05-09-2021', db)
     dbCloseConnection(client)
 
     '''# inserisco di nuovo tutto nel dataset
