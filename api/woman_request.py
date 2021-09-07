@@ -1,8 +1,8 @@
 from .apiClass import  *
 
-@app.get("/getNumberOfWomanByCourseAndUni", tags=["Number of women"])
-async def get_woman_by_uni_and_course(university: str, course: str):
-    '''How womany woman there are in a course? '''
+@app.get("/getNumberOfWomenByCourseAndUni", tags=["Number of women"])
+async def get_women_by_uni_and_course(university: str, course: str):
+    '''How many women there are in a course? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     uni_input = university.lower()
@@ -13,9 +13,9 @@ async def get_woman_by_uni_and_course(university: str, course: str):
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanByCourse", tags=["Number of women"])
-async def get_woman_by_course( course: str):
-    '''How womany woman there study this course? '''
+@app.get("/getNumberOfWomenByCourse", tags=["Number of women"])
+async def get_women_by_course( course: str):
+    '''How many women study in this course? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     course_input = course.lower()
@@ -24,9 +24,9 @@ async def get_woman_by_course( course: str):
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanByUni", tags=["Number of women"])
-async def get_woman_by_uni(university: str):
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenByUni", tags=["Number of women"])
+async def get_women_by_uni(university: str):
+    '''How many women there are in a university? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     uni_input = university.lower()
@@ -35,9 +35,9 @@ async def get_woman_by_uni(university: str):
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanWhitSameProvinceOfUni", tags=["Number of women"])
-async def get_woman_whit_same_province_of_uni(university: str):
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenWithSameProvinceOfUni", tags=["Number of women"])
+async def get_women_whit_same_province_of_uni(university: str):
+    '''How many women study in the same province? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     uni_input = university.lower()
@@ -46,9 +46,9 @@ async def get_woman_whit_same_province_of_uni(university: str):
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanWhitSameRegionOfUni", tags=["Number of women"])
-async def get_woman_whit_same_region_of_uni(university: str):
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenWithSameRegionOfUni", tags=["Number of women"])
+async def get_women_whit_same_region_of_uni(university: str):
+    '''How many women study at the same region? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     uni_input = university.lower()
@@ -57,9 +57,9 @@ async def get_woman_whit_same_region_of_uni(university: str):
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanByRegion", tags=["Number of women"])
-async def get_woman_by_region(region: str):
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenByRegion", tags=["Number of women"])
+async def get_women_by_region(region: str):
+    '''How many women are in a region? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     input = region.lower()
@@ -68,36 +68,36 @@ async def get_woman_by_region(region: str):
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanGroupbyRegion", tags=["Number of women"])
-async def get_woman_groupby_region():
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenGroupbyRegion", tags=["Number of women"])
+async def get_women_groupby_region():
+    '''How many women are in all regions? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     number =  await getNumberOfWomanGroupbyRegion(db)
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanStudyatHomeRegion", tags=["Number of women"])
-async def get_woman_study_at_home_region():
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenStudyatHomeRegion", tags=["Number of women"])
+async def get_women_study_at_home_region():
+    '''How many women study at the home region? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     number =  await getNumberOfWomanStudyatHomeRegion(db)
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanStudyOutsideRegion", tags=["Number of women"])
-async def get_woman_study_outside_region():
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenStudyOutsideRegion", tags=["Number of women"])
+async def get_women_study_outside_region():
+    '''How many women study outside the region? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     number =  await getNumberOfWomanStudyOutsideRegion(db)
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanByProvince", tags=["Number of women"])
-async def get_woman_by_province(province: str):
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenByProvince", tags=["Number of women"])
+async def get_women_by_province(province: str):
+    '''How many women study in a province? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     input = province.lower()
@@ -106,9 +106,9 @@ async def get_woman_by_province(province: str):
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanGroupbyProvince", tags=["Number of women"])
-async def get_woman_groupby_province(province: str):
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenGroupbyProvince", tags=["Number of women"])
+async def get_women_groupby_province(province: str):
+    '''How many women study in all provinces? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     input = province.lower()
@@ -117,18 +117,18 @@ async def get_woman_groupby_province(province: str):
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanStudyatHomeProvince", tags=["Number of women"])
-async def get_woman_study_at_home_province():
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenStudyatHomeProvince", tags=["Number of women"])
+async def get_women_study_at_home_province():
+    '''How many women study at the home province? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     number =  await getNumberOfWomanStudyatHomeProvince(db)
     dbCloseConnection(client)
     return number
 
-@app.get("/getNumberOfWomanStudyOutsideProvince", tags=["Number of women"])
-async def get_woman_study_outside_province():
-    '''How womany woman there are in a uni? '''
+@app.get("/getNumberOfWomenStudyOutsideProvince", tags=["Number of women"])
+async def get_women_study_outside_province():
+    '''How many women study outside the province? '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     number = await getNumberOfWomanStudyOutsideProvince(db)

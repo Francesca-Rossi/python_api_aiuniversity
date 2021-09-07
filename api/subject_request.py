@@ -1,8 +1,8 @@
 from .apiClass import  *
 
-@app.get("/getAllSubject", tags=["Subjects & Exams"])
+@app.get("/getAllSubjects", tags=["Subjects & Exams"])
 async def get_all_subject(course: str):
-    '''Get all subjects study in a course'''
+    '''Get all subjects studied in a course'''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     input = course.lower()
@@ -11,9 +11,9 @@ async def get_all_subject(course: str):
     dbCloseConnection(client)
     return list
 
-@app.get("/getAllSubjectByUni", tags=["Subjects & Exams"])
+@app.get("/getAllSubjectsByUni", tags=["Subjects & Exams"])
 async def get_all_subject_by_uni(university: str, course: str):
-    '''Get all the province given a uni'''
+    '''Get all the subjects of a university'''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     uni_input = university.lower()
@@ -24,9 +24,9 @@ async def get_all_subject_by_uni(university: str, course: str):
     dbCloseConnection(client)
     return list
 
-@app.get("/getAllEasyExam", tags=["Subjects & Exams"])
+@app.get("/getAllEasyExams", tags=["Subjects & Exams"])
 async def get_all_easy_exam(university: str, course: str):
-    '''Get all easy exam in a course '''
+    '''Get all easy exams in a course '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     uni_input = university.lower()
@@ -37,9 +37,9 @@ async def get_all_easy_exam(university: str, course: str):
     dbCloseConnection(client)
     return list
 
-@app.get("/getAllHardExam", tags=["Subjects & Exams"])
+@app.get("/getAllHardExams", tags=["Subjects & Exams"])
 async def get_all_hard_exam(university: str, course: str):
-    '''Get all easy exam in a course '''
+    '''Get all hard exams in a course '''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     uni_input = university.lower()

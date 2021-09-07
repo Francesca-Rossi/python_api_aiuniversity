@@ -1,8 +1,8 @@
 from .apiClass import  *
 
-@app.get("/getAllRegion", tags=["Regions & Provinces"])
+@app.get("/getAllRegions", tags=["Regions & Provinces"])
 async def get_all_region():
-    '''Get all the region from the db'''
+    '''Get all the regions from the db'''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     list =  await getAllRegion(db)
@@ -11,7 +11,7 @@ async def get_all_region():
 
 @app.get("/getRegionByUni", tags=["Regions & Provinces"])
 async def get_region_by_uni(university: str):
-    '''Get all the region from the db'''
+    '''Get the region by the university'''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     input = university.lower()
@@ -20,9 +20,9 @@ async def get_region_by_uni(university: str):
     dbCloseConnection(client)
     return list
 
-@app.get("/getAllProvince", tags=["Regions & Provinces"])
+@app.get("/getAllProvinces", tags=["Regions & Provinces"])
 async def get_all_province():
-    '''Get all the province from the db'''
+    '''Get all the provinces from the db'''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     list =  await getAllProvince(db)
@@ -31,7 +31,7 @@ async def get_all_province():
 
 @app.get("/getProvinceByUni", tags=["Regions & Provinces"])
 async def get_province_by_uni(university: str):
-    '''Get all the province given a uni'''
+    '''Get the province of a university'''
     client = dbOpenConnection()
     db = client.get_database("ai_university_db")
     input = university.lower()
