@@ -1,8 +1,10 @@
 from pydantic import BaseModel
 from typing import Optional
 from commons_func.generic_func import *
+from fastapi import FastAPI
+from db.db_operations import  *
 
-
+app = FastAPI(debug=True, title="AIuniversity-API")
 
 class BoolResult(BaseModel):
     result: bool

@@ -6,12 +6,18 @@
 from fastapi import FastAPI,  HTTPException, routing
 from api.apiClass import  *
 from request import predict_request
+from api.man_request import  *
+from api.woman_request import  *
+from api.subscription_request import  *
+from api.uni_request import *
+from api.course_request import  *
+from api.region_and_province_request import  *
+from api.subject_request import *
 from recovery_data import *
-from db.db_operations import  *
 from datetime import date
 
 
-app = FastAPI()
+
 
 
 # pydantic models
@@ -22,87 +28,13 @@ app = FastAPI()
 def pong():
     return {"ping": "pong!"}
 
-@app.get("/getAllUni")
-async def get_all_uni():
-    '''Get all the university present in the db'''
-    client = dbOpenConnection()
-    db = client.get_database("ai_university_db")
-    list = await getAllUni(db)
-    dbCloseConnection(client)
-    return list
 
-@app.get("/getAllUniByCourse")
-async def get_all_uni_by_course(course: str):
-    '''Get all the university by course'''
-    client = dbOpenConnection()
-    db = client.get_database("ai_university_db")
-    input= course.lower()
-    input = input.strip()
-    list = await getAllUnByCourse(input, db)
-    dbCloseConnection(client)
-    return list
 
-@app.get("/getAllUniByRegion")
-async def get_all_uni_by_region(region: str):
-    '''Get all the university by region'''
-    client = dbOpenConnection()
-    db = client.get_database("ai_university_db")
-    input = region.lower()
-    input = input.strip()
-    list = await getAllUniByRegion(input, db)
-    dbCloseConnection(client)
-    return list
 
-@app.get("/getAllUniByProvince")
-async def get_all_uni_by_province(province: str):
-    '''Get all the university by region'''
-    client = dbOpenConnection()
-    db = client.get_database("ai_university_db")
-    input = province.lower()
-    input = input.strip()
-    list = await getAllUniByProvince(input, db)
-    dbCloseConnection(client)
-    return list
 
-@app.get("/getAllCourse")
-async def get_all_course():
-    '''Get all italian course in the DB'''
-    client = dbOpenConnection()
-    db = client.get_database("ai_university_db")
-    list = await getAllCourse(db)
-    dbCloseConnection(client)
-    return list
 
-@app.get("/getAllCourseByUni")
-async def get_all_course_by_uni(university: str):
-    '''Get all the course given a university'''
-    client = dbOpenConnection()
-    db = client.get_database("ai_university_db")
-    input = university.lower()
-    input = input.strip()
-    list =  await getAllCourseByUni(input, db)
-    dbCloseConnection(client)
-    return list
 
-@app.get("/getAllRegion")
-async def get_all_region():
-    '''Get all the region from the db'''
-    client = dbOpenConnection()
-    db = client.get_database("ai_university_db")
-    list =  await getAllRegion(db)
-    dbCloseConnection(client)
-    return list
 
-@app.get("/getRegionByUni")
-async def get_region_by_uni(university: str):
-    '''Get all the region from the db'''
-    client = dbOpenConnection()
-    db = client.get_database("ai_university_db")
-    input = university.lower()
-    input = input.strip()
-    list =  await getRegionByUni(input, db)
-    dbCloseConnection(client)
-    return list
 
 
 @app.get("/predict", response_model= DegreeResult, status_code=200)
@@ -183,7 +115,8 @@ if __name__ == '__main__':
     #TODO: INSERIRE EMAIL/ CODICE IDENTIFICATIVO UUID PER NUOVE SOTTOSCRIZIONI DI UTENTI REGISTRATI
     client=dbOpenConnection()
     db = client.get_database("ai_university_db")
-    #getSubscriptionByDate('05-09-2021', db)
+    list=getAllSubjectByUni('ingegneria dei sistemi informativi',  'università degli studi di parma', db)
+    print(list)
     dbCloseConnection(client)
 
     '''# inserisco di nuovo tutto nel dataset

@@ -53,6 +53,7 @@ async def addNewSubscriptions(subscriptions_info, db):
 SELECT METHOD
 --------------------------
 '''
+#todo: fai le api di questa parte, ci servono per fare l'aggiornamento automatico quando inseriamo un nuovo utente dei file
 def getAllStudents(db):
     try:
         cursor=db.students.find({})
@@ -199,23 +200,23 @@ async def getRegionByUni(uni, db):
     except Exception as e:
         print(e)
 
-def getAllProvince(db):
+async def getAllProvince(db):
     #recupero tutti le regioni del db ( sia studenti che laureati)
+    province_list = set()
     try:
         home = db.subscriptions.distinct('home_province')
         study = db.subscriptions.distinct('study_province')
-        province_list=set()
         for item in home:
             province_list.add(item.upper())
         for item in study:
             if item not in province_list:
                 province_list.add(item.upper())
-        for i in province_list:
-            print(i)
+        return province_list
     except Exception as e:
         print(e)
+        return province_list
 
-def getProvinceFromUni(uni, db):
+async def getProvinceByUni(uni, db):
     #recupero la regione di un università
     try:
         study = db.subscriptions.distinct('study_province', {"university": uni})
@@ -232,352 +233,362 @@ def getProvinceFromUni(uni, db):
                     print(item)
                     return item
         else:
-            print('NO PROVINCE FOUND')
+            item= 'NO PROVINCE FOUND'
+            return item
 
     except Exception as e:
         print(e)
 
 
 
-def getAllSubject(course, db):
+async def getAllSubject(course, db):
     #recupero tutte le materie dato un corso generico
-    capital_course= course.capitalize()
+    subject_list = set()
     try:
-        cursor = db.subscriptions.distinct('subject_area', {'$or':[{"degree_course": course},{"degree_course": capital_course}]})
+        cursor = db.subscriptions.distinct('subject_area', {'$or':[{"degree_course": course}]})
         for i in cursor:
             list= i.split(',')
-            subject_list=set()
             for item in list:
                 if item not in subject_list:
-                    subject_list.add(item.strip())
-                    print(item.strip())
+                    if item != "":
+                        subject_list.add(item.strip())
+        return subject_list
     except Exception as e:
         print(e)
+        return subject_list
 
-def getAllSubjectWhitUni(course, db, uni):
+async def getAllSubjectByUni(course,  uni, db):
     #recupero tutte le materie dato un corso specifico di un università
+    subject_list = set()
     try:
         cursor = db.subscriptions.distinct('subject_area',  {'$and': [{"degree_course": course},{"university": uni}]})
         for i in cursor:
             list= i.split(',')
-            subject_list=set()
             for item in list:
                 if item not in subject_list:
-                    subject_list.add(item)
-                    print(item)
+                    if item != "":
+                        subject_list.add(item)
+        return subject_list
     except Exception as e:
         print(e)
+        return subject_list
 
-def getAllEasyExam(course, uni, db):
+
+async def getAllEasyExam(course, uni, db):
     #recupero tutte gli esami facili dato un corso di un'università
+    exams_list = set()
     try:
         easy_exam = db.subscriptions.distinct('easy_exams',{'$and': [{"university": uni}, {'degree_course': course}]})
-        exams_list = set()
         for exams in easy_exam:
             list= exams.split(',')
             for item in list:
                 if item.strip() not in exams_list:
-                    exams_list.add(item.strip())
-                    print(item.strip())
+                    if item.strip != "":
+                        exams_list.add(item.strip())
+        return exams_list
     except Exception as e:
         print(e)
+        return exams_list
 
-def getAllDifficultExam(course, uni,  db):
+async def getAllDifficultExam(course, uni,  db):
     #recupero tutte gli esami difficili dato un corso
     # recupero tutte gli esami facili dato un corso di un'università
+    exams_list = set()
     try:
         hard_exams = db.subscriptions.distinct('hard_exams', {'$and': [{"university": uni}, {'degree_course': course}]})
-        exams_list = set()
         for exams in hard_exams:
             list = exams.split(',')
             for item in list:
                 if item.strip() not in exams_list:
-                    exams_list.add(item.strip())
-                    print(item.strip())
+                    if item.strip != "":
+                        exams_list.add(item.strip())
+        return exams_list
     except Exception as e:
         print(e)
+        return exams_list
 
 '''
 MAN QUERY
 '''
-def getNumberOfManByCourseAndUni(course, uni, db):
+async def getNumberOfManByCourseAndUni(course, uni, db):
     #recupero numero maschi in un corso
     man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'m'}]})
-    print(man)
-def getNumberOfManByCourse(course, db):
+    return man
+
+async def getNumberOfManByCourse(course, db):
     #recupero numero maschi in un corso
     man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'm'}]})
-    print(man)
+    return man
 
-def getNumberOfManByUNi(uni, db):
+async def getNumberOfManByUNi(uni, db):
     #recupero numero maschi in un università
     man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'm'}]})
-    print(man)
+    return man
 
-def getNumberOfManWhitSameProvinceOfUni(uni, db):
+async def getNumberOfManWhitSameProvinceOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
-    province=getProvinceFromUni(uni, db)
+    province=await getRegionByUni(uni, db)
     man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'm'}]})
-    print(man)
+    return man
 
-def getNumberOfManWhitSameRegionOfUni(uni, db):
+async def getNumberOfManWhitSameRegionOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
-    region=getRegionFromUni(uni, db)
+    region=await getRegionByUni(uni, db)
     man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'm'}]})
-    print(man)
+    return man
 
-def getNumberOfManByRegion(home_region, db):
+async def getNumberOfManByRegion(home_region, db):
     #recupero numero maschi in una regione iscritti all'uni
     man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'm'}]})
-    print(man)
+    return man
 
-def getNumberOfManGroupbyRegion(db):
+async def getNumberOfManGroupbyRegion(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    region_list=getAllRegion(db)
+    region_list=await getAllRegion(db)
     region_dict={}
     for region in region_list:
         if region != "":
             n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'm'}]})
             region_dict[region]=n_man
-    print(region_dict)
+    return region_dict
 
-def getNumberOfManStudyatHomeRegion(db):
+async def getNumberOfManStudyatHomeRegion(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
     man = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'm'}]})
-    print(man)
+    return man
 
-def getNumberOfManStudyOutsideRegion(db):
+async def getNumberOfManStudyOutsideRegion(db):
     #quanti sono i ragazzi che studiano fuori regione ragruppati per re
-    region_list=getAllRegion(db)
+    region_list=await getAllRegion(db)
     total=0
     for region in region_list:
         if region != "":
             n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'm'}]})
             total = total + n_man
-    print(total)
+    return total
 
-def getNumberOfManByProvince(home_province, db):
+async def getNumberOfManByProvince(home_province, db):
     #recupero numero maschi in una regione iscritti all'uni
     man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'm'}]})
-    print(man)
+    return man
 
-def getNumberOfManGroupbyProvince(db):
+async def getNumberOfManGroupbyProvince(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    province_list=getAllProvince(db)
+    province_list=await getAllProvince(db)
     province_dict={}
     for province in province_list:
         if province != "":
             n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'm'}]})
             province_dict[province]=n_man
-    print(province_dict)
+    return province_dict
 
-def getNumberOfManStudyatHomeProvince(db):
+async def getNumberOfManStudyatHomeProvince(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
     man = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'm'}]})
-    print(man)
+    return man
 
-def getNumberOfManStudyOutsideProvince(db):
+async def getNumberOfManStudyOutsideProvince(db):
     #quanti sono i ragazzi che studiano fuori regione
-    province_list=getAllProvince(db)
+    province_list=await getAllProvince(db)
     total=0
     for province in province_list:
         if province != "":
             n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'm'}]})
             total = total + n_man
-    print(total)
+    return total
 
 
 
 '''
 WOMAN QUERY
 '''
-def getNumberOfWomanByCourseAndUni(course, uni, db):
+async def getNumberOfWomanByCourseAndUni(course, uni, db):
     #recupero numero maschi in un corso
-    man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'f'}]})
-    print(man)
-def getNumberOfWomanByCourse(course, db):
+    woman=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'f'}]})
+    return  woman
+async def getNumberOfWomanByCourse(course, db):
     #recupero numero maschi in un corso
-    man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'f'}]})
-    print(man)
+    woman = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'f'}]})
+    return woman
 
-def getNumberOfWomanByUNi(uni, db):
+async def getNumberOfWomanByUNi(uni, db):
     #recupero numero maschi in un università
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'f'}]})
-    print(man)
+    woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'f'}]})
+    return woman
 
-def getNumberOfWomanWhitSameProvinceOfUni(uni, db):
+async def getNumberOfWomanWhitSameProvinceOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
-    province=getProvinceFromUni(uni, db)
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'f'}]})
-    print(man)
+    province=await getProvinceByUni(uni, db)
+    woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'f'}]})
+    return woman
 
-def getNumberOfWomanWhitSameRegionOfUni(uni, db):
+async def getNumberOfWomanWhitSameRegionOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
-    region=getRegionFromUni(uni, db)
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'f'}]})
-    print(man)
+    region=await getRegionByUni(uni, db)
+    woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'f'}]})
+    return woman
 
-def getNumberOfWomanByRegion(home_region, db):
+async def getNumberOfWomanByRegion(home_region, db):
     #recupero numero maschi in una regione iscritti all'uni
-    man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'f'}]})
-    print(man)
+    woman = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'f'}]})
+    return woman
 
-def getNumberOfWomanGroupbyRegion(db):
+async def getNumberOfWomanGroupbyRegion(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    region_list=getAllRegion(db)
+    region_list=await getAllRegion(db)
     region_dict={}
     for region in region_list:
         if region != "":
-            n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'f'}]})
-            region_dict[region]=n_man
-    print(region_dict)
+            n_woman = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'f'}]})
+            region_dict[region]=n_woman
+    return region_dict
 
-def getNumberOfWomanStudyatHomeRegion(db):
+async def getNumberOfWomanStudyatHomeRegion(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    man = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'f'}]})
-    print(man)
+    woman = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'f'}]})
+    return woman
 
-def getNumberOfWomanStudyOutsideRegion(db):
+async def getNumberOfWomanStudyOutsideRegion(db):
     #quanti sono i ragazzi che studiano fuori regione ragruppati per re
-    region_list=getAllRegion(db)
+    region_list=await getAllRegion(db)
     total=0
     for region in region_list:
         if region != "":
-            n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'f'}]})
-            total = total + n_man
-    print(total)
+            n_woman =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'f'}]})
+            total = total + n_woman
+    return total
 
-def getNumberOfWomanByProvince(home_province, db):
+async def getNumberOfWomanByProvince(home_province, db):
     #recupero numero maschi in una regione iscritti all'uni
-    man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'f'}]})
-    print(man)
+    woman = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'f'}]})
+    return woman
 
-def getNumberOfWomanGroupbyProvince(db):
+async def getNumberOfWomanGroupbyProvince(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    province_list=getAllProvince(db)
-    province_dict={}
+    province_dict = {}
+    province_list=await getAllProvince(db)
     for province in province_list:
         if province != "":
             n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'f'}]})
             province_dict[province]=n_man
-    print(province_dict)
+    return province_dict
 
-def getNumberOfWomanStudyatHomeProvince(db):
+async def getNumberOfWomanStudyatHomeProvince(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    man = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'f'}]})
-    print(man)
+    woman = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'f'}]})
+    return woman
 
-def getNumberOfWomanStudyOutsideProvince(db):
+async def getNumberOfWomanStudyOutsideProvince(db):
     #quanti sono i ragazzi che studiano fuori regione
-    province_list=getAllProvince(db)
+    province_list=await getAllProvince(db)
     total=0
     for province in province_list:
         if province != "":
-            n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'f'}]})
-            total = total + n_man
-    print(total)
+            n_woman =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'f'}]})
+            total = total + n_woman
+    return total
 
 
 
 '''
 SUBSCRIBERS QUERY
 '''
-def getNumberOfPeopleByCourseAndUni(course, uni, db):
+async def getNumberOfPeopleByCourseAndUni(course, uni, db):
     #recupero numero maschi in un corso
-    man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}]})
-    print(man)
-def getNumberOfPeopleByCourse(course, db):
+    people=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}]})
+    return people
+async def getNumberOfPeopleByCourse(course, db):
     #recupero numero maschi in un corso
-    man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}]})
-    print(man)
+    people = db.subscriptions.count_documents({'$and': [ {'degree_course': course}]})
+    return people
 
-def getNumberOfPeopleByUNi(uni, db):
+async def getNumberOfPeopleByUNi(uni, db):
     #recupero numero maschi in un università
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}]})
-    print(man)
+    people = db.subscriptions.count_documents({'$and': [{'university': uni}]})
+    return people
 
-def getNumberOfPeopleWhitSameProvinceOfUni(uni, db):
+async def getNumberOfPeopleWhitSameProvinceOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
-    province=getProvinceFromUni(uni, db)
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}]})
-    print(man)
+    province=await getProvinceByUni(uni, db)
+    people = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}]})
+    return people
 
-def getNumberOfPeopleWhitSameRegionOfUni(uni, db):
+async def getNumberOfPeopleWhitSameRegionOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
-    region=getRegionFromUni(uni, db)
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}]})
-    print(man)
+    region=await getRegionByUni(uni, db)
+    people = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}]})
+    return people
 
-def getNumberOfPeopleByRegion(home_region, db):
+async def getNumberOfPeopleByRegion(home_region, db):
     #recupero numero maschi in una regione iscritti all'uni
-    man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}]})
-    print(man)
+    people = db.subscriptions.count_documents({'$and': [{'home_region': home_region}]})
+    return people
 
 
-def getNumberOfPeopleGroupbyRegion(db):
+async def getNumberOfPeopleGroupbyRegion(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    region_list=getAllRegion(db)
-    region_dict={}
+    region_dict = {}
+    region_list=await getAllRegion(db)
     for region in region_list:
         if region != "":
             n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}]})
             region_dict[region]=n_man
-    print(region_dict)
+    return region_dict
 
-def getNumberOfPeopleStudyatHomeRegion(db):
+async def getNumberOfPeopleStudyatHomeRegion(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    man = db.subscriptions.count_documents({'$and': [{'study_region': ''}]})
-    print(man)
+    people = db.subscriptions.count_documents({'$and': [{'study_region': ''}]})
+    return people
 
-def getNumberOfPeopleStudyOutsideRegion(db):
+async def getNumberOfPeopleStudyOutsideRegion(db):
     #quanti sono i ragazzi che studiano fuori regione
-    region_list=getAllRegion(db)
+    region_list=await getAllRegion(db)
     total=0
     for region in region_list:
         if region != "":
             n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}]})
             total = total + n_man
-    print(total)
+    return total
 
-def getNumberOfPeopleByProvince(home_province, db):
+async def getNumberOfPeopleByProvince(home_province, db):
     #recupero numero maschi in una regione iscritti all'uni
-    man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}]})
-    print(man)
+    people = db.subscriptions.count_documents({'$and': [{'home_province': home_province}]})
+    return people
 
-def getNumberOfPeopleGroupbyProvince(db):
+async def getNumberOfPeopleGroupbyProvince(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    province_list=getAllProvince(db)
+    province_list=await getAllProvince(db)
     province_dict={}
     for province in province_list:
         if province != "":
             n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}]})
             province_dict[province]=n_man
-    print(province_dict)
+    return province_dict
 
-def getNumberOfPeopleStudyatHomeProvince(db):
+async def getNumberOfPeopleStudyatHomeProvince(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    man = db.subscriptions.count_documents({'$and': [{'study_province': ''}]})
-    print(man)
+    people = db.subscriptions.count_documents({'$and': [{'study_province': ''}]})
+    return people
 
-def getNumberOfPeopleStudyOutsideProvince(db):
+async def getNumberOfPeopleStudyOutsideProvince(db):
     #quanti sono i ragazzi che studiano fuori regione
-    province_list=getAllProvince(db)
+    province_list= await getAllProvince(db)
     total=0
     for province in province_list:
         if province != "":
             n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}]})
             total = total + n_man
-    print(total)
+    return total
 
-
-def getMarkAveragebyCourse(course, uni, db):
+#TODO: continue
+async def getMarkAveragebyCourse(course, uni, db):
     dictionary=db.subscriptions.find({'$and':
        [{'university': uni },
         {'degree_course': course}]})
     avg=average_dict(dictionary, 'average_grade')
     print(avg)
 
-def getMarkAveragebyCourseAndYear(course, uni, year,  db):
+async def getMarkAveragebyCourseAndYear(course, uni, year,  db):
     dictionary = db.subscriptions.find({'$and':
                                       [{'university': uni},
                                        {'degree_course': course},
@@ -586,7 +597,7 @@ def getMarkAveragebyCourseAndYear(course, uni, year,  db):
     avg = average_dict(dictionary, 'average_grade')
     print(avg)
 
-def getGradeAveragebyCourse(course, uni, db):
+async def getGradeAveragebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                       [{'university': uni},
                                        {'degree_course': course}
@@ -594,7 +605,7 @@ def getGradeAveragebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'graduation_grade')
     print(avg)
 
-def getDurationAveragebyCourse(course, uni, db):
+async def getDurationAveragebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                       [{'university': uni},
                                        {'degree_course': course}
@@ -609,7 +620,7 @@ def getDurationAveragebyCourse(course, uni, db):
         avg = average_list(duration)
         print(fromFloatToYearAndMonth(avg))
 
-def getExamNotDoneAveragebyCourse(course, uni, db):
+async def getExamNotDoneAveragebyCourse(course, uni, db):
      dictionary = db.subscriptions.find({'$and':
                                              [{'university': uni},
                                               {'degree_course': course}
@@ -617,7 +628,7 @@ def getExamNotDoneAveragebyCourse(course, uni, db):
      avg = average_dict(dictionary, 'numb_exams_not_done')
      print(avg)
 
-def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
+async def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course},
@@ -626,7 +637,7 @@ def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
     avg = average_dict(dictionary, 'numb_exams_not_done')
     print(avg)
 
-def getReviewListbyCourse(course, uni, db):
+async def getReviewListbyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -635,7 +646,7 @@ def getReviewListbyCourse(course, uni, db):
         if i['review'] !="":
             print(i['review'])
 
-def getReviewListbyCourseAndYear(course, uni, year,  db):
+async def getReviewListbyCourseAndYear(course, uni, year,  db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course},
@@ -645,7 +656,7 @@ def getReviewListbyCourseAndYear(course, uni, year,  db):
         if i['review'] != "":
             print(i['review'])
 
-def getReviewAverangebyCourse(course, uni, db):
+async def getReviewAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -653,7 +664,7 @@ def getReviewAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'stars')
     print(avg)
 
-def getReviewAverangebyCourseAndYear(course, uni, year,  db):
+async def getReviewAverangebyCourseAndYear(course, uni, year,  db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course},
@@ -662,14 +673,14 @@ def getReviewAverangebyCourseAndYear(course, uni, year,  db):
     avg = average_dict(dictionary, 'stars')
     print(avg)
 
-def getReviewAverangebyUni(uni, db):
+async def getReviewAverangebyUni(uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni}
                                              ]})
     avg = average_dict(dictionary, 'stars')
     print(avg)
 
-def getDidacticQualityAverangebyCourse(course, uni, db):
+async def getDidacticQualityAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -677,7 +688,7 @@ def getDidacticQualityAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'didactic_quality')
     print(avg)
 
-def getTeachingQualityAverangebyCourse(course, uni, db):
+async def getTeachingQualityAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -685,7 +696,7 @@ def getTeachingQualityAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'teaching_quality')
     print(avg)
 
-def getExamDifficultAverangebyCourse(course, uni, db):
+async def getExamDifficultAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -693,7 +704,7 @@ def getExamDifficultAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'exams_difficulties')
     print(avg)
 
-def getSubjectsDifficultAverangebyCourse(course, uni, db):
+async def getSubjectsDifficultAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -701,7 +712,7 @@ def getSubjectsDifficultAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'subjects_difficulties')
     print(avg)
 
-def getEnviromentalQualityAverangebyCourse(course, uni, db):
+async def getEnviromentalQualityAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -709,7 +720,7 @@ def getEnviromentalQualityAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'environment_quality')
     print(avg)
 
-def getStudentsRelationshipAverangebyCourse(course, uni, db):
+async def getStudentsRelationshipAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -717,7 +728,7 @@ def getStudentsRelationshipAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'students_relationship')
     print(avg)
 
-def getDateOfLastSubscription(db):
+async def getDateOfLastSubscription(db):
     dictionary = db.subscriptions.find({})
     df=pd.DataFrame()
     date_list=set()
@@ -729,13 +740,13 @@ def getDateOfLastSubscription(db):
     print(most_recent)
 
 
-def getSubscriptionByDate(date, db):
+async def getSubscriptionsByDate(date, db):
     dictionary = db.subscriptions.find({'subscription_date': date})
     for i in dictionary:
         print(i)
 
 
-def getLaboratoryAverangebyCourse(course, uni, db):
+async def getLaboratoryAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
@@ -743,21 +754,74 @@ def getLaboratoryAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'laboratory')
     print(avg)
 
-#TODO: def getDifficultAspectList(course, uni, db):
+#TODO: da testare in python
+async def getDifficultAspectList(course, uni, db):
+    difficult_list=set()
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    for item in dictionary:
+        value=item['difficult_aspect']
+        if value != "":
+            difficult_list.add(value)
+    return difficult_list
 
-#TODO: def getCountRedoChoice(course, uni, db):
-#Quanti studenti rifarebbero la scelta
+#TODO: da testare in python
+async def getCountRedoChoice(course, uni, db):
+    #Quanti studenti rifarebbero la scelta
+    sum=0
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    for item in dictionary:
+        value = item['redo_choice']
+        if value == "si":
+            sum =+1
+    return sum
 
-#TODO: def getNumberOfStudentsDoErasmusByCourse(course, uni, db):
-#Contare quanti hanno fatto un esperienza all'estero
+async def getNumberOfStudentsGoToErasmusByCourse(course, uni, db):
+    #Contare quanti hanno fatto un esperienza all'estero
+    sum = 0
+    dictionary = db.subscriptions.find({'$and':
+                                            [{'university': uni},
+                                             {'degree_course': course}
+                                             ]})
+    for item in dictionary:
+        value = item['abroad_experience']
+        if value == "si":
+            sum = +1
+    return sum
 
-#TODO: def getNumberOfStudentsDoErasmusByUni(uni, db):
 
-#TODO: def getNumberOfStudentsDoPreviousDegree(course, uni, db):
-#Quanti studenti avevano già fatto una precedente carriera incompleta
+async def getNumberOfStudentsGoToErasmusByUni(uni, db):
+    sum = 0
+    dictionary = db.subscriptions.find({'university': uni})
+    for item in dictionary:
+        value = item['abroad_experience']
+        if value == "si":
+            sum = +1
+    return sum
 
-#TODO: def getNumberOfCourse( db):
-#Total number of course in the db
+async def getNumberOfStudentsChangeThisDegree(course, uni, db):
+    #Quanti studenti avevano già fatto una precedente carriera incompleta
+    count= db.subscriptions.count_documents({'$and':
+                                            [{'prev_change_uni': uni},
+                                             {'prev_change_degree_course': course}
+                                             ]})
+    return count
 
-#TODO: def getNumberOfCourseInUni(uni, db):
-#Total number of course in an university
+async def getNumberOfCourse( db):
+    #Total number of course in the db
+    all_course= await getAllCourse(db)
+    return len(all_course)
+
+async def getNumberOfCourseByUni(uni, db):
+    #Total number of course in the db
+    all_course= await getAllCourseByUni(uni, db)
+    return len(all_course)
+
+
+#TODO: def addReviewOfMachineLearning(subscription_info, degree_review):
+#aggiungo la recesione sull'algoritmo
