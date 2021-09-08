@@ -640,7 +640,7 @@ async def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
     avg = average_dict(dictionary, 'numb_exams_not_done')
     return avg
 
-#TODO: continue
+
 async def getReviewListbyCourse(course, uni, db):
     review_list=set()
     dictionary = db.subscriptions.find({'$and':
@@ -736,6 +736,7 @@ async def getStudentsRelationshipAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'students_relationship')
     return avg
 
+
 async def getDateOfLastSubscription(db):
     dictionary = db.subscriptions.find({})
     df=pd.DataFrame()
@@ -761,6 +762,7 @@ async def getLaboratoryAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'laboratory')
     return avg
 
+#TODO: continue
 #TODO: da testare in python
 async def getDifficultAspectList(course, uni, db):
     difficult_list=set()
@@ -774,7 +776,7 @@ async def getDifficultAspectList(course, uni, db):
             difficult_list.add(value)
     return difficult_list
 
-#TODO: da testare in python
+
 async def getCountRedoChoice(course, uni, db):
     #Quanti studenti rifarebbero la scelta
     sum=0
@@ -811,6 +813,7 @@ async def getNumberOfStudentsGoToErasmusByUni(uni, db):
             sum = +1
     return sum
 
+#TODO: da testare in python
 async def getNumberOfStudentsChangeThisDegree(course, uni, db):
     #Quanti studenti avevano già fatto una precedente carriera incompleta
     count= db.subscriptions.count_documents({'$and':

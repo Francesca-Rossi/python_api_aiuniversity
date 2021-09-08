@@ -14,6 +14,8 @@ from api.course_request import  *
 from api.region_and_province_request import  *
 from api.subject_request import *
 from api.average_request import *
+from api.review_request import  *
+from api.evalutation_request import  *
 from recovery_data import *
 from datetime import date
 

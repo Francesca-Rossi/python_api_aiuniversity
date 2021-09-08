@@ -134,3 +134,22 @@ async def get_people_study_outside_province():
     number = await getNumberOfPeopleStudyOutsideProvince(db)
     dbCloseConnection(client)
     return {'result': number}
+
+@app.get("/getDateOfLastSubscription", tags=["Subscriptions"])
+async def get_date_of_last_subscription():
+    '''How many people study outside the province? '''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    date = await getDateOfLastSubscription(db)
+    dbCloseConnection(client)
+    return {'result': date}
+
+@app.get("/getSubscriptionsByDate", tags=["Subscriptions"])
+async def get_subscriptions_by_date():
+    '''How many people study outside the province? '''
+    client = dbOpenConnection()
+    db = client.get_database("ai_university_db")
+    date = await getSubscriptionsByDate(db)
+    dbCloseConnection(client)
+    return {'result': date}
+
