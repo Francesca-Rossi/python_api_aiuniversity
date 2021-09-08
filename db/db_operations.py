@@ -580,13 +580,13 @@ async def getNumberOfPeopleStudyOutsideProvince(db):
             total = total + n_man
     return total
 
-#TODO: continue
+
 async def getMarkAveragebyCourse(course, uni, db):
     dictionary=db.subscriptions.find({'$and':
        [{'university': uni },
         {'degree_course': course}]})
     avg=average_dict(dictionary, 'average_grade')
-    print(avg)
+    return avg
 
 async def getMarkAveragebyCourseAndYear(course, uni, year,  db):
     dictionary = db.subscriptions.find({'$and':
@@ -595,7 +595,7 @@ async def getMarkAveragebyCourseAndYear(course, uni, year,  db):
                                        {'degree_year': year}
                                        ]})
     avg = average_dict(dictionary, 'average_grade')
-    print(avg)
+    return avg
 
 async def getGradeAveragebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -603,7 +603,8 @@ async def getGradeAveragebyCourse(course, uni, db):
                                        {'degree_course': course}
                                        ]})
     avg = average_dict(dictionary, 'graduation_grade')
-    print(avg)
+    return avg
+
 
 async def getDurationAveragebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -611,6 +612,7 @@ async def getDurationAveragebyCourse(course, uni, db):
                                        {'degree_course': course}
                                        ]})
     duration = set()
+    avg=0
     for i in dictionary:
         if int(i['end_year']) & int(i['enrolment_year']):
             if len(str(i['end_year']))==4 & len(str(i['enrolment_year']))==4:
@@ -618,7 +620,8 @@ async def getDurationAveragebyCourse(course, uni, db):
                 duration.add(difference)
     if len(duration)>0:
         avg = average_list(duration)
-        print(fromFloatToYearAndMonth(avg))
+        return fromFloatToYearAndMonth(avg)
+    return avg
 
 async def getExamNotDoneAveragebyCourse(course, uni, db):
      dictionary = db.subscriptions.find({'$and':
@@ -626,7 +629,7 @@ async def getExamNotDoneAveragebyCourse(course, uni, db):
                                               {'degree_course': course}
                                               ]})
      avg = average_dict(dictionary, 'numb_exams_not_done')
-     print(avg)
+     return avg
 
 async def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
     dictionary = db.subscriptions.find({'$and':
@@ -635,18 +638,22 @@ async def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
                                              {'degree_year': year}
                                              ]})
     avg = average_dict(dictionary, 'numb_exams_not_done')
-    print(avg)
+    return avg
 
+#TODO: continue
 async def getReviewListbyCourse(course, uni, db):
+    review_list=set()
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course}
                                              ]})
     for i in dictionary:
         if i['review'] !="":
-            print(i['review'])
+            review_list.add(i['review'])
+    return review_list
 
 async def getReviewListbyCourseAndYear(course, uni, year,  db):
+    review_list = set()
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni},
                                              {'degree_course': course},
@@ -654,7 +661,8 @@ async def getReviewListbyCourseAndYear(course, uni, year,  db):
                                              ]})
     for i in dictionary:
         if i['review'] != "":
-            print(i['review'])
+            review_list.add(i['review'])
+    return review_list
 
 async def getReviewAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -662,7 +670,7 @@ async def getReviewAverangebyCourse(course, uni, db):
                                              {'degree_course': course}
                                              ]})
     avg = average_dict(dictionary, 'stars')
-    print(avg)
+    return avg
 
 async def getReviewAverangebyCourseAndYear(course, uni, year,  db):
     dictionary = db.subscriptions.find({'$and':
@@ -671,14 +679,14 @@ async def getReviewAverangebyCourseAndYear(course, uni, year,  db):
                                              {'degree_year': year}
                                              ]})
     avg = average_dict(dictionary, 'stars')
-    print(avg)
+    return avg
 
 async def getReviewAverangebyUni(uni, db):
     dictionary = db.subscriptions.find({'$and':
                                             [{'university': uni}
                                              ]})
     avg = average_dict(dictionary, 'stars')
-    print(avg)
+    return avg
 
 async def getDidacticQualityAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -686,7 +694,7 @@ async def getDidacticQualityAverangebyCourse(course, uni, db):
                                              {'degree_course': course}
                                              ]})
     avg = average_dict(dictionary, 'didactic_quality')
-    print(avg)
+    return avg
 
 async def getTeachingQualityAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -694,7 +702,7 @@ async def getTeachingQualityAverangebyCourse(course, uni, db):
                                              {'degree_course': course}
                                              ]})
     avg = average_dict(dictionary, 'teaching_quality')
-    print(avg)
+    return avg
 
 async def getExamDifficultAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -702,7 +710,7 @@ async def getExamDifficultAverangebyCourse(course, uni, db):
                                              {'degree_course': course}
                                              ]})
     avg = average_dict(dictionary, 'exams_difficulties')
-    print(avg)
+    return avg
 
 async def getSubjectsDifficultAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -710,7 +718,7 @@ async def getSubjectsDifficultAverangebyCourse(course, uni, db):
                                              {'degree_course': course}
                                              ]})
     avg = average_dict(dictionary, 'subjects_difficulties')
-    print(avg)
+    return avg
 
 async def getEnviromentalQualityAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -718,7 +726,7 @@ async def getEnviromentalQualityAverangebyCourse(course, uni, db):
                                              {'degree_course': course}
                                              ]})
     avg = average_dict(dictionary, 'environment_quality')
-    print(avg)
+    return avg
 
 async def getStudentsRelationshipAverangebyCourse(course, uni, db):
     dictionary = db.subscriptions.find({'$and':
@@ -726,7 +734,7 @@ async def getStudentsRelationshipAverangebyCourse(course, uni, db):
                                              {'degree_course': course}
                                              ]})
     avg = average_dict(dictionary, 'students_relationship')
-    print(avg)
+    return avg
 
 async def getDateOfLastSubscription(db):
     dictionary = db.subscriptions.find({})
@@ -737,13 +745,12 @@ async def getDateOfLastSubscription(db):
         dto = datetime.strptime(date_str, '%d-%m-%Y').date()
         date_list.add(dto)
     most_recent=max(date_list)
-    print(most_recent)
+    return most_recent
 
 
 async def getSubscriptionsByDate(date, db):
     dictionary = db.subscriptions.find({'subscription_date': date})
-    for i in dictionary:
-        print(i)
+    return dictionary
 
 
 async def getLaboratoryAverangebyCourse(course, uni, db):
@@ -752,7 +759,7 @@ async def getLaboratoryAverangebyCourse(course, uni, db):
                                              {'degree_course': course}
                                              ]})
     avg = average_dict(dictionary, 'laboratory')
-    print(avg)
+    return avg
 
 #TODO: da testare in python
 async def getDifficultAspectList(course, uni, db):

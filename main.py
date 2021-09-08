@@ -13,8 +13,10 @@ from api.uni_request import *
 from api.course_request import  *
 from api.region_and_province_request import  *
 from api.subject_request import *
+from api.average_request import *
 from recovery_data import *
 from datetime import date
+
 
 
 
@@ -37,7 +39,7 @@ def pong():
 
 
 
-@app.get("/predict", response_model= DegreeResult, status_code=200)
+@app.post("/predict", response_model= DegreeResult, status_code=200)
 async def prediction_degree(payload: UserInfo):
     '''api per prevedere una laurea dato le informazioni in ingresso ( da usare sia per studenti superiori sia come check per gli studenti universitari)'''
     #TODO: Questo codice si può migliorare

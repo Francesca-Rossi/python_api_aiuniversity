@@ -7,9 +7,9 @@ async def get_all_course():
     db = client.get_database("ai_university_db")
     list = await getAllCourse(db)
     dbCloseConnection(client)
-    return list
+    return {'result': list}
 
-@app.get("/getAllCoursesByUni", tags=["Degree courses"])
+@app.get("/getAllCoursesByUni/{university}", tags=["Degree courses"])
 async def get_all_course_by_uni(university: str):
     '''Get all the courses given by an university'''
     client = dbOpenConnection()
@@ -18,4 +18,4 @@ async def get_all_course_by_uni(university: str):
     input = input.strip()
     list =  await getAllCourseByUni(input, db)
     dbCloseConnection(client)
-    return list
+    return {'result': list}

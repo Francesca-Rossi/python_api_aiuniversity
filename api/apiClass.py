@@ -9,6 +9,9 @@ app = FastAPI(debug=True, title="AIuniversity-API")
 class BoolResult(BaseModel):
     result: bool
 
+class UniInfo(BaseModel):
+    uni: str
+    course: str
 
 class UserInfo(BaseModel):
     high_school: str

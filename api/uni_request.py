@@ -7,9 +7,9 @@ async def get_all_uni():
     db = client.get_database("ai_university_db")
     list = await getAllUni(db)
     dbCloseConnection(client)
-    return list
+    return {'result': list}
 
-@app.get("/getAllUniByCourse", tags=["Universities"])
+@app.get("/getAllUniByCourse/{course}", tags=["Universities"])
 async def get_all_uni_by_course(course: str):
     '''Get all the universities by course'''
     client = dbOpenConnection()
@@ -18,9 +18,9 @@ async def get_all_uni_by_course(course: str):
     input = input.strip()
     list = await getAllUnByCourse(input, db)
     dbCloseConnection(client)
-    return list
+    return {'result': list}
 
-@app.get("/getAllUniByRegion", tags=["Universities"])
+@app.get("/getAllUniByRegion/{region}", tags=["Universities"])
 async def get_all_uni_by_region(region: str):
     '''Get all the universities by region'''
     client = dbOpenConnection()
@@ -29,9 +29,9 @@ async def get_all_uni_by_region(region: str):
     input = input.strip()
     list = await getAllUniByRegion(input, db)
     dbCloseConnection(client)
-    return list
+    return {'result': list}
 
-@app.get("/getAllUniByProvince", tags=["Universities"])
+@app.get("/getAllUniByProvince/{province}", tags=["Universities"])
 async def get_all_uni_by_province(province: str):
     '''Get all the universities by province'''
     client = dbOpenConnection()
@@ -40,4 +40,4 @@ async def get_all_uni_by_province(province: str):
     input = input.strip()
     list = await getAllUniByProvince(input, db)
     dbCloseConnection(client)
-    return list
+    return {'result': list}
