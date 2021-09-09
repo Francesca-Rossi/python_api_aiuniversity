@@ -12,7 +12,9 @@ async def get_difficult_aspect(university: str, course: str):
         input_course = input_course.strip()
         list = await getDifficultAspectList(input_course, input_uni,  db)
         dbCloseConnection(client)
-    return {'result': list}
+        return {'result': list}
+    except:
+        raise HTTPException(status_code=400, detail="Model not found.")
 
 @app.get("/getCountRedoChoice/{university}/{course}", tags=["Other"])
 async def get_count_redo_choice(university: str, course: str):
@@ -27,6 +29,8 @@ async def get_count_redo_choice(university: str, course: str):
         number = await getCountRedoChoice(input_course, input_uni,  db)
         dbCloseConnection(client)
         return {'result': number}
+    except:
+        raise HTTPException(status_code=400, detail="Model not found.")
 
 @app.get("/getNumberOfStudentsGoToErasmusByCourse/{university}/{course}", tags=["Other"])
 async def get_number_of_students_go_to_erasmus_by_course(university: str, course: str):
@@ -41,6 +45,8 @@ async def get_number_of_students_go_to_erasmus_by_course(university: str, course
         number = await getNumberOfStudentsGoToErasmusByCourse(input_course, input_uni,  db)
         dbCloseConnection(client)
         return {'result': number}
+    except:
+        raise HTTPException(status_code=400, detail="Model not found.")
 
 @app.get("/getNumberOfStudentsGoToErasmusByCourse/{university}", tags=["Other"])
 async def get_number_of_students_go_to_erasmus_by_uni(university: str):
@@ -53,6 +59,8 @@ async def get_number_of_students_go_to_erasmus_by_uni(university: str):
         number = await getNumberOfStudentsGoToErasmusByCourse(input_uni,  db)
         dbCloseConnection(client)
         return {'result': number}
+    except:
+        raise HTTPException(status_code=400, detail="Model not found.")
 
 @app.get("/getNumberOfStudentsChangedThisDegree/{university}/{course}", tags=["Other"])
 async def get_number_of_students_changed_this_degree(university: str, course: str):
@@ -67,6 +75,8 @@ async def get_number_of_students_changed_this_degree(university: str, course: st
         number = await getNumberOfStudentsChangeThisDegree(input_course, input_uni,  db)
         dbCloseConnection(client)
         return {'result': number}
+    except:
+        raise HTTPException(status_code=400, detail="Model not found.")
 
 @app.get("/restartCalucatedModel", tags=["Other"])
 async def restart_calucated_model():
@@ -77,6 +87,8 @@ async def restart_calucated_model():
         number = await restartCalucatedModule(db)
         dbCloseConnection(client)
         return {'result': number}
+    except:
+        raise HTTPException(status_code=400, detail="Model not found.")
 
 
 
