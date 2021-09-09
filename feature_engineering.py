@@ -19,7 +19,7 @@ def create_clustering_degree_course():
         # cosine similarity
         similarity_matrix = cosine_similarity(vectorize_matrix)
         similarity_df = pd.DataFrame(similarity_matrix)
-        logging.info('Finish create SIMILARITY MATRIX')
+        logging.warning('Finish create SIMILARITY MATRIX')
 
         # clustering
         km = KMeans(n_clusters=120, random_state=0)
@@ -40,20 +40,20 @@ def create_clustering_degree_course():
         # DEBUG: print all the cluster
         labels = []
         for cluster, degree in byCluster:
-            logging.info(f"All entries for {cluster!r}")
-            logging.info("------------------------")
-            logging.info(degree, end="\n\n")  # display(degree)
+            logging.warning(f"All entries for {cluster!r}")
+            logging.warning("------------------------")
+            logging.warning(degree, end="\n\n")  # display(degree)
 
             labels.append(degree['full_degree_course'].iloc[0])
-        logging.info(labels)
+        logging.warning(labels)
 
         # put the cluster result inside the dataset
 
         df_clean_features = df_clean_features.set_index(cluster_labels_degree_course.index)
         df_clean_features['degree_course'] = cluster_labels_degree_course['ClusterLabel']
         # DEBUG
-        logging.info('check if add missing values: %s', df_clean_features['degree_course'].isnull().sum())
-        logging.info('-----Method finish whit success------')
+        logging.warning('check if add missing values: %s', df_clean_features['degree_course'].isnull().sum())
+        logging.warning('-----Method finish whit success------')
         return df_clean_features
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -75,7 +75,7 @@ def encoding_categorical_features():
 
         joblib.dump(encoder_choice, 'doc/encoder_choice_model')
         joblib.dump(encoder_school, 'doc/encoder_school_model')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_clean_features
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -102,9 +102,9 @@ def bag_of_words_text_features():
         df_clean_features = df_clean_features.set_index(df_bow_dict.index)
         df_clean_features = pd.concat([df_clean_features, df_bow_dict], axis=1)
         # DEBUG
-        logging.info('bag of words DF %s', df_clean_features.head())
-        logging.info('bag of words SHAPE %s', df_clean_features.shape)
-        logging.info('-----Method finish whit success------')
+        logging.warning('bag of words DF %s', df_clean_features.head())
+        logging.warning('bag of words SHAPE %s', df_clean_features.shape)
+        logging.warning('-----Method finish whit success------')
         return df_clean_features
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -123,10 +123,10 @@ def tf_id_text_features():
         df_clean_features = df_clean_features.drop(['expectations', 'decision_choice', 'tf_if'], axis=1)
         df_clean_features = df_clean_features.set_index(df_tf_id.index)
         df_clean_features = pd.concat([df_clean_features, df_tf_id], axis=1)
-        logging.info('tf-id DF %s', df_clean_features.head())
-        logging.info('tf-id SHAPE %s', df_clean_features.shape)
+        logging.warning('tf-id DF %s', df_clean_features.head())
+        logging.warning('tf-id SHAPE %s', df_clean_features.shape)
         print(df_clean_features.isnull().sum())
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return  df_clean_features
     except:
         logging.error("Exception occurred", exc_info=True)

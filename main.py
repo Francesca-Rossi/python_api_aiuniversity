@@ -3,7 +3,7 @@
 # Press Maiusc+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-from fastapi import FastAPI,  HTTPException, routing
+from fastapi import FastAPI,  HTTPException
 from api.apiClass import  *
 from api.man_request import  *
 from api.woman_request import  *

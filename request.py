@@ -11,7 +11,7 @@ def set_request(high_school, subject, prefered_subject, hobby, work_dream, aspec
     try:
         df_answer = pd.DataFrame([high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study]).transpose()
         df_answer.columns = ['high_school', 'subject', 'prefered_subject', 'hobby', 'work_dream', 'aspectations_uni', 'decision_choice_uni', 'continuos_study']
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_answer
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -26,7 +26,7 @@ def clean_request(df_answer):
             df_answer_clean[feature] = data_cleaning(df_answer_clean[feature], regex_features)
             if feature not in categorical_features_answer:
                 df_answer_clean[feature] = preprocessing_text(df_answer_clean, df_answer_clean[feature], feature,  'IT')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_answer_clean
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -40,7 +40,7 @@ def hot_encoding(encoder, df, label):
                     df[label] = number
                 else:
                     number += 1
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -60,7 +60,7 @@ def reverse_bag_of_word(df):
         # add the new columns
         df = df.set_index(df_bow_answer.index)
         df = pd.concat([df, df_bow_answer], axis=1)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -81,7 +81,7 @@ def reverse_td_if(df):
         df = df.drop(['aspectations_uni', 'decision_choice_uni', 'tf_if'], axis=1)
         df = df.set_index(df_tf_answer.index)
         df = pd.concat([df, df_tf_answer], axis=1)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -91,24 +91,24 @@ def feature_engireering_request(high_school, subject, prefered_subject, hobby, w
         encoder_choice= joblib.load('doc/encoder_choice_model')
         encoder_school = joblib.load('doc/encoder_school_model')
         df_request = set_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
-        logging.info(f'REQUEST VALUE: {df_request.values}')
+        logging.warning(f'REQUEST VALUE: {df_request.values}')
         df_request_clean = clean_request(df_request)
-        logging.info(f'REQUEST VALUE CLEANS: {df_request_clean.values}')
+        logging.warning(f'REQUEST VALUE CLEANS: {df_request_clean.values}')
         df_request_clean = hot_encoding(encoder_choice, df_request_clean, 'continuos_study')
         df_request_clean= hot_encoding(encoder_school, df_request_clean, 'high_school')
-        logging.info(f'REQUEST VALUE ENCODING CATEGORICAL: {df_request_clean.values}')
+        logging.warning(f'REQUEST VALUE ENCODING CATEGORICAL: {df_request_clean.values}')
         df_after_bof = reverse_bag_of_word(df_request_clean)
         print(df_after_bof.values)
         df_after_tfid = reverse_td_if(df_after_bof)
-        logging.info(f'REQUEST VALUE AFTER FEAURES ENGIN: {df_after_tfid.values}')
-        logging.info(f'REQUEST VALUE AFTER FEAURES ENGIN=>shape: {df_after_tfid.shape}')
-        logging.info('-----Method finish whit success------')
+        logging.warning(f'REQUEST VALUE AFTER FEAURES ENGIN: {df_after_tfid.values}')
+        logging.warning(f'REQUEST VALUE AFTER FEAURES ENGIN=>shape: {df_after_tfid.shape}')
+        logging.warning('-----Method finish whit success------')
         return df_after_tfid
     except:
         logging.error("Exception occurred", exc_info=True)
 
 
-def predict_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study):
+async def predict_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study):
     try:
         logging.warning('****START PREDICT****')
         df_request = feature_engireering_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
@@ -121,7 +121,7 @@ def predict_request(high_school, subject, prefered_subject, hobby, work_dream, a
         cluster_labels_degree_course = pd.read_json('doc/cluster_labels_degree_course.json')
         df2 = cluster_labels_degree_course[cluster_labels_degree_course['ClusterLabel'] == uni]['full_degree_course']
         print(df2)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return  df2.to_dict()
     except:
         logging.error("Exception occurred", exc_info=True)

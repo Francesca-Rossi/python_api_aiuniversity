@@ -61,7 +61,7 @@ def get_students_first_degree_dataset():
         df_students=get_students_data_after_manage_missing_values(False)
         df_students_first_degree = df_students.query(QUERY_FIRST_DEGREE)
         print('students first degree:', df_students_first_degree.shape)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_students_first_degree
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -72,7 +72,7 @@ def get_graduate_first_degree_dataset():
         df_graduate = get_graduated_data_after_manage_missing_values(False)
         df_graduate_first_degree = df_graduate.query(QUERY_FIRST_DEGREE)
         print('graduates first degree:', df_graduate_first_degree.shape)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_graduate_first_degree
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -83,7 +83,7 @@ def get_first_degree_complete_dataframe():
     try:
         df_all_features_first_degree = pd.DataFrame(get_first_degree_complete_dictionary())
         print('original sample first degree:', df_all_features_first_degree.shape[0])
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_all_features_first_degree
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -97,7 +97,7 @@ def get_first_degree_complete_dictionary():
             all_features = df_students_first_degree[feature]
             all_features = all_features.append(df_graduate_first_degree[feature], ignore_index=True, verify_integrity=True)
             all_features_dict[feature] = all_features
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return  all_features_dict
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -114,7 +114,7 @@ def get_students_data_after_manage_missing_values(show_graphs):
         print("Original students dataset missing value: \n", df_missing_value_students)
         if(show_graphs):
             missing_value_graphs(df_missing_value_students, df_students, 'Studenti')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_students #ritorno il vecchio dataset con le modifiche fatte
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -127,7 +127,7 @@ def get_graduated_data_after_manage_missing_values(show_graphs):
         print("Original graduate dataset missing value: \n", df_missing_value_graduate)
         if(show_graphs):
             missing_value_graphs(df_missing_value_graduate, df_graduate, 'Laureati')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_graduate
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -141,7 +141,7 @@ def get_first_degree_complete_dataset_after_delete_missing_value():
             if key != 'main_subject' and key != 'other_high_school':
                 df_all_features_first_degree = df_all_features_first_degree[df_all_features_first_degree[key].notna()]
         print('sample first degree after delete null value:', df_all_features_first_degree.shape[0])
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_all_features_first_degree
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -154,7 +154,7 @@ def show_graphs_missing_value_first_degree_students():
         df_missing_value_first_degree_students = df_students_first_degree.isnull().sum()
         missing_value_graphs(df_missing_value_first_degree_students, df_students_first_degree,
                              'Studenti laurea primo livello')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
     except:
         logging.error("Exception occurred", exc_info=True)
 
@@ -164,7 +164,7 @@ def show_graphs_missing_value_first_degree_graduated():
         df_missing_value_first_degree_graduate = df_graduate_first_degree.isnull().sum()
         missing_value_graphs(df_missing_value_first_degree_graduate, df_graduate_first_degree,
                              'Laureati laurea primo livello')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
     except:
         logging.error("Exception occurred", exc_info=True)
 

@@ -46,7 +46,7 @@ def create_model():
         X_test_list = [X_test_20, X_test_33, X_test_50, X_test_66]
         y_test_list = [y_test_20, y_test_33, y_test_50, y_test_66]
         keys_list = ['test_20%', 'test_33%', 'test_50%', 'test_66%']
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return X_train_list,y_train_list, X_test_list, y_test_list, keys_list
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -64,8 +64,8 @@ def voting_alghoritm(X_train_list, y_train_list, X_test_list, y_test_list, keys_
             #voting_score[keys_list[i]]['wrong_class'] = wrong_classification(X_test_list[i], voting_predict[keys_list[i]],y_test_list[i])
             voting_report[keys_list[i]] = classification_report(y_test_list[i], voting_predict[keys_list[i]],output_dict=True)
             voting_score[keys_list[i]]['accuracy'] = voting_report[keys_list[i]]['accuracy']
-            logging.info(f'Finish {i} train set in voting model')
-        logging.info('-----Method finish whit success------')
+            logging.warning(f'Finish {i} train set in voting model')
+        logging.warning('-----Method finish whit success------')
         return voting_score, voting_model , voting_predict, voting_report
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -84,8 +84,8 @@ def bagging_algorithm(X_train_list, y_train_list, X_test_list, y_test_list, keys
             #bagging_score[keys_list[i]]['wrong_class'] = wrong_classification(X_test_list[i], bagging_predict[keys_list[i]],y_test_list[i])
             bagging_report[keys_list[i]] = classification_report(y_test_list[i], bagging_predict[keys_list[i]],output_dict=True)
             bagging_score[keys_list[i]]['accuracy'] = bagging_report[keys_list[i]]['accuracy']
-            logging.info(f'Finish {i} train set in bagging model')
-        logging.info('-----Method finish whit success------')
+            logging.warning(f'Finish {i} train set in bagging model')
+        logging.warning('-----Method finish whit success------')
         return  bagging_score, bagging_model, bagging_predict, bagging_report
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -104,8 +104,8 @@ def boosting_alghoritm(X_train_list, y_train_list, X_test_list, y_test_list, key
             #boosting_score[keys_list[i]]['wrong_class'] = wrong_classification(X_test_list[i],boosting_predict[keys_list[i]], y_test_list[i])
             boosting_report[keys_list[i]] = classification_report(y_test_list[i], boosting_predict[keys_list[i]], output_dict=True)
             boosting_score[keys_list[i]]['accuracy'] = boosting_report[keys_list[i]]['accuracy']
-            logging.info(f'Finish {i} train set in boosting model')
-        logging.info('-----Method finish whit success------')
+            logging.warning(f'Finish {i} train set in boosting model')
+        logging.warning('-----Method finish whit success------')
         return boosting_score, boosting_model, boosting_predict, boosting_report
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -124,8 +124,8 @@ def stacking_alghortim(X_train_list, y_train_list, X_test_list, y_test_list, key
             #stacking_score[keys_list[i]]['wrong_class'] = wrong_classification(X_test_list[i],stacking_predict[keys_list[i]],y_test_list[i])
             stacking_report[keys_list[i]] = classification_report(y_test_list[i], stacking_predict[keys_list[i]],output_dict=True)
             stacking_score[keys_list[i]]['accuracy'] = stacking_report[keys_list[i]]['accuracy']
-            logging.info(f'Finish {i} train set in stacking model')
-        logging.info('-----Method finish whit success------')
+            logging.warning(f'Finish {i} train set in stacking model')
+        logging.warning('-----Method finish whit success------')
         return stacking_score, stacking_model, stacking_predict, stacking_report
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -149,7 +149,7 @@ def generate_model():
         bagging_list = [bagging_score, bagging_model, bagging_predict, bagging_report]
         boosting_list = [boosting_score, boosting_model, boosting_predict, boosting_report]
         stacking_list = [stacking_score, stacking_model, stacking_predict, stacking_report]
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return  list_score, name_list, voting_list, bagging_list, boosting_list, stacking_list
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -178,8 +178,8 @@ def best_model():
                 for model, value in sub_dict.items():
                     model_name = model
                     test_name = test
-        logging.info(f'Il miglior modello è {model_name}, utilizzando un {test_name}')
-        logging.info('-----Method finish whit success------')
+        logging.warning(f'Il miglior modello è {model_name}, utilizzando un {test_name}')
+        logging.warning('-----Method finish whit success------')
         return model_name, test_name, voting_list, bagging_list, boosting_list, stacking_list
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -193,28 +193,28 @@ def save_best_model():
             clf = voting_list[1] #modello
             report = voting_list[3][test_name] #report
             predictions = voting_list[2][test_name] #prediction
-            logging.info('BEST MODEL CHOICE = voting')  # debug output
+            logging.warning('BEST MODEL CHOICE = voting')  # debug output
         elif model_name == 'bagging':
             clf = bagging_list[1]
             report = bagging_list[3][test_name]
             predictions = bagging_list[2][test_name]
-            logging.info('BEST MODEL CHOICE = bagging')
+            logging.warning('BEST MODEL CHOICE = bagging')
         elif model_name == 'boosting':
             clf = boosting_list[1]
             report = boosting_list[3][test_name]
             predictions = boosting_list[2][test_name]
-            logging.info('BEST MODEL CHOICE = boosting')
+            logging.warning('BEST MODEL CHOICE = boosting')
         elif model_name == 'stacking':
             clf = stacking_list[1]
             report = stacking_list[3][test_name]
             predictions = stacking_list[2][test_name]
-            logging.info('BEST MODEL CHOICE = stacking')
+            logging.warning('BEST MODEL CHOICE = stacking')
         else:
             logging.error('Errore nella scelta del modello')
             error = 1
             clf=""
         filename = 'doc/model'
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         joblib.dump(clf, filename)
     except:
         logging.error("Exception occurred", exc_info=True)

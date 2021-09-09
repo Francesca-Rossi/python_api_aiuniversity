@@ -33,7 +33,7 @@ def main_subject_replace_missing_value():
 
         df_all_features_first_degree = df_all_features_first_degree[df_all_features_first_degree['main_subject'].notna()]  # delete null values
         print('sample first degree after delete null value:', df_all_features_first_degree.shape[0])
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_all_features_first_degree
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -43,7 +43,7 @@ def get_originl_df_after_managing_all_missing_value():
         df_all_features_first_degree = main_subject_replace_missing_value()
         original_df_whitout_nan_value = df_all_features_first_degree.copy()
         return original_df_whitout_nan_value
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
     except:
         logging.error("Exception occurred", exc_info=True)
 
@@ -93,8 +93,8 @@ def clean_degree_course():
                                                                            'degree_course', 'IT-EN')
         # DEBUG: print the unique degree_course after the cleaning
         unique_degree_course = np.unique(df_all_features_first_degree['degree_course'])
-        logging.info('degree_course cleaning %s', unique_degree_course)
-        logging.info('-----Method finish whit success------')
+        logging.warning('degree_course cleaning %s', unique_degree_course)
+        logging.warning('-----Method finish whit success------')
         return df_all_features_first_degree
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -114,7 +114,7 @@ def merge_school_whit_other_school_features():
         """  ### <h5>5.5.6) Controllo finale che non ci siano più valori nulli</h5>"""
 
         print(df_all_features_first_degree.isnull().sum())
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_all_features_first_degree
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -137,7 +137,7 @@ def cleaning_character_features():
                              left_index=True))
         #TODO: index_clean_features serve nella parte finale
         index_clean_features = df_clean_features.index  # need to the final
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return df_clean_features
     except:
         logging.error("Exception occurred", exc_info=True)

@@ -30,7 +30,7 @@ def dbCloseConnection(client):
 async def addNewStudent(student_info, db):
     try:
         db.students.insert_one(student_info) #student_info is a dict
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return True
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -39,7 +39,7 @@ async def addNewStudent(student_info, db):
 async def addNewGraduate(graduate_info, db):
     try:
         db.graduates.insert_one(graduate_info) #graduate_info is a dict
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return True
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -48,7 +48,7 @@ async def addNewGraduate(graduate_info, db):
 async def addNewSubscriptions(subscriptions_info, db):
     try:
         db.subscriptions.insert_one(subscriptions_info)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return True
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -63,7 +63,7 @@ def getAllStudents(db):
         df = pd.read_json(dumps(cursor))
         df = df.iloc[:, 1:]
         df.to_json('doc/students_original_dataset.json')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
     except:
         logging.error("Exception occurred", exc_info=True)
 
@@ -73,7 +73,7 @@ def getAllGraduates(db):
         df = pd.read_json(dumps(cursor))
         df = df.iloc[:, 1:]
         df.to_json('doc/graduates_original_dataset.json')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
     except:
         logging.error("Exception occurred", exc_info=True)
 
@@ -84,7 +84,7 @@ def getAllSubscription(db):
         df = pd.read_json(dumps(cursor))
         df = df.iloc[:, 1:]
         df.to_json('doc/subscriptions_original_dataset.json')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
     except:
         logging.error("Exception occurred", exc_info=True)
 
@@ -97,7 +97,7 @@ async def getAllUni(db):
         for item in cursor:
             if item !="":
                 uni_list.add(item)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return uni_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -110,7 +110,7 @@ async def getAllUnByCourse(course, db):
         for item in cursor:
             if item != "":
                 uni_list.add(item)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return uni_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -126,7 +126,7 @@ async def getAllUniByRegion(region, db):
                 if ( j==i ):
                     if i != "":
                         uni_list.add(i)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return uni_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -142,7 +142,7 @@ async def getAllUniByProvince(province, db):
                 if ( j==i ):
                     if i != "":
                         uni_list.add(i)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return uni_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -156,7 +156,7 @@ async def getAllCourse(db):
             if item not in degree_course_list:
                 if item != "":
                     degree_course_list.add(item)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return degree_course_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -171,7 +171,7 @@ async def getAllCourseByUni(uni, db):
             if item not in degree_course_list:
                 if item != "":
                     degree_course_list.add(item)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return degree_course_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -187,7 +187,7 @@ async def getAllRegion(db):
         for item in study:
             if item not in region_list:
                 region_list.add(item)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return region_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -210,7 +210,7 @@ async def getRegionByUni(uni, db):
         else:
             item="NO REGION FOUND"
             print(item)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
 
@@ -225,7 +225,7 @@ async def getAllProvince(db):
         for item in study:
             if item not in province_list:
                 province_list.add(item.upper())
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return province_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -249,7 +249,7 @@ async def getProvinceByUni(uni, db):
         else:
             item= 'NO PROVINCE FOUND'
             return item
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
 
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -267,7 +267,7 @@ async def getAllSubject(course, db):
                 if item not in subject_list:
                     if item != "":
                         subject_list.add(item.strip())
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return subject_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -283,7 +283,7 @@ async def getAllSubjectByUni(course,  uni, db):
                 if item not in subject_list:
                     if item != "":
                         subject_list.add(item)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return subject_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -300,7 +300,7 @@ async def getAllEasyExam(course, uni, db):
                 if item.strip() not in exams_list:
                     if item.strip != "":
                         exams_list.add(item.strip())
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return exams_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -317,7 +317,7 @@ async def getAllDifficultExam(course, uni,  db):
                 if item.strip() not in exams_list:
                     if item.strip != "":
                         exams_list.add(item.strip())
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return exams_list
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -327,7 +327,7 @@ async def getNumberOfManByCourseAndUni(course, uni, db):
     #recupero numero maschi in un corso
     try:
         man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'m'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -336,7 +336,7 @@ async def getNumberOfManByCourse(course, db):
     #recupero numero maschi in un corso
     try:
         man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'm'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -345,7 +345,7 @@ async def getNumberOfManByUNi(uni, db):
     #recupero numero maschi in un università
     try:
         man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'm'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -355,7 +355,7 @@ async def getNumberOfManWhitSameProvinceOfUni(uni, db):
     try:
         province=await getRegionByUni(uni, db)
         man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'm'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -365,7 +365,7 @@ async def getNumberOfManWhitSameRegionOfUni(uni, db):
     try:
         region=await getRegionByUni(uni, db)
         man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'm'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -375,7 +375,7 @@ async def getNumberOfManByRegion(home_region, db):
     try:
         #recupero numero maschi in una regione iscritti all'uni
         man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'm'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -389,7 +389,7 @@ async def getNumberOfManGroupbyRegion(db):
             if region != "":
                 n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'm'}]})
                 region_dict[region]=n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return region_dict
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -398,7 +398,7 @@ async def getNumberOfManStudyatHomeRegion(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
     try:
         man = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'm'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -412,7 +412,7 @@ async def getNumberOfManStudyOutsideRegion(db):
             if region != "":
                 n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'm'}]})
                 total = total + n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return total
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -421,7 +421,7 @@ async def getNumberOfManByProvince(home_province, db):
     #recupero numero maschi in una regione iscritti all'uni
     try:
         man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'm'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -435,7 +435,7 @@ async def getNumberOfManGroupbyProvince(db):
             if province != "":
                 n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'm'}]})
                 province_dict[province]=n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return province_dict
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -444,7 +444,7 @@ async def getNumberOfManStudyatHomeProvince(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
     try:
         man = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'm'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return man
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -458,7 +458,7 @@ async def getNumberOfManStudyOutsideProvince(db):
             if province != "":
                 n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'm'}]})
                 total = total + n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return total
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -469,7 +469,7 @@ async def getNumberOfWomanByCourseAndUni(course, uni, db):
     try:
      #recupero numero maschi in un corso
         woman=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return  woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -478,7 +478,7 @@ async def getNumberOfWomanByCourse(course, db):
     try:
         #recupero numero maschi in un corso
         woman = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -487,7 +487,7 @@ async def getNumberOfWomanByUNi(uni, db):
     try:
         #recupero numero maschi in un università
         woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -497,7 +497,7 @@ async def getNumberOfWomanWhitSameProvinceOfUni(uni, db):
         #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
         province=await getProvinceByUni(uni, db)
         woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -507,7 +507,7 @@ async def getNumberOfWomanWhitSameRegionOfUni(uni, db):
         #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
         region=await getRegionByUni(uni, db)
         woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -516,7 +516,7 @@ async def getNumberOfWomanByRegion(home_region, db):
     try:
         #recupero numero maschi in una regione iscritti all'uni
         woman = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -530,7 +530,7 @@ async def getNumberOfWomanGroupbyRegion(db):
             if region != "":
                 n_woman = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'f'}]})
                 region_dict[region]=n_woman
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return region_dict
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -539,7 +539,7 @@ async def getNumberOfWomanStudyatHomeRegion(db):
     try:
         #quanti sono i ragazzi che studiano nella loro regione di provenienza
         woman = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -553,7 +553,7 @@ async def getNumberOfWomanStudyOutsideRegion(db):
             if region != "":
                 n_woman =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'f'}]})
                 total = total + n_woman
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return total
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -562,7 +562,7 @@ async def getNumberOfWomanByProvince(home_province, db):
     try:
         #recupero numero maschi in una regione iscritti all'uni
         woman = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -576,7 +576,7 @@ async def getNumberOfWomanGroupbyProvince(db):
             if province != "":
                 n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'f'}]})
                 province_dict[province]=n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return province_dict
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -585,7 +585,7 @@ async def getNumberOfWomanStudyatHomeProvince(db):
     try:
         #quanti sono i ragazzi che studiano nella loro regione di provenienza
         woman = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'f'}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return woman
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -599,7 +599,7 @@ async def getNumberOfWomanStudyOutsideProvince(db):
             if province != "":
                 n_woman =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'f'}]})
                 total = total + n_woman
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return total
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -612,7 +612,7 @@ async def getNumberOfPeopleByCourseAndUni(course, uni, db):
     #recupero numero maschi in un corso
     try:
         people=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -620,7 +620,7 @@ async def getNumberOfPeopleByCourse(course, db):
     #recupero numero maschi in un corso
     try:
         people = db.subscriptions.count_documents({'$and': [ {'degree_course': course}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -629,7 +629,7 @@ async def getNumberOfPeopleByUNi(uni, db):
     #recupero numero maschi in un università
     try:
         people = db.subscriptions.count_documents({'$and': [{'university': uni}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -639,7 +639,7 @@ async def getNumberOfPeopleWhitSameProvinceOfUni(uni, db):
     try:
         province=await getProvinceByUni(uni, db)
         people = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -649,7 +649,7 @@ async def getNumberOfPeopleWhitSameRegionOfUni(uni, db):
     try:
         region=await getRegionByUni(uni, db)
         people = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -658,7 +658,7 @@ async def getNumberOfPeopleByRegion(home_region, db):
     #recupero numero maschi in una regione iscritti all'uni
     try:
         people = db.subscriptions.count_documents({'$and': [{'home_region': home_region}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -673,7 +673,7 @@ async def getNumberOfPeopleGroupbyRegion(db):
             if region != "":
                 n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}]})
                 region_dict[region]=n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return region_dict
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -682,7 +682,7 @@ async def getNumberOfPeopleStudyatHomeRegion(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
     try:
         people = db.subscriptions.count_documents({'$and': [{'study_region': ''}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -696,7 +696,7 @@ async def getNumberOfPeopleStudyOutsideRegion(db):
             if region != "":
                 n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}]})
                 total = total + n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return total
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -705,7 +705,7 @@ async def getNumberOfPeopleByProvince(home_province, db):
     #recupero numero maschi in una regione iscritti all'uni
     try:
         people = db.subscriptions.count_documents({'$and': [{'home_province': home_province}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -719,7 +719,7 @@ async def getNumberOfPeopleGroupbyProvince(db):
             if province != "":
                 n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}]})
                 province_dict[province]=n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return province_dict
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -728,7 +728,7 @@ async def getNumberOfPeopleStudyatHomeProvince(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
     try:
         people = db.subscriptions.count_documents({'$and': [{'study_province': ''}]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return people
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -742,7 +742,7 @@ async def getNumberOfPeopleStudyOutsideProvince(db):
             if province != "":
                 n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}]})
                 total = total + n_man
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return total
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -755,7 +755,7 @@ async def getMarkAveragebyCourse(course, uni, db):
            [{'university': uni },
             {'degree_course': course}]})
         avg=average_dict(dictionary, 'average_grade')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -768,7 +768,7 @@ async def getMarkAveragebyCourseAndYear(course, uni, year,  db):
                                            {'degree_year': year}
                                            ]})
         avg = average_dict(dictionary, 'average_grade')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -780,7 +780,7 @@ async def getGradeAveragebyCourse(course, uni, db):
                                            {'degree_course': course}
                                            ]})
         avg = average_dict(dictionary, 'graduation_grade')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -802,7 +802,7 @@ async def getDurationAveragebyCourse(course, uni, db):
         if len(duration)>0:
             avg = average_list(duration)
             return fromFloatToYearAndMonth(avg)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -814,7 +814,7 @@ async def getExamNotDoneAveragebyCourse(course, uni, db):
                                                   {'degree_course': course}
                                                   ]})
          avg = average_dict(dictionary, 'numb_exams_not_done')
-         logging.info('-----Method finish whit success------')
+         logging.warning('-----Method finish whit success------')
          return avg
      except:
          logging.error("Exception occurred", exc_info=True)
@@ -827,7 +827,7 @@ async def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
                                                  {'degree_year': year}
                                                  ]})
         avg = average_dict(dictionary, 'numb_exams_not_done')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -844,7 +844,7 @@ async def getReviewListbyCourse(course, uni, db):
         for i in dictionary:
             if i['review'] !="":
                 review_list.add(i['review'])
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return review_list
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -860,7 +860,7 @@ async def getReviewListbyCourseAndYear(course, uni, year,  db):
         for i in dictionary:
             if i['review'] != "":
                 review_list.add(i['review'])
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return review_list
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -872,7 +872,7 @@ async def getReviewAverangebyCourse(course, uni, db):
                                                  {'degree_course': course}
                                                  ]})
         avg = average_dict(dictionary, 'stars')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -885,7 +885,7 @@ async def getReviewAverangebyCourseAndYear(course, uni, year,  db):
                                                  {'degree_year': year}
                                                  ]})
         avg = average_dict(dictionary, 'stars')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -896,7 +896,7 @@ async def getReviewAverangebyUni(uni, db):
                                                 [{'university': uni}
                                                  ]})
         avg = average_dict(dictionary, 'stars')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -911,7 +911,7 @@ async def getDidacticQualityAverangebyCourse(course, uni, db):
                                                  {'degree_course': course}
                                                  ]})
         avg = average_dict(dictionary, 'didactic_quality')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -924,7 +924,7 @@ async def getTeachingQualityAverangebyCourse(course, uni, db):
                                                  {'degree_course': course}
                                                  ]})
         avg = average_dict(dictionary, 'teaching_quality')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -937,7 +937,7 @@ async def getExamDifficultAverangebyCourse(course, uni, db):
                                                  {'degree_course': course}
                                                  ]})
         avg = average_dict(dictionary, 'exams_difficulties')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -949,7 +949,7 @@ async def getSubjectsDifficultAverangebyCourse(course, uni, db):
                                                  {'degree_course': course}
                                                  ]})
         avg = average_dict(dictionary, 'subjects_difficulties')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -961,7 +961,7 @@ async def getEnviromentalQualityAverangebyCourse(course, uni, db):
                                                  {'degree_course': course}
                                                  ]})
         avg = average_dict(dictionary, 'environment_quality')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -973,7 +973,7 @@ async def getStudentsRelationshipAverangebyCourse(course, uni, db):
                                                  {'degree_course': course}
                                                  ]})
         avg = average_dict(dictionary, 'students_relationship')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -989,7 +989,7 @@ async def getDateOfLastSubscription(db):
             dto = datetime.strptime(date_str, '%d-%m-%Y').date()
             date_list.add(dto)
         most_recent=max(date_list)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return most_recent
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -999,7 +999,7 @@ async def getDateOfLastSubscription(db):
 async def getSubscriptionsByDate(date, db):
     try:
         dictionary = db.subscriptions.find({'subscription_date': date})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return dictionary
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -1012,7 +1012,7 @@ async def getLaboratoryAverangebyCourse(course, uni, db):
                                                  {'degree_course': course}
                                                  ]})
         avg = average_dict(dictionary, 'laboratory')
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -1030,7 +1030,7 @@ async def getDifficultAspectList(course, uni, db):
             value=item['difficult_aspect']
             if value != "":
                 difficult_list.add(value)
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return difficult_list
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -1048,7 +1048,7 @@ async def getCountRedoChoice(course, uni, db):
             value = item['redo_choice']
             if value == "si":
                 sum =+1
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return sum
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -1065,7 +1065,7 @@ async def getNumberOfStudentsGoToErasmusByCourse(course, uni, db):
             value = item['abroad_experience']
             if value == "si":
                 sum = +1
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return sum
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -1079,7 +1079,7 @@ async def getNumberOfStudentsGoToErasmusByUni(uni, db):
             value = item['abroad_experience']
             if value == "si":
                 sum = +1
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return sum
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -1093,7 +1093,7 @@ async def getNumberOfStudentsChangeThisDegree(course, uni, db):
                                                 [{'prev_change_uni': uni},
                                                  {'prev_change_degree_course': course}
                                                  ]})
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return count
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -1103,7 +1103,7 @@ async def addReviewOfMachineLearning(predict_review, db):
     #aggiungo la recesione sull'algoritmo
     try:
         db.predict_review.insert_one(predict_review)  # student_info is a dict
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return True
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -1115,7 +1115,7 @@ async def restartCalucatedModule(db):
         getAllStudents(db)
         getAllGraduates(db)
         save_best_model()
-        logging.info('-----Method finish whit success------')
+        logging.warning('-----Method finish whit success------')
         return True
     except:
         logging.error("Exception occurred", exc_info=True)
