@@ -85,7 +85,7 @@ def get_first_degree_complete_dictionary():
 
 #region #MANAGE_MISSING_VALUE
 def get_students_data_after_manage_missing_values(show_graphs):
-    df_students = get_students_original_data() #TODO: CAMBIA CON IL FILE JSON E CONTROLLA CHE FUNZIONA
+    df_students = pd.read_json("doc/students_original_dataset.json")
     df_students = df_students.replace('', np.NaN)
     df_missing_value_students = df_students.isnull().sum()
     print("Original students dataset missing value: \n", df_missing_value_students)
@@ -94,7 +94,7 @@ def get_students_data_after_manage_missing_values(show_graphs):
     return df_students #ritorno il vecchio dataset con le modifiche fatte
 
 def get_graduated_data_after_manage_missing_values(show_graphs):
-    df_graduate = get_graduate_original_data() #TODO: CAMBIA CON IL FILE JSON E CONTROLLA CHE FUNZIONA
+    df_graduate = pd.read_json('doc/graduates_original_dataset.json')
     df_graduate = df_graduate.replace('', np.NaN)
     df_missing_value_graduate = df_graduate.isnull().sum()
     print("Original graduate dataset missing value: \n", df_missing_value_graduate)

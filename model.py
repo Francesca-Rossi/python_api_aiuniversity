@@ -13,6 +13,7 @@ from sklearn.ensemble import StackingClassifier
 from sklearn.linear_model import LogisticRegression
 from commons_func.training_data import *
 import joblib
+import multiprocessing as mp
 
 model_1 = MultinomialNB()
 model_2 = DecisionTreeClassifier()

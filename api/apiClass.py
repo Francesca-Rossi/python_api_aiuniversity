@@ -109,3 +109,19 @@ class SubscriptionInfo(BaseModel):
     stars: int
     subscription_date: Optional[str] = todayToString()
     subscription_type: str
+
+class PredictResult(BaseModel):
+    degree_course_input: str #corso inserito dall'utente
+    degree_predict: str #corso che gli abbiamo consigliato
+    university_input: str #università inserita
+    degree_predict_correct: bool
+    difference_between_course: int #quanto è lontano il tuo corso da quello che ti abbiamo consigliato
+    choosing_course_if_back: int #se tornassi indietro che scelta faresti
+    degree_dream: str #scelta da fare se tornasse indietro
+    uni_dream: str
+    aiuniversity_is_utils: bool
+    start_utilities_aiuniversity: bool
+    stars_aiuniversity: int
+    review_aiuniversity: str
+    subscription_date: Optional[str] = todayToString()
+

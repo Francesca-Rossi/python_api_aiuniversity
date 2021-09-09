@@ -3,6 +3,7 @@ import pymongo
 from bson.json_util import *
 from commons_func.generic_func import  *
 from datetime import datetime
+from model import *
 
 '''
 --------------------------
@@ -60,6 +61,7 @@ def getAllStudents(db):
     except:
         print('Error to get students from db')
     df=pd.read_json(dumps(cursor))
+    df = df.iloc[:, 1:]
     df.to_json('doc/students_original_dataset.json')
 
 
@@ -69,6 +71,7 @@ def getAllGraduates(db):
     except:
         print('Error to get graduates from db')
     df=pd.read_json(dumps(cursor))
+    df = df.iloc[:, 1:]
     df.to_json('doc/graduates_original_dataset.json')
 
 def getAllSubscription(db):
@@ -77,6 +80,7 @@ def getAllSubscription(db):
     except:
         print('Error to get graduates from db')
     df=pd.read_json(dumps(cursor))
+    df = df.iloc[:, 1:]
     df.to_json('doc/subscriptions_original_dataset.json')
 
 
@@ -762,7 +766,7 @@ async def getLaboratoryAverangebyCourse(course, uni, db):
     avg = average_dict(dictionary, 'laboratory')
     return avg
 
-#TODO: continue
+
 #TODO: da testare in python
 async def getDifficultAspectList(course, uni, db):
     difficult_list=set()
@@ -814,6 +818,7 @@ async def getNumberOfStudentsGoToErasmusByUni(uni, db):
     return sum
 
 #TODO: da testare in python
+
 async def getNumberOfStudentsChangeThisDegree(course, uni, db):
     #Quanti studenti avevano già fatto una precedente carriera incompleta
     count= db.subscriptions.count_documents({'$and':
@@ -822,16 +827,23 @@ async def getNumberOfStudentsChangeThisDegree(course, uni, db):
                                              ]})
     return count
 
-async def getNumberOfCourse( db):
-    #Total number of course in the db
-    all_course= await getAllCourse(db)
-    return len(all_course)
 
-async def getNumberOfCourseByUni(uni, db):
-    #Total number of course in the db
-    all_course= await getAllCourseByUni(uni, db)
-    return len(all_course)
+async def addReviewOfMachineLearning(predict_review, db):
+    #aggiungo la recesione sull'algoritmo
+    try:
+        db.predict_review.insert_one(predict_review)  # student_info is a dict
+        return True
+    except:
+        print(e)
+        return False
 
-
-#TODO: def addReviewOfMachineLearning(subscription_info, degree_review):
-#aggiungo la recesione sull'algoritmo
+async def restartCalucatedModule(db):
+    #ricalcolo il modulo python
+    try:
+        getAllStudents(db)
+        getAllGraduates(db)
+        save_best_model()
+        return True
+    except:
+        print(e)
+        return False
