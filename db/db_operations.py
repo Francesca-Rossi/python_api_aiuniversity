@@ -5,84 +5,88 @@ from commons_func.generic_func import  *
 from datetime import datetime
 from model import *
 
-'''
---------------------------
-DB CONNECTION
---------------------------
-'''
+#region ---CONNECTION METHOD---
 def dbOpenConnection():
-    client = pymongo.MongoClient(
-        "mongodb+srv://ai_university_admin:Pippo@dbserveraiuniversity.yfbov.mongodb.net/ai_university_db?retryWrites=true&w=majority")
-    return client
+    try:
+        client = pymongo.MongoClient(
+            "mongodb+srv://ai_university_admin:Pippo@dbserveraiuniversity.yfbov.mongodb.net/ai_university_db?retryWrites=true&w=majority")
+        logging.error('-*-*-*-CONNECT DB SUCCESS-*-*-*-')
+        return client
+    except:
+        logging.error('-*-*-*-FAILED TO CONNECT DB-*-*-*-')
+        logging.error("Exception occurred", exc_info=True)
 
 
 def dbCloseConnection(client):
-    client.close()
+    try:
+        client.close()
+        logging.error('-*-*-*-CLOSE CONNECTION DB-*-*-*-')
+    except:
+        logging.error('-*-*-*-FAILED TO CLOSE CONNECTION DB-*-*-*-')
+        logging.error("Exception occurred", exc_info=True)
+#endregion
 
-'''
---------------------------
-INSERT METHOD
---------------------------
-'''
+#region ---INSERT METHOD---
 async def addNewStudent(student_info, db):
     try:
         db.students.insert_one(student_info) #student_info is a dict
+        logging.info('-----Method finish whit success------')
         return True
     except:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
         return False
 
 async def addNewGraduate(graduate_info, db):
     try:
         db.graduates.insert_one(graduate_info) #graduate_info is a dict
+        logging.info('-----Method finish whit success------')
         return True
     except:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
         return False
 
 async def addNewSubscriptions(subscriptions_info, db):
     try:
         db.subscriptions.insert_one(subscriptions_info)
+        logging.info('-----Method finish whit success------')
         return True
-    except Exception as e:
-        print(e)
+    except:
+        logging.error("Exception occurred", exc_info=True)
         return False
+#endregion
 
+#region ---SELECT METHOD ---
 
-'''
---------------------------
-SELECT METHOD
---------------------------
-'''
-#todo: fai le api di questa parte, ci servono per fare l'aggiornamento automatico quando inseriamo un nuovo utente dei file
 def getAllStudents(db):
     try:
         cursor=db.students.find({})
+        df = pd.read_json(dumps(cursor))
+        df = df.iloc[:, 1:]
+        df.to_json('doc/students_original_dataset.json')
+        logging.info('-----Method finish whit success------')
     except:
-        print('Error to get students from db')
-    df=pd.read_json(dumps(cursor))
-    df = df.iloc[:, 1:]
-    df.to_json('doc/students_original_dataset.json')
-
+        logging.error("Exception occurred", exc_info=True)
 
 def getAllGraduates(db):
     try:
         cursor=db.graduates.find({})
+        df = pd.read_json(dumps(cursor))
+        df = df.iloc[:, 1:]
+        df.to_json('doc/graduates_original_dataset.json')
+        logging.info('-----Method finish whit success------')
     except:
-        print('Error to get graduates from db')
-    df=pd.read_json(dumps(cursor))
-    df = df.iloc[:, 1:]
-    df.to_json('doc/graduates_original_dataset.json')
+        logging.error("Exception occurred", exc_info=True)
+
 
 def getAllSubscription(db):
     try:
         cursor=db.subscriptions.find({})
+        df = pd.read_json(dumps(cursor))
+        df = df.iloc[:, 1:]
+        df.to_json('doc/subscriptions_original_dataset.json')
+        logging.info('-----Method finish whit success------')
     except:
-        print('Error to get graduates from db')
-    df=pd.read_json(dumps(cursor))
-    df = df.iloc[:, 1:]
-    df.to_json('doc/subscriptions_original_dataset.json')
-
+        logging.error("Exception occurred", exc_info=True)
 
 
 async def getAllUni(db):
@@ -93,9 +97,10 @@ async def getAllUni(db):
         for item in cursor:
             if item !="":
                 uni_list.add(item)
+        logging.info('-----Method finish whit success------')
         return uni_list
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllUnByCourse(course, db):
     #recupero tutte le università che hanno quel corso di laurea ( sia studenti che laureati)
@@ -105,9 +110,10 @@ async def getAllUnByCourse(course, db):
         for item in cursor:
             if item != "":
                 uni_list.add(item)
+        logging.info('-----Method finish whit success------')
         return uni_list
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllUniByRegion(region, db):
     # recupero tutte le università che si trovano in quella regione ( sia studenti che laureati)
@@ -120,9 +126,10 @@ async def getAllUniByRegion(region, db):
                 if ( j==i ):
                     if i != "":
                         uni_list.add(i)
+        logging.info('-----Method finish whit success------')
         return uni_list
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllUniByProvince(province, db):
     #recupero tutte le università che si trovano in quella provincia ( sia studenti che laureati)
@@ -135,9 +142,10 @@ async def getAllUniByProvince(province, db):
                 if ( j==i ):
                     if i != "":
                         uni_list.add(i)
+        logging.info('-----Method finish whit success------')
         return uni_list
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllCourse(db):
     #recupero tutti i corsi del db ( sia studenti che laureati)
@@ -148,10 +156,10 @@ async def getAllCourse(db):
             if item not in degree_course_list:
                 if item != "":
                     degree_course_list.add(item)
+        logging.info('-----Method finish whit success------')
         return degree_course_list
-
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllCourseByUni(uni, db):
     #recupero tutti i corsi di un università ( sia studenti che laureati)
@@ -163,9 +171,10 @@ async def getAllCourseByUni(uni, db):
             if item not in degree_course_list:
                 if item != "":
                     degree_course_list.add(item)
+        logging.info('-----Method finish whit success------')
         return degree_course_list
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllRegion(db):
     #recupero tutti le regioni del db ( sia studenti che laureati)
@@ -178,9 +187,10 @@ async def getAllRegion(db):
         for item in study:
             if item not in region_list:
                 region_list.add(item)
+        logging.info('-----Method finish whit success------')
         return region_list
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 async def getRegionByUni(uni, db):
     #recupero la regione di un università
@@ -200,9 +210,9 @@ async def getRegionByUni(uni, db):
         else:
             item="NO REGION FOUND"
             print(item)
-
+        logging.info('-----Method finish whit success------')
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllProvince(db):
     #recupero tutti le regioni del db ( sia studenti che laureati)
@@ -215,10 +225,10 @@ async def getAllProvince(db):
         for item in study:
             if item not in province_list:
                 province_list.add(item.upper())
+        logging.info('-----Method finish whit success------')
         return province_list
     except Exception as e:
-        print(e)
-        return province_list
+        logging.error("Exception occurred", exc_info=True)
 
 async def getProvinceByUni(uni, db):
     #recupero la regione di un università
@@ -239,9 +249,10 @@ async def getProvinceByUni(uni, db):
         else:
             item= 'NO PROVINCE FOUND'
             return item
+        logging.info('-----Method finish whit success------')
 
     except Exception as e:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
 
 
 
@@ -256,10 +267,10 @@ async def getAllSubject(course, db):
                 if item not in subject_list:
                     if item != "":
                         subject_list.add(item.strip())
+        logging.info('-----Method finish whit success------')
         return subject_list
     except Exception as e:
-        print(e)
-        return subject_list
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllSubjectByUni(course,  uni, db):
     #recupero tutte le materie dato un corso specifico di un università
@@ -272,10 +283,10 @@ async def getAllSubjectByUni(course,  uni, db):
                 if item not in subject_list:
                     if item != "":
                         subject_list.add(item)
+        logging.info('-----Method finish whit success------')
         return subject_list
     except Exception as e:
-        print(e)
-        return subject_list
+        logging.error("Exception occurred", exc_info=True)
 
 
 async def getAllEasyExam(course, uni, db):
@@ -289,10 +300,10 @@ async def getAllEasyExam(course, uni, db):
                 if item.strip() not in exams_list:
                     if item.strip != "":
                         exams_list.add(item.strip())
+        logging.info('-----Method finish whit success------')
         return exams_list
     except Exception as e:
-        print(e)
-        return exams_list
+        logging.error("Exception occurred", exc_info=True)
 
 async def getAllDifficultExam(course, uni,  db):
     #recupero tutte gli esami difficili dato un corso
@@ -306,535 +317,796 @@ async def getAllDifficultExam(course, uni,  db):
                 if item.strip() not in exams_list:
                     if item.strip != "":
                         exams_list.add(item.strip())
+        logging.info('-----Method finish whit success------')
         return exams_list
     except Exception as e:
-        print(e)
-        return exams_list
+        logging.error("Exception occurred", exc_info=True)
 
-'''
-MAN QUERY
-'''
+#region ---MAN QUERY---
 async def getNumberOfManByCourseAndUni(course, uni, db):
     #recupero numero maschi in un corso
-    man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'m'}]})
-    return man
+    try:
+        man=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'m'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManByCourse(course, db):
     #recupero numero maschi in un corso
-    man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'm'}]})
-    return man
+    try:
+        man = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'm'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManByUNi(uni, db):
     #recupero numero maschi in un università
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'm'}]})
-    return man
+    try:
+        man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'm'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManWhitSameProvinceOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
-    province=await getRegionByUni(uni, db)
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'm'}]})
-    return man
+    try:
+        province=await getRegionByUni(uni, db)
+        man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'm'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManWhitSameRegionOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
-    region=await getRegionByUni(uni, db)
-    man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'm'}]})
-    return man
+    try:
+        region=await getRegionByUni(uni, db)
+        man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'm'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
+
 
 async def getNumberOfManByRegion(home_region, db):
-    #recupero numero maschi in una regione iscritti all'uni
-    man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'm'}]})
-    return man
+    try:
+        #recupero numero maschi in una regione iscritti all'uni
+        man = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'm'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManGroupbyRegion(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    region_list=await getAllRegion(db)
-    region_dict={}
-    for region in region_list:
-        if region != "":
-            n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'm'}]})
-            region_dict[region]=n_man
-    return region_dict
+    try:
+        region_list=await getAllRegion(db)
+        region_dict={}
+        for region in region_list:
+            if region != "":
+                n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'm'}]})
+                region_dict[region]=n_man
+        logging.info('-----Method finish whit success------')
+        return region_dict
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManStudyatHomeRegion(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    man = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'm'}]})
-    return man
+    try:
+        man = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'm'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManStudyOutsideRegion(db):
     #quanti sono i ragazzi che studiano fuori regione ragruppati per re
-    region_list=await getAllRegion(db)
-    total=0
-    for region in region_list:
-        if region != "":
-            n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'm'}]})
-            total = total + n_man
-    return total
+    try:
+        region_list=await getAllRegion(db)
+        total=0
+        for region in region_list:
+            if region != "":
+                n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'm'}]})
+                total = total + n_man
+        logging.info('-----Method finish whit success------')
+        return total
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManByProvince(home_province, db):
     #recupero numero maschi in una regione iscritti all'uni
-    man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'm'}]})
-    return man
+    try:
+        man = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'm'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManGroupbyProvince(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    province_list=await getAllProvince(db)
-    province_dict={}
-    for province in province_list:
-        if province != "":
-            n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'm'}]})
-            province_dict[province]=n_man
-    return province_dict
+    try:
+        province_list=await getAllProvince(db)
+        province_dict={}
+        for province in province_list:
+            if province != "":
+                n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'm'}]})
+                province_dict[province]=n_man
+        logging.info('-----Method finish whit success------')
+        return province_dict
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManStudyatHomeProvince(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    man = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'm'}]})
-    return man
+    try:
+        man = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'm'}]})
+        logging.info('-----Method finish whit success------')
+        return man
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfManStudyOutsideProvince(db):
     #quanti sono i ragazzi che studiano fuori regione
-    province_list=await getAllProvince(db)
-    total=0
-    for province in province_list:
-        if province != "":
-            n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'm'}]})
-            total = total + n_man
-    return total
+    try:
+        province_list=await getAllProvince(db)
+        total=0
+        for province in province_list:
+            if province != "":
+                n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'm'}]})
+                total = total + n_man
+        logging.info('-----Method finish whit success------')
+        return total
+    except:
+        logging.error("Exception occurred", exc_info=True)
+#endregion
 
-
-
-'''
-WOMAN QUERY
-'''
+#region ---WOMAN QUERY---
 async def getNumberOfWomanByCourseAndUni(course, uni, db):
-    #recupero numero maschi in un corso
-    woman=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'f'}]})
-    return  woman
+    try:
+     #recupero numero maschi in un corso
+        woman=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}, {'gender':'f'}]})
+        logging.info('-----Method finish whit success------')
+        return  woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
+
 async def getNumberOfWomanByCourse(course, db):
-    #recupero numero maschi in un corso
-    woman = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'f'}]})
-    return woman
+    try:
+        #recupero numero maschi in un corso
+        woman = db.subscriptions.count_documents({'$and': [ {'degree_course': course}, {'gender': 'f'}]})
+        logging.info('-----Method finish whit success------')
+        return woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanByUNi(uni, db):
-    #recupero numero maschi in un università
-    woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'f'}]})
-    return woman
+    try:
+        #recupero numero maschi in un università
+        woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'gender': 'f'}]})
+        logging.info('-----Method finish whit success------')
+        return woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanWhitSameProvinceOfUni(uni, db):
-    #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
-    province=await getProvinceByUni(uni, db)
-    woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'f'}]})
-    return woman
+    try:
+        #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
+        province=await getProvinceByUni(uni, db)
+        woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'f'}]})
+        logging.info('-----Method finish whit success------')
+        return woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanWhitSameRegionOfUni(uni, db):
-    #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
-    region=await getRegionByUni(uni, db)
-    woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'f'}]})
-    return woman
+    try:
+        #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
+        region=await getRegionByUni(uni, db)
+        woman = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}, {'gender': 'f'}]})
+        logging.info('-----Method finish whit success------')
+        return woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanByRegion(home_region, db):
-    #recupero numero maschi in una regione iscritti all'uni
-    woman = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'f'}]})
-    return woman
+    try:
+        #recupero numero maschi in una regione iscritti all'uni
+        woman = db.subscriptions.count_documents({'$and': [{'home_region': home_region}, {'gender': 'f'}]})
+        logging.info('-----Method finish whit success------')
+        return woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanGroupbyRegion(db):
-    #da che regione provengono i ragazzi che studiano all'uni
-    region_list=await getAllRegion(db)
-    region_dict={}
-    for region in region_list:
-        if region != "":
-            n_woman = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'f'}]})
-            region_dict[region]=n_woman
-    return region_dict
+    try:
+        #da che regione provengono i ragazzi che studiano all'uni
+        region_list=await getAllRegion(db)
+        region_dict={}
+        for region in region_list:
+            if region != "":
+                n_woman = db.subscriptions.count_documents({'$and': [{'home_region': region}, {'gender': 'f'}]})
+                region_dict[region]=n_woman
+        logging.info('-----Method finish whit success------')
+        return region_dict
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanStudyatHomeRegion(db):
-    #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    woman = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'f'}]})
-    return woman
+    try:
+        #quanti sono i ragazzi che studiano nella loro regione di provenienza
+        woman = db.subscriptions.count_documents({'$and': [{'study_region': ''}, {'gender': 'f'}]})
+        logging.info('-----Method finish whit success------')
+        return woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanStudyOutsideRegion(db):
-    #quanti sono i ragazzi che studiano fuori regione ragruppati per re
-    region_list=await getAllRegion(db)
-    total=0
-    for region in region_list:
-        if region != "":
-            n_woman =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'f'}]})
-            total = total + n_woman
-    return total
+    try:
+        #quanti sono i ragazzi che studiano fuori regione ragruppati per re
+        region_list=await getAllRegion(db)
+        total=0
+        for region in region_list:
+            if region != "":
+                n_woman =db.subscriptions.count_documents({'$and': [{'study_region': region}, {'gender': 'f'}]})
+                total = total + n_woman
+        logging.info('-----Method finish whit success------')
+        return total
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanByProvince(home_province, db):
-    #recupero numero maschi in una regione iscritti all'uni
-    woman = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'f'}]})
-    return woman
+    try:
+        #recupero numero maschi in una regione iscritti all'uni
+        woman = db.subscriptions.count_documents({'$and': [{'home_province': home_province}, {'gender': 'f'}]})
+        logging.info('-----Method finish whit success------')
+        return woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanGroupbyProvince(db):
-    #da che regione provengono i ragazzi che studiano all'uni
-    province_dict = {}
-    province_list=await getAllProvince(db)
-    for province in province_list:
-        if province != "":
-            n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'f'}]})
-            province_dict[province]=n_man
-    return province_dict
+    try:
+        #da che regione provengono i ragazzi che studiano all'uni
+        province_dict = {}
+        province_list=await getAllProvince(db)
+        for province in province_list:
+            if province != "":
+                n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'f'}]})
+                province_dict[province]=n_man
+        logging.info('-----Method finish whit success------')
+        return province_dict
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanStudyatHomeProvince(db):
-    #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    woman = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'f'}]})
-    return woman
+    try:
+        #quanti sono i ragazzi che studiano nella loro regione di provenienza
+        woman = db.subscriptions.count_documents({'$and': [{'study_province': ''}, {'gender': 'f'}]})
+        logging.info('-----Method finish whit success------')
+        return woman
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfWomanStudyOutsideProvince(db):
-    #quanti sono i ragazzi che studiano fuori regione
-    province_list=await getAllProvince(db)
-    total=0
-    for province in province_list:
-        if province != "":
-            n_woman =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'f'}]})
-            total = total + n_woman
-    return total
+    try:
+        #quanti sono i ragazzi che studiano fuori regione
+        province_list=await getAllProvince(db)
+        total=0
+        for province in province_list:
+            if province != "":
+                n_woman =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'f'}]})
+                total = total + n_woman
+        logging.info('-----Method finish whit success------')
+        return total
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
+#endregion
 
+#region ---SUBSCRIBERS QUERY---
 
-'''
-SUBSCRIBERS QUERY
-'''
 async def getNumberOfPeopleByCourseAndUni(course, uni, db):
     #recupero numero maschi in un corso
-    people=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}]})
-    return people
+    try:
+        people=db.subscriptions.count_documents({'$and': [{"university": uni}, {'degree_course': course}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 async def getNumberOfPeopleByCourse(course, db):
     #recupero numero maschi in un corso
-    people = db.subscriptions.count_documents({'$and': [ {'degree_course': course}]})
-    return people
+    try:
+        people = db.subscriptions.count_documents({'$and': [ {'degree_course': course}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleByUNi(uni, db):
     #recupero numero maschi in un università
-    people = db.subscriptions.count_documents({'$and': [{'university': uni}]})
-    return people
+    try:
+        people = db.subscriptions.count_documents({'$and': [{'university': uni}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleWhitSameProvinceOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
-    province=await getProvinceByUni(uni, db)
-    people = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}]})
-    return people
+    try:
+        province=await getProvinceByUni(uni, db)
+        people = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleWhitSameRegionOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA REGIONE DELL'UNI)
-    region=await getRegionByUni(uni, db)
-    people = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}]})
-    return people
+    try:
+        region=await getRegionByUni(uni, db)
+        people = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_region': region}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleByRegion(home_region, db):
     #recupero numero maschi in una regione iscritti all'uni
-    people = db.subscriptions.count_documents({'$and': [{'home_region': home_region}]})
-    return people
+    try:
+        people = db.subscriptions.count_documents({'$and': [{'home_region': home_region}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 
 async def getNumberOfPeopleGroupbyRegion(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    region_dict = {}
-    region_list=await getAllRegion(db)
-    for region in region_list:
-        if region != "":
-            n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}]})
-            region_dict[region]=n_man
-    return region_dict
+    try:
+        region_dict = {}
+        region_list=await getAllRegion(db)
+        for region in region_list:
+            if region != "":
+                n_man = db.subscriptions.count_documents({'$and': [{'home_region': region}]})
+                region_dict[region]=n_man
+        logging.info('-----Method finish whit success------')
+        return region_dict
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleStudyatHomeRegion(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    people = db.subscriptions.count_documents({'$and': [{'study_region': ''}]})
-    return people
+    try:
+        people = db.subscriptions.count_documents({'$and': [{'study_region': ''}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleStudyOutsideRegion(db):
     #quanti sono i ragazzi che studiano fuori regione
-    region_list=await getAllRegion(db)
-    total=0
-    for region in region_list:
-        if region != "":
-            n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}]})
-            total = total + n_man
-    return total
+    try:
+        region_list=await getAllRegion(db)
+        total=0
+        for region in region_list:
+            if region != "":
+                n_man =db.subscriptions.count_documents({'$and': [{'study_region': region}]})
+                total = total + n_man
+        logging.info('-----Method finish whit success------')
+        return total
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleByProvince(home_province, db):
     #recupero numero maschi in una regione iscritti all'uni
-    people = db.subscriptions.count_documents({'$and': [{'home_province': home_province}]})
-    return people
+    try:
+        people = db.subscriptions.count_documents({'$and': [{'home_province': home_province}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleGroupbyProvince(db):
     #da che regione provengono i ragazzi che studiano all'uni
-    province_list=await getAllProvince(db)
-    province_dict={}
-    for province in province_list:
-        if province != "":
-            n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}]})
-            province_dict[province]=n_man
-    return province_dict
+    try:
+        province_list=await getAllProvince(db)
+        province_dict={}
+        for province in province_list:
+            if province != "":
+                n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}]})
+                province_dict[province]=n_man
+        logging.info('-----Method finish whit success------')
+        return province_dict
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleStudyatHomeProvince(db):
     #quanti sono i ragazzi che studiano nella loro regione di provenienza
-    people = db.subscriptions.count_documents({'$and': [{'study_province': ''}]})
-    return people
+    try:
+        people = db.subscriptions.count_documents({'$and': [{'study_province': ''}]})
+        logging.info('-----Method finish whit success------')
+        return people
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfPeopleStudyOutsideProvince(db):
     #quanti sono i ragazzi che studiano fuori regione
-    province_list= await getAllProvince(db)
-    total=0
-    for province in province_list:
-        if province != "":
-            n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}]})
-            total = total + n_man
-    return total
+    try:
+        province_list= await getAllProvince(db)
+        total=0
+        for province in province_list:
+            if province != "":
+                n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}]})
+                total = total + n_man
+        logging.info('-----Method finish whit success------')
+        return total
+    except:
+        logging.error("Exception occurred", exc_info=True)
+#endregion
 
-
+#region --AVERAGE QUERY--
 async def getMarkAveragebyCourse(course, uni, db):
-    dictionary=db.subscriptions.find({'$and':
-       [{'university': uni },
-        {'degree_course': course}]})
-    avg=average_dict(dictionary, 'average_grade')
-    return avg
+    try:
+        dictionary=db.subscriptions.find({'$and':
+           [{'university': uni },
+            {'degree_course': course}]})
+        avg=average_dict(dictionary, 'average_grade')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getMarkAveragebyCourseAndYear(course, uni, year,  db):
-    dictionary = db.subscriptions.find({'$and':
-                                      [{'university': uni},
-                                       {'degree_course': course},
-                                       {'degree_year': year}
-                                       ]})
-    avg = average_dict(dictionary, 'average_grade')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                          [{'university': uni},
+                                           {'degree_course': course},
+                                           {'degree_year': year}
+                                           ]})
+        avg = average_dict(dictionary, 'average_grade')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getGradeAveragebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                      [{'university': uni},
-                                       {'degree_course': course}
-                                       ]})
-    avg = average_dict(dictionary, 'graduation_grade')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                          [{'university': uni},
+                                           {'degree_course': course}
+                                           ]})
+        avg = average_dict(dictionary, 'graduation_grade')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 
 async def getDurationAveragebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                      [{'university': uni},
-                                       {'degree_course': course}
-                                       ]})
-    duration = set()
-    avg=0
-    for i in dictionary:
-        if int(i['end_year']) & int(i['enrolment_year']):
-            if len(str(i['end_year']))==4 & len(str(i['enrolment_year']))==4:
-                difference=i['end_year']-i['enrolment_year']
-                duration.add(difference)
-    if len(duration)>0:
-        avg = average_list(duration)
-        return fromFloatToYearAndMonth(avg)
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                          [{'university': uni},
+                                           {'degree_course': course}
+                                           ]})
+        duration = set()
+        avg=0
+        for i in dictionary:
+            if int(i['end_year']) & int(i['enrolment_year']):
+                if len(str(i['end_year']))==4 & len(str(i['enrolment_year']))==4:
+                    difference=i['end_year']-i['enrolment_year']
+                    duration.add(difference)
+        if len(duration)>0:
+            avg = average_list(duration)
+            return fromFloatToYearAndMonth(avg)
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getExamNotDoneAveragebyCourse(course, uni, db):
-     dictionary = db.subscriptions.find({'$and':
-                                             [{'university': uni},
-                                              {'degree_course': course}
-                                              ]})
-     avg = average_dict(dictionary, 'numb_exams_not_done')
-     return avg
+     try:
+         dictionary = db.subscriptions.find({'$and':
+                                                 [{'university': uni},
+                                                  {'degree_course': course}
+                                                  ]})
+         avg = average_dict(dictionary, 'numb_exams_not_done')
+         logging.info('-----Method finish whit success------')
+         return avg
+     except:
+         logging.error("Exception occurred", exc_info=True)
 
 async def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course},
-                                             {'degree_year': year}
-                                             ]})
-    avg = average_dict(dictionary, 'numb_exams_not_done')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course},
+                                                 {'degree_year': year}
+                                                 ]})
+        avg = average_dict(dictionary, 'numb_exams_not_done')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
+#endregion
 
-
+#region ---REVIEW QUERY---
 async def getReviewListbyCourse(course, uni, db):
-    review_list=set()
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    for i in dictionary:
-        if i['review'] !="":
-            review_list.add(i['review'])
-    return review_list
+    try:
+        review_list=set()
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        for i in dictionary:
+            if i['review'] !="":
+                review_list.add(i['review'])
+        logging.info('-----Method finish whit success------')
+        return review_list
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getReviewListbyCourseAndYear(course, uni, year,  db):
-    review_list = set()
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course},
-                                             {'degree_year': year}
-                                             ]})
-    for i in dictionary:
-        if i['review'] != "":
-            review_list.add(i['review'])
-    return review_list
+    try:
+        review_list = set()
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course},
+                                                 {'degree_year': year}
+                                                 ]})
+        for i in dictionary:
+            if i['review'] != "":
+                review_list.add(i['review'])
+        logging.info('-----Method finish whit success------')
+        return review_list
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getReviewAverangebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    avg = average_dict(dictionary, 'stars')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        avg = average_dict(dictionary, 'stars')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getReviewAverangebyCourseAndYear(course, uni, year,  db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course},
-                                             {'degree_year': year}
-                                             ]})
-    avg = average_dict(dictionary, 'stars')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course},
+                                                 {'degree_year': year}
+                                                 ]})
+        avg = average_dict(dictionary, 'stars')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getReviewAverangebyUni(uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni}
-                                             ]})
-    avg = average_dict(dictionary, 'stars')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni}
+                                                 ]})
+        avg = average_dict(dictionary, 'stars')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
+#endregion
+
+#region ---EVALUTATIONS---
 async def getDidacticQualityAverangebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    avg = average_dict(dictionary, 'didactic_quality')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        avg = average_dict(dictionary, 'didactic_quality')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
+
 
 async def getTeachingQualityAverangebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    avg = average_dict(dictionary, 'teaching_quality')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        avg = average_dict(dictionary, 'teaching_quality')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
+
 
 async def getExamDifficultAverangebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    avg = average_dict(dictionary, 'exams_difficulties')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        avg = average_dict(dictionary, 'exams_difficulties')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getSubjectsDifficultAverangebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    avg = average_dict(dictionary, 'subjects_difficulties')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        avg = average_dict(dictionary, 'subjects_difficulties')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getEnviromentalQualityAverangebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    avg = average_dict(dictionary, 'environment_quality')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        avg = average_dict(dictionary, 'environment_quality')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getStudentsRelationshipAverangebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    avg = average_dict(dictionary, 'students_relationship')
-    return avg
-
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        avg = average_dict(dictionary, 'students_relationship')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
+#endregion
 
 async def getDateOfLastSubscription(db):
-    dictionary = db.subscriptions.find({})
-    df=pd.DataFrame()
-    date_list=set()
-    for dict in dictionary:
-        date_str= dict['subscription_date']
-        dto = datetime.strptime(date_str, '%d-%m-%Y').date()
-        date_list.add(dto)
-    most_recent=max(date_list)
-    return most_recent
+    try:
+        dictionary = db.subscriptions.find({})
+        df=pd.DataFrame()
+        date_list=set()
+        for dict in dictionary:
+            date_str= dict['subscription_date']
+            dto = datetime.strptime(date_str, '%d-%m-%Y').date()
+            date_list.add(dto)
+        most_recent=max(date_list)
+        logging.info('-----Method finish whit success------')
+        return most_recent
+    except:
+        logging.error("Exception occurred", exc_info=True)
+
 
 
 async def getSubscriptionsByDate(date, db):
-    dictionary = db.subscriptions.find({'subscription_date': date})
-    return dictionary
+    try:
+        dictionary = db.subscriptions.find({'subscription_date': date})
+        logging.info('-----Method finish whit success------')
+        return dictionary
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 
 async def getLaboratoryAverangebyCourse(course, uni, db):
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    avg = average_dict(dictionary, 'laboratory')
-    return avg
+    try:
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        avg = average_dict(dictionary, 'laboratory')
+        logging.info('-----Method finish whit success------')
+        return avg
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 
 #TODO: da testare in python
 async def getDifficultAspectList(course, uni, db):
-    difficult_list=set()
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    for item in dictionary:
-        value=item['difficult_aspect']
-        if value != "":
-            difficult_list.add(value)
-    return difficult_list
+    try:
+        difficult_list=set()
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        for item in dictionary:
+            value=item['difficult_aspect']
+            if value != "":
+                difficult_list.add(value)
+        logging.info('-----Method finish whit success------')
+        return difficult_list
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 
 async def getCountRedoChoice(course, uni, db):
     #Quanti studenti rifarebbero la scelta
-    sum=0
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    for item in dictionary:
-        value = item['redo_choice']
-        if value == "si":
-            sum =+1
-    return sum
+    try:
+        sum=0
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        for item in dictionary:
+            value = item['redo_choice']
+            if value == "si":
+                sum =+1
+        logging.info('-----Method finish whit success------')
+        return sum
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 async def getNumberOfStudentsGoToErasmusByCourse(course, uni, db):
     #Contare quanti hanno fatto un esperienza all'estero
-    sum = 0
-    dictionary = db.subscriptions.find({'$and':
-                                            [{'university': uni},
-                                             {'degree_course': course}
-                                             ]})
-    for item in dictionary:
-        value = item['abroad_experience']
-        if value == "si":
-            sum = +1
-    return sum
+    try:
+        sum = 0
+        dictionary = db.subscriptions.find({'$and':
+                                                [{'university': uni},
+                                                 {'degree_course': course}
+                                                 ]})
+        for item in dictionary:
+            value = item['abroad_experience']
+            if value == "si":
+                sum = +1
+        logging.info('-----Method finish whit success------')
+        return sum
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 
 async def getNumberOfStudentsGoToErasmusByUni(uni, db):
-    sum = 0
-    dictionary = db.subscriptions.find({'university': uni})
-    for item in dictionary:
-        value = item['abroad_experience']
-        if value == "si":
-            sum = +1
-    return sum
+    try:
+        sum = 0
+        dictionary = db.subscriptions.find({'university': uni})
+        for item in dictionary:
+            value = item['abroad_experience']
+            if value == "si":
+                sum = +1
+        logging.info('-----Method finish whit success------')
+        return sum
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 #TODO: da testare in python
 
 async def getNumberOfStudentsChangeThisDegree(course, uni, db):
     #Quanti studenti avevano già fatto una precedente carriera incompleta
-    count= db.subscriptions.count_documents({'$and':
-                                            [{'prev_change_uni': uni},
-                                             {'prev_change_degree_course': course}
-                                             ]})
-    return count
+    try:
+        count= db.subscriptions.count_documents({'$and':
+                                                [{'prev_change_uni': uni},
+                                                 {'prev_change_degree_course': course}
+                                                 ]})
+        logging.info('-----Method finish whit success------')
+        return count
+    except:
+        logging.error("Exception occurred", exc_info=True)
 
 
 async def addReviewOfMachineLearning(predict_review, db):
     #aggiungo la recesione sull'algoritmo
     try:
         db.predict_review.insert_one(predict_review)  # student_info is a dict
+        logging.info('-----Method finish whit success------')
         return True
     except:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
         return False
 
 async def restartCalucatedModule(db):
@@ -843,7 +1115,10 @@ async def restartCalucatedModule(db):
         getAllStudents(db)
         getAllGraduates(db)
         save_best_model()
+        logging.info('-----Method finish whit success------')
         return True
     except:
-        print(e)
+        logging.error("Exception occurred", exc_info=True)
         return False
+
+#endregion
