@@ -48,7 +48,7 @@ async def get_number_of_students_go_to_erasmus_by_course(university: str, course
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.get("/getNumberOfStudentsGoToErasmusByCourse/{university}", tags=["Other"])
+@app.get("/getNumberOfStudentsGoToErasmusByUni/{university}", tags=["Other"])
 async def get_number_of_students_go_to_erasmus_by_uni(university: str):
     '''Get the average of exame not done given the course and the year'''
     try:
@@ -56,7 +56,7 @@ async def get_number_of_students_go_to_erasmus_by_uni(university: str):
         db = client.get_database("ai_university_db")
         input_uni = university.lower()
         input_uni = input_uni.strip()
-        number = await getNumberOfStudentsGoToErasmusByCourse(input_uni,  db)
+        number = await getNumberOfStudentsGoToErasmusByUni(input_uni,  db)
         dbCloseConnection(client)
         return {'result': number}
     except:

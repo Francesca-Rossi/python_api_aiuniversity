@@ -10,19 +10,19 @@ def dbOpenConnection():
     try:
         client = pymongo.MongoClient(
             "mongodb+srv://ai_university_admin:Pippo@dbserveraiuniversity.yfbov.mongodb.net/ai_university_db?retryWrites=true&w=majority")
-        logging.error('-*-*-*-CONNECT DB SUCCESS-*-*-*-')
+        logging.warning('---CONNECT DB SUCCESS---')
         return client
     except:
-        logging.error('-*-*-*-FAILED TO CONNECT DB-*-*-*-')
+        logging.error('---FAILED TO CONNECT DB---')
         logging.error("Exception occurred", exc_info=True)
 
 
 def dbCloseConnection(client):
     try:
         client.close()
-        logging.error('-*-*-*-CLOSE CONNECTION DB-*-*-*-')
+        logging.warning('---CLOSE CONNECTION DB---')
     except:
-        logging.error('-*-*-*-FAILED TO CLOSE CONNECTION DB-*-*-*-')
+        logging.warning('---FAILED TO CLOSE CONNECTION DB---')
         logging.error("Exception occurred", exc_info=True)
 #endregion
 
@@ -210,6 +210,8 @@ async def getRegionByUni(uni, db):
         else:
             item="NO REGION FOUND"
             print(item)
+            return item
+
         logging.warning('-----Method finish whit success------')
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
@@ -242,13 +244,13 @@ async def getProvinceByUni(uni, db):
                     for item1 in home:
                         if (item == item1):
                             print(item)
-                            return item
+                            return item.upper()
                 else:
                     print(item)
-                    return item
+                    return item.upper()
         else:
             item= 'NO PROVINCE FOUND'
-            return item
+            return item.upper()
         logging.warning('-----Method finish whit success------')
 
     except Exception as e:
@@ -280,6 +282,7 @@ async def getAllSubjectByUni(course,  uni, db):
         for i in cursor:
             list= i.split(',')
             for item in list:
+                item = item.strip()
                 if item not in subject_list:
                     if item != "":
                         subject_list.add(item)
@@ -298,7 +301,7 @@ async def getAllEasyExam(course, uni, db):
             list= exams.split(',')
             for item in list:
                 if item.strip() not in exams_list:
-                    if item.strip != "":
+                    if item.strip()  != "":
                         exams_list.add(item.strip())
         logging.warning('-----Method finish whit success------')
         return exams_list
@@ -315,7 +318,7 @@ async def getAllDifficultExam(course, uni,  db):
             list = exams.split(',')
             for item in list:
                 if item.strip() not in exams_list:
-                    if item.strip != "":
+                    if item.strip() != "":
                         exams_list.add(item.strip())
         logging.warning('-----Method finish whit success------')
         return exams_list
@@ -353,7 +356,7 @@ async def getNumberOfManByUNi(uni, db):
 async def getNumberOfManWhitSameProvinceOfUni(uni, db):
     #recupero numero maschi in un università che NON SONO FUORISEDE (STESSA PROVINCIA DELL'UNI)
     try:
-        province=await getRegionByUni(uni, db)
+        province=await getProvinceByUni(uni, db)
         man = db.subscriptions.count_documents({'$and': [{'university': uni}, {'home_province': province}, {'gender': 'm'}]})
         logging.warning('-----Method finish whit success------')
         return man
@@ -430,10 +433,12 @@ async def getNumberOfManGroupbyProvince(db):
     #da che regione provengono i ragazzi che studiano all'uni
     try:
         province_list=await getAllProvince(db)
+
         province_dict={}
         for province in province_list:
             if province != "":
-                n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'm'}]})
+                pr=province.lower()
+                n_man = db.subscriptions.count_documents({'$and': [{'home_province': pr}, {'gender': 'm'}]})
                 province_dict[province]=n_man
         logging.warning('-----Method finish whit success------')
         return province_dict
@@ -456,7 +461,8 @@ async def getNumberOfManStudyOutsideProvince(db):
         total=0
         for province in province_list:
             if province != "":
-                n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'm'}]})
+                pr = province.lower()
+                n_man =db.subscriptions.count_documents({'$and': [{'study_province': pr}, {'gender': 'm'}]})
                 total = total + n_man
         logging.warning('-----Method finish whit success------')
         return total
@@ -574,7 +580,8 @@ async def getNumberOfWomanGroupbyProvince(db):
         province_list=await getAllProvince(db)
         for province in province_list:
             if province != "":
-                n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}, {'gender': 'f'}]})
+                pr = province.lower()
+                n_man = db.subscriptions.count_documents({'$and': [{'home_province': pr}, {'gender': 'f'}]})
                 province_dict[province]=n_man
         logging.warning('-----Method finish whit success------')
         return province_dict
@@ -596,8 +603,9 @@ async def getNumberOfWomanStudyOutsideProvince(db):
         province_list=await getAllProvince(db)
         total=0
         for province in province_list:
+            pr = province.lower()
             if province != "":
-                n_woman =db.subscriptions.count_documents({'$and': [{'study_province': province}, {'gender': 'f'}]})
+                n_woman =db.subscriptions.count_documents({'$and': [{'study_province': pr}, {'gender': 'f'}]})
                 total = total + n_woman
         logging.warning('-----Method finish whit success------')
         return total
@@ -717,7 +725,8 @@ async def getNumberOfPeopleGroupbyProvince(db):
         province_dict={}
         for province in province_list:
             if province != "":
-                n_man = db.subscriptions.count_documents({'$and': [{'home_province': province}]})
+                pr=province.lower()
+                n_man = db.subscriptions.count_documents({'$and': [{'home_province': pr}]})
                 province_dict[province]=n_man
         logging.warning('-----Method finish whit success------')
         return province_dict
@@ -740,7 +749,8 @@ async def getNumberOfPeopleStudyOutsideProvince(db):
         total=0
         for province in province_list:
             if province != "":
-                n_man =db.subscriptions.count_documents({'$and': [{'study_province': province}]})
+                pr = province.lower()
+                n_man =db.subscriptions.count_documents({'$and': [{'study_province': pr}]})
                 total = total + n_man
         logging.warning('-----Method finish whit success------')
         return total
@@ -797,7 +807,7 @@ async def getDurationAveragebyCourse(course, uni, db):
         for i in dictionary:
             if int(i['end_year']) & int(i['enrolment_year']):
                 if len(str(i['end_year']))==4 & len(str(i['enrolment_year']))==4:
-                    difference=i['end_year']-i['enrolment_year']
+                    difference=int(i['end_year'])-int(i['enrolment_year'])
                     duration.add(difference)
         if len(duration)>0:
             avg = average_list(duration)
@@ -806,6 +816,7 @@ async def getDurationAveragebyCourse(course, uni, db):
         return avg
     except:
         logging.error("Exception occurred", exc_info=True)
+        return "undefined"
 
 async def getExamNotDoneAveragebyCourse(course, uni, db):
      try:
@@ -836,14 +847,17 @@ async def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
 #region ---REVIEW QUERY---
 async def getReviewListbyCourse(course, uni, db):
     try:
-        review_list=set()
+        review_list=[]
         dictionary = db.subscriptions.find({'$and':
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
         for i in dictionary:
             if i['review'] !="":
-                review_list.add(i['review'])
+                review_dict={}
+                review_dict['review']=i['review']
+                review_dict['stars'] = i['stars']
+                review_list.append(review_dict)
         logging.warning('-----Method finish whit success------')
         return review_list
     except:
@@ -1011,7 +1025,7 @@ async def getLaboratoryAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'laboratory')
+        avg = average_dict(dictionary, 'laboratories')
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -1039,15 +1053,16 @@ async def getDifficultAspectList(course, uni, db):
 async def getCountRedoChoice(course, uni, db):
     #Quanti studenti rifarebbero la scelta
     try:
-        sum=0
+
         dictionary = db.subscriptions.find({'$and':
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
+        sum = 0
         for item in dictionary:
             value = item['redo_choice']
             if value == "si":
-                sum =+1
+                sum = sum +1
         logging.warning('-----Method finish whit success------')
         return sum
     except:
@@ -1064,7 +1079,7 @@ async def getNumberOfStudentsGoToErasmusByCourse(course, uni, db):
         for item in dictionary:
             value = item['abroad_experience']
             if value == "si":
-                sum = +1
+                sum =sum +1
         logging.warning('-----Method finish whit success------')
         return sum
     except:
@@ -1078,7 +1093,7 @@ async def getNumberOfStudentsGoToErasmusByUni(uni, db):
         for item in dictionary:
             value = item['abroad_experience']
             if value == "si":
-                sum = +1
+                sum = sum +1
         logging.warning('-----Method finish whit success------')
         return sum
     except:

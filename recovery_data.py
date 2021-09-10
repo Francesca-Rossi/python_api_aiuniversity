@@ -6,7 +6,7 @@ import numpy as np
 from commons_func.graphs import *
 from commons_func.logging_config import  *
 
-QUERY_FIRST_DEGREE= 'study_type == "Triennale" | study_type == "Magistrale_unico"'
+QUERY_FIRST_DEGREE= 'study_type == "triennale" | study_type == "magistrale_unico"'
 FEATURES_FIRST_DEGREE=['degree_course', 'other_high_school', 'high_school', 'main_subject', 'favorite_subject', 'dream_job', 'hobby', 'decision_choice' , 'expectations', 'choice_related_studies']
 
 #region  #CREATE DATASET
@@ -59,6 +59,7 @@ def get_students_first_degree_dataset():
     '''Get the students first degree after managing missing value of original dataset'''
     try:
         df_students=get_students_data_after_manage_missing_values(False)
+        print('df_students:', df_students.head())
         df_students_first_degree = df_students.query(QUERY_FIRST_DEGREE)
         print('students first degree:', df_students_first_degree.shape)
         logging.warning('-----Method finish whit success------')
@@ -115,6 +116,7 @@ def get_students_data_after_manage_missing_values(show_graphs):
         if(show_graphs):
             missing_value_graphs(df_missing_value_students, df_students, 'Studenti')
         logging.warning('-----Method finish whit success------')
+        print(df_students.head())
         return df_students #ritorno il vecchio dataset con le modifiche fatte
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -128,6 +130,7 @@ def get_graduated_data_after_manage_missing_values(show_graphs):
         if(show_graphs):
             missing_value_graphs(df_missing_value_graduate, df_graduate, 'Laureati')
         logging.warning('-----Method finish whit success------')
+        print(df_graduate.head())
         return df_graduate
     except:
         logging.error("Exception occurred", exc_info=True)

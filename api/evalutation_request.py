@@ -12,7 +12,7 @@ async def get_didatic_quality_average(university: str, course: str):
         input_course = input_course.strip()
         number = await getDidacticQualityAverangebyCourse(input_course, input_uni,  db)
         dbCloseConnection(client)
-        return {'result': number}
+        return {'result': round(number, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -28,7 +28,7 @@ async def get_teaching_quality_average(university: str, course: str):
         input_course = input_course.strip()
         number = await getTeachingQualityAverangebyCourse(input_course, input_uni,  db)
         dbCloseConnection(client)
-        return {'result': number}
+        return {'result': round(number, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -44,7 +44,7 @@ async def get_exams_difficult_average(university: str, course: str):
         input_course = input_course.strip()
         number = await getExamDifficultAverangebyCourse(input_course, input_uni,  db)
         dbCloseConnection(client)
-        return {'result': number}
+        return {'result': round(number, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -60,7 +60,7 @@ async def get_subjects_difficult_average(university: str, course: str):
         input_course = input_course.strip()
         number = await getSubjectsDifficultAverangebyCourse(input_course, input_uni,  db)
         dbCloseConnection(client)
-        return {'result': number}
+        return {'result': round(number, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -76,7 +76,7 @@ async def get_enviromental_quality_average(university: str, course: str):
         input_course = input_course.strip()
         number = await getEnviromentalQualityAverangebyCourse(input_course, input_uni,  db)
         dbCloseConnection(client)
-        return {'result': number}
+        return {'result': round(number, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -92,7 +92,7 @@ async def get_students_relationship_average(university: str, course: str):
         input_course = input_course.strip()
         number = await getStudentsRelationshipAverangebyCourse(input_course, input_uni,  db)
         dbCloseConnection(client)
-        return {'result': number}
+        return {'result': round(number, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -108,6 +108,6 @@ async def get_laboratory_average(university: str, course: str):
         input_course = input_course.strip()
         number = await getLaboratoryAverangebyCourse(input_course, input_uni,  db)
         dbCloseConnection(client)
-        return {'result': number}
+        return {'result': round(number, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")

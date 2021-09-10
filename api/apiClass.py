@@ -3,8 +3,21 @@ from typing import Optional
 from commons_func.generic_func import *
 from fastapi import FastAPI,  HTTPException
 from db.db_operations import  *
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(debug=True, title="AIuniversity-API")
+
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class BoolResult(BaseModel):
     result: bool

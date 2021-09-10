@@ -136,15 +136,13 @@ async def get_women_by_province(province: str):
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.get("/getNumberOfWomenGroupbyProvince/{province}", tags=["Number of women"])
-async def get_women_groupby_province(province: str):
+@app.get("/getNumberOfWomenGroupbyProvince", tags=["Number of women"])
+async def get_women_groupby_province():
     '''How many women study in all provinces? '''
     try:
         client = dbOpenConnection()
         db = client.get_database("ai_university_db")
-        input = province.lower()
-        input = input.strip()
-        number =  await getNumberOfWomanGroupbyProvince(input,  db)
+        number =  await getNumberOfWomanGroupbyProvince( db)
         dbCloseConnection(client)
         return {'result': number}
     except:

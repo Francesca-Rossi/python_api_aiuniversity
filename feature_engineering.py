@@ -42,7 +42,7 @@ def create_clustering_degree_course():
         for cluster, degree in byCluster:
             logging.warning(f"All entries for {cluster!r}")
             logging.warning("------------------------")
-            logging.warning(degree, end="\n\n")  # display(degree)
+            logging.warning(f"All entries for {degree}")  # display(degree)
 
             labels.append(degree['full_degree_course'].iloc[0])
         logging.warning(labels)

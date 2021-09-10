@@ -12,7 +12,7 @@ async def get_mark_average_by_course(university: str, course: str):
         input_course = input_course.strip()
         avg = await getMarkAveragebyCourse(input_course, input_uni, db)
         dbCloseConnection(client)
-        return avg
+        return {'result': round(avg, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -28,7 +28,7 @@ async def get_mark_average_by_course_and_year(university: str, course: str, year
         input_course = input_course.strip()
         avg = await getMarkAveragebyCourseAndYear(input_course, input_uni, year_of_course,  db)
         dbCloseConnection(client)
-        return {'result': avg}
+        return {'result': round(avg, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -44,7 +44,7 @@ async def get_grade_average_by_course(university: str, course: str):
         input_course = input_course.strip()
         avg = await getGradeAveragebyCourse(input_course, input_uni, db)
         dbCloseConnection(client)
-        return {'result': avg}
+        return {'result': round(avg, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -58,9 +58,9 @@ async def get_duratiion_average_by_course(university: str, course: str):
         input_uni = input_uni.strip()
         input_course=course.lower()
         input_course = input_course.strip()
-        avg = await getDurationAveragebyCourse(input_course, input_uni, db)
+        duration = await getDurationAveragebyCourse(input_course, input_uni, db)
         dbCloseConnection(client)
-        return {'result': avg}
+        return {'result': duration}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
@@ -76,7 +76,7 @@ async def get_exam_not_done_by_course_and_year(university: str, course: str, yea
         input_course = input_course.strip()
         avg = await getExamNotDoneAveragebyCourseAndYear(input_course, input_uni, year_of_course, db)
         dbCloseConnection(client)
-        return {'result': avg}
+        return {'result': round(avg, 2)}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
