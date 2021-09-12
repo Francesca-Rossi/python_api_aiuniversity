@@ -20,7 +20,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+CLIENT = dbOpenConnection()
+DB = CLIENT.get_database("ai_university_db")
 @app.get("/")
 async def read_items(token: str = Depends(oauth2_scheme)):
     return {"token": token}
@@ -33,6 +34,8 @@ class UniInfo(BaseModel):
     course: str
 
 class UserInfo(BaseModel):
+    age: int
+    gender: str
     region: str
     province: str
     high_school: str
@@ -43,6 +46,8 @@ class UserInfo(BaseModel):
     uni_aspectations: str
     uni_decision_choice: str
     continuous_previous_study: str
+    advice_date: Optional[str] = todayToString()
+    degree_predict: Optional[str]
 
 
 class SubscriptionInfo(BaseModel):

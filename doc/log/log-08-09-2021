@@ -1,0 +1,4 @@
+08-Sep-21 22:08:25-root - WARNING - prova
+08-Sep-21 22:08:35-uvicorn.error - INFO - Started server process [396]
+08-Sep-21 22:08:35-uvicorn.error - INFO - Waiting for application startup.
+08-Sep-21 22:08:35-uvicorn.error - INFO - Application startup complete.

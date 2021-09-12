@@ -30,6 +30,7 @@ def dbCloseConnection(client):
 async def addNewStudent(student_info, db):
     try:
         db.students.insert_one(student_info) #student_info is a dict
+        logging.warning('-----New student added in db------')
         logging.warning('-----Method finish whit success------')
         return True
     except:
@@ -39,6 +40,7 @@ async def addNewStudent(student_info, db):
 async def addNewGraduate(graduate_info, db):
     try:
         db.graduates.insert_one(graduate_info) #graduate_info is a dict
+        logging.warning('-----New graduate added in db------')
         logging.warning('-----Method finish whit success------')
         return True
     except:
@@ -48,6 +50,17 @@ async def addNewGraduate(graduate_info, db):
 async def addNewSubscriptions(subscriptions_info, db):
     try:
         db.subscriptions.insert_one(subscriptions_info)
+        logging.warning('-----New subscriptions added in db------')
+        logging.warning('-----Method finish whit success------')
+        return True
+    except:
+        logging.error("Exception occurred", exc_info=True)
+        return False
+
+async def AddNewAdvice(student_info, db):
+    try:
+        db.advice.insert_one(student_info) #student_info is a dict
+        logging.warning('-----New advice added in db------')
         logging.warning('-----Method finish whit success------')
         return True
     except:
@@ -808,10 +821,12 @@ async def getDurationAveragebyCourse(course, uni, db):
             if int(i['end_year']) & int(i['enrolment_year']):
                 if len(str(i['end_year']))==4 & len(str(i['enrolment_year']))==4:
                     difference=int(i['end_year'])-int(i['enrolment_year'])
-                    duration.add(difference)
+                    if difference > 0:
+                        duration.add(difference)
         if len(duration)>0:
             avg = average_list(duration)
             return fromFloatToYearAndMonth(avg)
+
         logging.warning('-----Method finish whit success------')
         return avg
     except:

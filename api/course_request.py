@@ -4,10 +4,7 @@ from .apiClass import  *
 async def get_all_course():
     '''Get all italian courses in the DB'''
     try:
-        client = dbOpenConnection()
-        db = client.get_database("ai_university_db")
-        list = await getAllCourse(db)
-        dbCloseConnection(client)
+        list = await getAllCourse(DB)
         return {'result': list}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
@@ -16,12 +13,9 @@ async def get_all_course():
 async def get_all_course_by_uni(university: str):
     '''Get all the courses given by an university'''
     try:
-        client = dbOpenConnection()
-        db = client.get_database("ai_university_db")
         input = university.lower()
         input = input.strip()
-        list =  await getAllCourseByUni(input, db)
-        dbCloseConnection(client)
+        list =  await getAllCourseByUni(input, DB)
         return {'result': list}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")

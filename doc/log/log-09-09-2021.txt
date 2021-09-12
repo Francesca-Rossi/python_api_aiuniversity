@@ -1,0 +1,395 @@
+09-Sep-21 18:36:18- uvicorn.error - server.py - serve - INFO - Started server process [12324]
+09-Sep-21 18:36:18- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 18:36:18- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 18:41:37- uvicorn.error - server.py - serve - INFO - Started server process [25952]
+09-Sep-21 18:41:37- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 18:41:37- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 18:45:06- uvicorn.error - server.py - serve - INFO - Started server process [28968]
+09-Sep-21 18:45:06- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 18:45:06- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 18:47:23- uvicorn.error - server.py - serve - INFO - Started server process [3564]
+09-Sep-21 18:47:23- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 18:47:23- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 18:47:55- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 18:47:56- root - db_operations.py - getNumberOfManWhitSameProvinceOfUni - WARNING - -----Method finish whit success------
+09-Sep-21 18:47:56- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 18:49:50- uvicorn.error - server.py - serve - INFO - Started server process [32580]
+09-Sep-21 18:49:50- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 18:49:50- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 18:51:45- uvicorn.error - server.py - serve - INFO - Started server process [21644]
+09-Sep-21 18:51:45- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 18:51:45- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 18:53:14- uvicorn.error - server.py - serve - INFO - Started server process [30392]
+09-Sep-21 18:53:14- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 18:53:14- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 19:00:34- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:00:35- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:00:47- root - db_operations.py - getNumberOfManGroupbyProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:00:47- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:10:48- uvicorn.error - server.py - serve - INFO - Started server process [34076]
+09-Sep-21 19:10:48- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 19:10:48- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 19:15:55- uvicorn.error - server.py - serve - INFO - Started server process [12620]
+09-Sep-21 19:15:55- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 19:15:55- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 19:20:35- uvicorn.error - server.py - serve - INFO - Started server process [16940]
+09-Sep-21 19:20:35- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 19:20:35- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 19:23:21- root - db_operations.py - dbOpenConnection - ERROR - ---FAILED TO CONNECT DB---
+09-Sep-21 19:23:21- root - db_operations.py - dbOpenConnection - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 88, in _resolve_uri
+    results = _resolve('_mongodb._tcp.' + self.__fqdn, 'SRV',
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 48, in _resolve
+    return resolver.query(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\dns\resolver.py", line 1100, in query
+    return get_default_resolver().query(qname, rdtype, rdclass, tcp, source,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\dns\resolver.py", line 900, in query
+    timeout = self._compute_timeout(start, lifetime)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\dns\resolver.py", line 799, in _compute_timeout
+    raise Timeout(timeout=duration)
+dns.exception.Timeout: The DNS operation timed out after 20.00491428375244 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\db\db_operations.py", line 11, in dbOpenConnection
+    client = pymongo.MongoClient(
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\mongo_client.py", line 670, in __init__
+    res = uri_parser.parse_uri(
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\uri_parser.py", line 524, in parse_uri
+    nodes = dns_resolver.get_hosts()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 118, in get_hosts
+    _, nodes = self._get_srv_response_and_hosts(True)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 99, in _get_srv_response_and_hosts
+    results = self._resolve_uri(encapsulate_errors)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 95, in _resolve_uri
+    raise ConfigurationError(str(exc))
+pymongo.errors.ConfigurationError: The DNS operation timed out after 20.00491428375244 seconds
+09-Sep-21 19:25:07- root - db_operations.py - dbOpenConnection - ERROR - ---FAILED TO CONNECT DB---
+09-Sep-21 19:25:07- root - db_operations.py - dbOpenConnection - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 88, in _resolve_uri
+    results = _resolve('_mongodb._tcp.' + self.__fqdn, 'SRV',
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 48, in _resolve
+    return resolver.query(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\dns\resolver.py", line 1100, in query
+    return get_default_resolver().query(qname, rdtype, rdclass, tcp, source,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\dns\resolver.py", line 900, in query
+    timeout = self._compute_timeout(start, lifetime)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\dns\resolver.py", line 799, in _compute_timeout
+    raise Timeout(timeout=duration)
+dns.exception.Timeout: The DNS operation timed out after 20.01412343978882 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\db\db_operations.py", line 11, in dbOpenConnection
+    client = pymongo.MongoClient(
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\mongo_client.py", line 670, in __init__
+    res = uri_parser.parse_uri(
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\uri_parser.py", line 524, in parse_uri
+    nodes = dns_resolver.get_hosts()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 118, in get_hosts
+    _, nodes = self._get_srv_response_and_hosts(True)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 99, in _get_srv_response_and_hosts
+    results = self._resolve_uri(encapsulate_errors)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\pymongo\srv_resolver.py", line 95, in _resolve_uri
+    raise ConfigurationError(str(exc))
+pymongo.errors.ConfigurationError: The DNS operation timed out after 20.01412343978882 seconds
+09-Sep-21 19:28:47- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:28:48- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:28:59- root - db_operations.py - getNumberOfManStudyOutsideProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:29:00- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:29:29- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:29:29- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:29:40- root - db_operations.py - getNumberOfManGroupbyProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:29:41- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:30:32- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:30:33- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:30:44- root - db_operations.py - getNumberOfWomanGroupbyProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:30:44- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:33:42- uvicorn.error - server.py - serve - INFO - Started server process [22884]
+09-Sep-21 19:33:42- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 19:33:42- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 19:34:40- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:34:41- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:34:52- root - db_operations.py - getNumberOfWomanGroupbyProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:34:52- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:35:22- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:35:23- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:35:34- root - db_operations.py - getNumberOfWomanStudyOutsideProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:35:34- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:36:02- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:36:03- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:36:15- root - db_operations.py - getNumberOfManStudyOutsideProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:36:15- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:37:13- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:37:14- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:37:26- root - db_operations.py - getNumberOfPeopleGroupbyProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:37:27- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:37:55- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:37:56- root - db_operations.py - getAllProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:38:08- root - db_operations.py - getNumberOfPeopleStudyOutsideProvince - WARNING - -----Method finish whit success------
+09-Sep-21 19:38:08- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:40:12- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:40:13- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+09-Sep-21 19:40:13- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:41:24- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:41:25- root - db_operations.py - getStudentsRelationshipAverangebyCourse - WARNING - -----Method finish whit success------
+09-Sep-21 19:41:25- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 19:43:17- uvicorn.error - server.py - serve - INFO - Started server process [19060]
+09-Sep-21 19:43:17- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 19:43:17- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 19:43:47- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 19:43:48- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+09-Sep-21 19:43:48- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:42:54- uvicorn.error - server.py - serve - INFO - Started server process [23072]
+09-Sep-21 20:42:54- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 20:42:54- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 20:45:05- uvicorn.error - server.py - serve - INFO - Started server process [2552]
+09-Sep-21 20:45:05- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 20:45:05- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 20:46:50- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:46:51- root - db_operations.py - getCountRedoChoice - WARNING - -----Method finish whit success------
+09-Sep-21 20:46:51- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:47:58- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:47:58- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:47:59- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:48:03- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:48:04- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:48:04- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:48:17- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:48:17- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:48:17- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:48:40- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:48:40- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:48:41- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:48:54- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:48:54- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:48:55- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:49:02- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:49:03- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:49:03- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:49:10- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:49:11- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:49:11- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:49:27- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:49:27- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:49:28- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:49:34- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:49:34- root - db_operations.py - getNumberOfStudentsGoToErasmusByCourse - WARNING - -----Method finish whit success------
+09-Sep-21 20:49:34- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:50:10- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:50:12- root - db_operations.py - getNumberOfStudentsGoToErasmusByUni - WARNING - -----Method finish whit success------
+09-Sep-21 20:50:12- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:50:44- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:50:45- root - db_operations.py - getNumberOfStudentsChangeThisDegree - WARNING - -----Method finish whit success------
+09-Sep-21 20:50:45- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:51:02- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:51:03- root - db_operations.py - getNumberOfStudentsChangeThisDegree - WARNING - -----Method finish whit success------
+09-Sep-21 20:51:03- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:51:13- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:51:14- root - db_operations.py - getNumberOfStudentsChangeThisDegree - WARNING - -----Method finish whit success------
+09-Sep-21 20:51:14- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:51:22- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:51:23- root - db_operations.py - getNumberOfStudentsChangeThisDegree - WARNING - -----Method finish whit success------
+09-Sep-21 20:51:23- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:52:28- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:52:30- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:52:57- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:52:59- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:55:05- uvicorn.error - server.py - serve - INFO - Started server process [9172]
+09-Sep-21 20:55:05- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 20:55:05- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 20:55:42- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 20:55:43- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 20:57:05- uvicorn.error - server.py - serve - INFO - Started server process [17208]
+09-Sep-21 20:57:05- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 20:57:05- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 21:00:33- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:00:35- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:00:43- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:00:44- root - db_operations.py - getDurationAveragebyCourse - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\db\db_operations.py", line 805, in getDurationAveragebyCourse
+    if int(i['end_year']) & int(i['enrolment_year']):
+ValueError: invalid literal for int() with base 10: ''
+09-Sep-21 21:00:44- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:01:02- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:01:03- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:01:11- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:01:12- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:02:16- uvicorn.error - server.py - serve - INFO - Started server process [31436]
+09-Sep-21 21:02:16- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 21:02:16- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 21:04:46- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:04:47- root - db_operations.py - getDurationAveragebyCourse - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\db\db_operations.py", line 805, in getDurationAveragebyCourse
+    if float(i['end_year']) & float(i['enrolment_year']):
+TypeError: unsupported operand type(s) for &: 'float' and 'float'
+09-Sep-21 21:04:47- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:04:59- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:05:00- root - db_operations.py - getDurationAveragebyCourse - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\db\db_operations.py", line 805, in getDurationAveragebyCourse
+    if float(i['end_year']) & float(i['enrolment_year']):
+ValueError: could not convert string to float: ''
+09-Sep-21 21:05:00- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:07:17- uvicorn.error - server.py - serve - INFO - Started server process [5852]
+09-Sep-21 21:07:17- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 21:07:17- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 21:11:46- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:11:47- root - db_operations.py - getDurationAveragebyCourse - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\db\db_operations.py", line 805, in getDurationAveragebyCourse
+    if int(i['end_year']) & int(i['enrolment_year']):
+ValueError: invalid literal for int() with base 10: ''
+09-Sep-21 21:11:47- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:12:00- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:12:01- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:13:12- uvicorn.error - server.py - serve - INFO - Started server process [24288]
+09-Sep-21 21:13:12- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 21:13:12- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 21:26:48- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:26:49- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:26:49- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:41:07- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:41:08- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:41:08- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:44:02- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:44:03- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:44:03- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:45:12- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:45:13- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:45:13- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:50:24- uvicorn.error - server.py - serve - INFO - Started server process [5264]
+09-Sep-21 21:50:24- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+09-Sep-21 21:50:24- uvicorn.error - on.py - startup - INFO - Application startup complete.
+09-Sep-21 21:51:08- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:51:09- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:51:10- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:51:24- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:51:26- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:51:26- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:52:47- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:52:48- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:52:48- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:54:16- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:54:17- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:54:17- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:55:25- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:55:26- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:55:26- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:56:32- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:56:33- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:56:33- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:57:36- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:57:37- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:57:37- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:58:56- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:58:57- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:58:57- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:59:00- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:59:01- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:59:01- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 21:59:02- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 21:59:02- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 21:59:02- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 22:01:22- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 22:01:23- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 22:01:23- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 22:04:06- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 22:04:07- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 22:04:07- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 22:10:51- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 22:10:52- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 22:10:52- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 22:12:19- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 22:12:20- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 22:12:20- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 22:32:57- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 22:32:58- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 22:32:59- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 22:35:56- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 22:35:57- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 22:35:57- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 22:38:46- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 22:38:47- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 22:38:47- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 22:38:49- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 22:38:50- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 22:38:50- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:08:22- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:08:23- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:08:23- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:08:36- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:08:37- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:08:37- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:08:40- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:08:41- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:08:41- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:09:04- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:09:05- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:09:05- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:09:11- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:09:12- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:09:12- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:09:21- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:09:21- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:09:22- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:10:01- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:10:02- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:10:02- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:10:02- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:10:03- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:10:03- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:10:08- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:10:08- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:10:09- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:10:17- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:10:18- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:10:18- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:11:11- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:11:12- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:11:12- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:11:22- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:11:23- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:11:23- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:12:08- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:12:09- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:12:09- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:12:09- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:12:10- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:12:10- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:12:12- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:12:12- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:12:13- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:12:17- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:12:18- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:12:18- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:14:08- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:14:09- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:14:09- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:14:11- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:14:12- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:14:12- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:14:20- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:14:21- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:14:21- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:14:45- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:14:46- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:14:46- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:15:11- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:15:12- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:15:12- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:15:26- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:15:27- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:15:27- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:15:41- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:15:42- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:15:42- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
+09-Sep-21 23:15:42- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+09-Sep-21 23:15:44- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+09-Sep-21 23:15:44- root - db_operations.py - dbCloseConnection - WARNING - ---CLOSE CONNECTION DB---
