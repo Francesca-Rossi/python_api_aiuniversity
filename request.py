@@ -121,7 +121,8 @@ async def predict_request(high_school, subject, prefered_subject, hobby, work_dr
         cluster_labels_degree_course = pd.read_json('doc/cluster_labels_degree_course.json')
         df2 = cluster_labels_degree_course[cluster_labels_degree_course['ClusterLabel'] == uni]['full_degree_course']
         print(df2)
+        print(df2.iloc[1])
         logging.warning('-----Method finish whit success------')
-        return  df2.to_dict()
+        return  df2.iloc[1]
     except:
         logging.error("Exception occurred", exc_info=True)

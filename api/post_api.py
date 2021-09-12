@@ -1,7 +1,7 @@
 from .apiClass import  *
 from request import predict_request
 
-@app.post("/predict", response_model= DegreeResult, status_code=200)
+@app.post("/predict", status_code=200)
 async def prediction_degree(payload: UserInfo):
     '''api per prevedere una laurea dato le informazioni in ingresso ( da usare sia per studenti superiori sia come check per gli studenti universitari)'''
     try:
@@ -14,17 +14,8 @@ async def prediction_degree(payload: UserInfo):
         prediction_list= await predict_request(user_info.high_school, user_info.main_subject, user_info.prefered_subject, user_info.hobby, user_info.dream_work, user_info.uni_aspectations, user_info.uni_decision_choice, user_info.continuous_previous_study )
         if not prediction_list:
             raise HTTPException(status_code=400, detail="Model not found.")
-        response_object = {"high_school": user_info.high_school,
-             "main_subject": user_info.main_subject,
-             "prefered_subject": user_info.prefered_subject,
-             "hobby": user_info.hobby,
-             "dream_work": user_info.dream_work,
-             "uni_aspectations": user_info.uni_aspectations,
-             "uni_decision_choice": user_info.uni_decision_choice,
-             "continuous_previous_study": user_info.continuous_previous_study,
-             "degree_predict": prediction_list
-             }
-        return response_object
+
+        return {'result': prediction_list}
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 

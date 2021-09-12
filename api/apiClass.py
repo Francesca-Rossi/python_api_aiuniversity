@@ -1,16 +1,18 @@
 from pydantic import BaseModel
 from typing import Optional
 from commons_func.generic_func import *
-from fastapi import FastAPI,  HTTPException
+from fastapi import Depends, FastAPI,  HTTPException
 from db.db_operations import  *
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordBearer
+
 
 app = FastAPI(debug=True, title="AIuniversity-API")
 
-origins = [
-    "http://localhost",
-    "http://localhost:3000",
-]
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+origins = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -18,6 +20,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+async def read_items(token: str = Depends(oauth2_scheme)):
+    return {"token": token}
 
 class BoolResult(BaseModel):
     result: bool
@@ -27,6 +33,8 @@ class UniInfo(BaseModel):
     course: str
 
 class UserInfo(BaseModel):
+    region: str
+    province: str
     high_school: str
     main_subject: str
     prefered_subject: str
@@ -36,8 +44,6 @@ class UserInfo(BaseModel):
     uni_decision_choice: str
     continuous_previous_study: str
 
-class DegreeResult(UserInfo):
-    degree_predict: dict
 
 class SubscriptionInfo(BaseModel):
     age: int

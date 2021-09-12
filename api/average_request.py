@@ -32,6 +32,8 @@ async def get_mark_average_by_course_and_year(university: str, course: str, year
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
+
+
 @app.get("/getGradeAveragebyCourse/{university}/{course}", tags=["Grade"])
 async def get_grade_average_by_course(university: str, course: str):
     '''Get the average of the grade given the course'''
