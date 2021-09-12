@@ -2,7 +2,7 @@ from .apiClass import  *
 
 @app.get("/getAllSubjects/{course}", tags=["Subjects & Exams"])
 async def get_all_subject(course: str):
-    '''Get all subjects studied in a course'''
+    '''Return all subjects studied in a course'''
     try:
         
         input = course.lower()
@@ -15,7 +15,7 @@ async def get_all_subject(course: str):
 
 @app.get("/getAllSubjectsByUni/{university}/{course}", tags=["Subjects & Exams"])
 async def get_all_subject_by_uni(university: str, course: str):
-    '''Get all the subjects of a university'''
+    '''Return all the subjects of a university'''
     try:
         
         uni_input = university.lower()
@@ -30,7 +30,7 @@ async def get_all_subject_by_uni(university: str, course: str):
 
 @app.get("/getAllEasyExams/{university}/{course}", tags=["Subjects & Exams"])
 async def get_all_easy_exam(university: str, course: str):
-    '''Get all easy exams in a course '''
+    '''Return all easy exams in a course '''
     try:
         
         uni_input = university.lower()
@@ -45,7 +45,7 @@ async def get_all_easy_exam(university: str, course: str):
 
 @app.get("/getAllHardExams/{university}/{course}", tags=["Subjects & Exams"])
 async def get_all_hard_exam(university: str, course: str):
-    '''Get all hard exams in a course '''
+    '''Return all hard exams in a course '''
     try:
         
         uni_input = university.lower()

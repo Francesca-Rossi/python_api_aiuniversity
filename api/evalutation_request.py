@@ -2,7 +2,7 @@ from .apiClass import  *
 
 @app.get("/getDidacticQualityAverangebyCourse/{university}/{course}", tags=["Evalutations"])
 async def get_didatic_quality_average(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the averange ratings that students has assigned at the didactic quality'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -15,7 +15,7 @@ async def get_didatic_quality_average(university: str, course: str):
 
 @app.get("/getTeachingQualityAverangebyCourse/{university}/{course}", tags=["Evalutations"])
 async def get_teaching_quality_average(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the averange ratings that students has assigned at the teaching quality'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -28,7 +28,7 @@ async def get_teaching_quality_average(university: str, course: str):
 
 @app.get("/getExamsDifficultAverangebyCourse/{university}/{course}", tags=["Evalutations"])
 async def get_exams_difficult_average(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the averange ratings that students has assigned at the exams difficulty'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -41,7 +41,7 @@ async def get_exams_difficult_average(university: str, course: str):
 
 @app.get("/getSubjectsDifficultAverangebyCourse/{university}/{course}", tags=["Evalutations"])
 async def get_subjects_difficult_average(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the averange ratings that students has assigned at the subjects difficulty'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -54,7 +54,7 @@ async def get_subjects_difficult_average(university: str, course: str):
 
 @app.get("/getEnviromentalQualityAverangebyCourse/{university}/{course}", tags=["Evalutations"])
 async def get_enviromental_quality_average(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the averange ratings that students has assigned at the enviromental quality of the university'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -67,7 +67,7 @@ async def get_enviromental_quality_average(university: str, course: str):
 
 @app.get("/getStudentsRelationshipAverangebyCourse/{university}/{course}", tags=["Evalutations"])
 async def get_students_relationship_average(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the averange ratings that students has assigned at the relationship betweens students'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -80,7 +80,7 @@ async def get_students_relationship_average(university: str, course: str):
 
 @app.get("/getLaboratoryAverangebyCourse/{university}/{course}", tags=["Evalutations"])
 async def get_laboratory_average(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the averange ratings that students has assigned at the laboratory activites'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()

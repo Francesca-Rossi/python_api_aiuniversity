@@ -6,10 +6,74 @@ from db.db_operations import  *
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 
+tags_metadata = [
+    {
+        "name": "Add",
+        "description": "This APIs allow to register some information about the Italian bachelor's degree  in the database",
+    },
+    {
+        "name": "Number of men",
+        "description": "This APIs aim to return the number of man that have compiled the survey about their university experience ",
+    },
+    {
+        "name": "Number of women",
+        "description": "This APIs aim to return the number of woman that have compiled the survey about their university experience",
+    },
+    {
+        "name": "Number of subscriptions",
+        "description": "This APIs aim to return the number of people that have compiled the survey about their university experience ",
+    },
+    {
+        "name": "Subscriptions",
+        "description": "This APIs aim to return some information about  answers to the university experience survey ",
+    },
+    {
+        "name": "Universities",
+        "description": "This APIs aim to return some information about the Italian universites",
+    },
+    {
+        "name": "Degree courses",
+        "description": "This APIs aim to return some information about the Italian bachelor's degree",
+    },
+    {
+        "name": "Regions & Provinces",
+        "description": "This APIs aim to return some information about the location of the Italian bachelor's degree students",
+    },
+    {
+        "name": "Subjects & Exams",
+        "description": "This APIs aim to return some information about the subjects and exams in the Italian bachelor's degree",
+    },
 
-app = FastAPI(debug=True, title="AIuniversity-API")
+{
+        "name": "Duration",
+        "description": "This APIs aim to return some information  on the duration of Italian bachelor's degree ",
+    },
+    {
+        "name": "Grade",
+        "description": "This APIs aim to return some information on the average grade of Italian bachelor's degree",
+    },
+{
+        "name": "Mark",
+        "description": "This APIs aim to return some information on the average vote of Italian bachelor's degree",
+    },
+    {
+        "name": "Evalutations",
+        "description": "This APIs aim to return some information  on the ratings of Italian bachelor's degree",
+    },
+    {
+        "name": "Reviews",
+        "description": "This APIs aim to return some information  on the reviews of Italian bachelor's degree ",
+    },
+    {
+        "name": "Other",
+        "description": "This APIs aim to return other information  of Italian bachelor's degree",
+    },
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+]
+
+app = FastAPI( title="AIuniversity-API", openapi_tags=tags_metadata)
+
+
 
 origins = ["*"]
 
@@ -22,9 +86,6 @@ app.add_middleware(
 )
 CLIENT = dbOpenConnection()
 DB = CLIENT.get_database("ai_university_db")
-@app.get("/")
-async def read_items(token: str = Depends(oauth2_scheme)):
-    return {"token": token}
 
 class BoolResult(BaseModel):
     result: bool

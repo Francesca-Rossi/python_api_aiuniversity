@@ -2,7 +2,7 @@ from .apiClass import  *
 
 @app.get("/getAllRegions", tags=["Regions & Provinces"])
 async def get_all_region():
-    '''Get all the regions from the DB'''
+    '''Return all the regions from the DB'''
     try:
         list =  await getAllRegion(DB)
         return {'result': list}
@@ -12,7 +12,7 @@ async def get_all_region():
 
 @app.get("/getRegionByUni/{university}", tags=["Regions & Provinces"])
 async def get_region_by_uni(university: str):
-    '''Get the region by the university'''
+    '''Return the region by the university'''
     try:
         input = university.lower()
         input = input.strip()
@@ -23,7 +23,7 @@ async def get_region_by_uni(university: str):
 
 @app.get("/getAllProvinces", tags=["Regions & Provinces"])
 async def get_all_province():
-    '''Get all the provinces from the DB'''
+    '''Return all the provinces from the DB'''
     try:
         list =  await getAllProvince(DB)
         return {'result': list}
@@ -32,7 +32,7 @@ async def get_all_province():
 
 @app.get("/getProvinceByUni/{university}", tags=["Regions & Provinces"])
 async def get_province_by_uni(university: str):
-    '''Get the province of a university'''
+    '''Return the province of a university'''
     try:
         input = university.lower()
         input = input.strip()

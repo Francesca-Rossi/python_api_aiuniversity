@@ -1,6 +1,6 @@
 from .apiClass import  *
 
-@app.get("/getReviewListbyCourse/{university}/{course}", tags=["Review"])
+@app.get("/getReviewListbyCourse/{university}/{course}", tags=["Reviews"])
 async def get_review_list_by_course(university: str, course: str):
     '''Get the average of exame not done given the course and the year'''
     try:
@@ -15,7 +15,7 @@ async def get_review_list_by_course(university: str, course: str):
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.get("/getReviewListbyCourseAndYear/{university}/{course}/{year_of_course}", tags=["Review"])
+@app.get("/getReviewListbyCourseAndYear/{university}/{course}/{year_of_course}", tags=["Reviews"])
 async def get_review_list_by_course_and_year(university: str, course: str, year_of_course: int):
     '''Get the average of exame not done given the course and the year'''
     try:
@@ -30,7 +30,7 @@ async def get_review_list_by_course_and_year(university: str, course: str, year_
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.get("/getReviewAverangebyCourse/{university}/{course}", tags=["Review"])
+@app.get("/getReviewAverangebyCourse/{university}/{course}", tags=["Reviews"])
 async def get_review_average_by_course(university: str, course: str):
     '''Get the average of exame not done given the course and the year'''
     try:
@@ -45,7 +45,7 @@ async def get_review_average_by_course(university: str, course: str):
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.get("/getReviewAverangebyCourseAndYear/{university}/{course}/{year_of_course}", tags=["Review"])
+@app.get("/getReviewAverangebyCourseAndYear/{university}/{course}/{year_of_course}", tags=["Reviews"])
 async def get_review_average_by_course_and_year(university: str, course: str, year_of_course: int):
     '''Get the average of exame not done given the course and the year'''
     try:
@@ -60,7 +60,7 @@ async def get_review_average_by_course_and_year(university: str, course: str, ye
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.get("/getReviewAverangebyUni/{university}", tags=["Review"])
+@app.get("/getReviewAverangebyUni/{university}", tags=["Reviews"])
 async def get_review_average_by_uni(university: str):
     '''Get the average of exame not done given the course and the year'''
     try:

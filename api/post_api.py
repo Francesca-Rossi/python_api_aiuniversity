@@ -1,7 +1,7 @@
 from .apiClass import  *
 from request import predict_request
 
-@app.post("/predict", status_code=200)
+@app.post("/predict", status_code=200, tags=["Add"])
 async def prediction_degree(payload: UserInfo):
     '''api per prevedere una laurea dato le informazioni in ingresso ( da usare sia per studenti superiori sia come check per gli studenti universitari)'''
     try:
@@ -21,7 +21,7 @@ async def prediction_degree(payload: UserInfo):
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.post("/addNewSubscriptions", response_model= BoolResult, status_code=200)
+@app.post("/addNewSubscriptions", response_model= BoolResult, status_code=200, tags=["Add"])
 async def add_new_subscription(payload: SubscriptionInfo):
     '''Aggiunta di una compilazione al database'''
     try:
@@ -40,7 +40,7 @@ async def add_new_subscription(payload: SubscriptionInfo):
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.post("/addNewStudent", response_model= BoolResult, status_code=200)
+@app.post("/addNewStudent", response_model= BoolResult, status_code=200,  tags=["Add"])
 async def add_new_students(payload: SubscriptionInfo):
     '''Aggiunta di uno studente al database'''
     try:
@@ -58,7 +58,7 @@ async def add_new_students(payload: SubscriptionInfo):
     except:
         raise HTTPException(status_code=400, detail="Model not found.")
 
-@app.post("/AddNewGraduate", response_model= BoolResult, status_code=200)
+@app.post("/AddNewGraduate", response_model= BoolResult, status_code=200,  tags=["Add"] )
 async def add_new_graduate(payload: SubscriptionInfo):
     '''Aggiunta di un laureato al database'''
     try:
@@ -78,7 +78,7 @@ async def add_new_graduate(payload: SubscriptionInfo):
         raise HTTPException(status_code=400, detail="Model not found.")
 
 
-@app.post("/AddPredictReview", response_model= BoolResult, status_code=200)
+@app.post("/AddPredictReview", response_model= BoolResult, status_code=200,  tags=["Add"])
 async def add_predict_review(payload: PredictResult):
     '''Aggiunta di un laureato al database'''
     try:

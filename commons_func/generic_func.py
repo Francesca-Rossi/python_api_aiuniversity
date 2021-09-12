@@ -21,14 +21,16 @@ def set_slug_degree_course(key, value):
     writeFile.write(js.dumps(slug_degree_course))
     writeFile.close()
 
-def average_dict(dictionary, field):
+def average_dict(dictionary, field, minimum):
     sum = 0
     count = 0
     for i in dictionary:
         if field in i.keys():
-            if type(i[field]) == int:
-                sum = sum + i[field]
-                count += 1
+            number=i[field]
+            if type(number) == int:
+                if number >= minimum:
+                    sum = sum + number
+                    count += 1
     if count > 0:
         avg = sum / count
         return avg

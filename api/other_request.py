@@ -2,7 +2,7 @@ from .apiClass import  *
 
 @app.get("/getDifficultAspectList/{university}/{course}", tags=["Other"])
 async def get_difficult_aspect(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the list of difficulty aspects given the degree course'''
     try:
        
         input_uni = university.lower()
@@ -17,7 +17,7 @@ async def get_difficult_aspect(university: str, course: str):
 
 @app.get("/getCountRedoChoice/{university}/{course}", tags=["Other"])
 async def get_count_redo_choice(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the students who would redo this degree course'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -30,7 +30,7 @@ async def get_count_redo_choice(university: str, course: str):
 
 @app.get("/getNumberOfStudentsGoToErasmusByCourse/{university}/{course}", tags=["Other"])
 async def get_number_of_students_go_to_erasmus_by_course(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the  number of students went to erasmus,  given the degree course'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -43,7 +43,7 @@ async def get_number_of_students_go_to_erasmus_by_course(university: str, course
 
 @app.get("/getNumberOfStudentsGoToErasmusByUni/{university}", tags=["Other"])
 async def get_number_of_students_go_to_erasmus_by_uni(university: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the  number of students went to erasmus,  given the course and the year attended'''
     try: 
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -55,7 +55,7 @@ async def get_number_of_students_go_to_erasmus_by_uni(university: str):
 
 @app.get("/getNumberOfStudentsChangedThisDegree/{university}/{course}", tags=["Other"])
 async def get_number_of_students_changed_this_degree(university: str, course: str):
-    '''Get the average of exame not done given the course and the year'''
+    '''Return the number of students changed degree course, given the degree course and the year attended'''
     try:
        
         input_uni = university.lower()
@@ -70,7 +70,7 @@ async def get_number_of_students_changed_this_degree(university: str, course: st
 
 @app.get("/restartCalucatedModel", tags=["Other"])
 async def restart_calucated_model():
-    '''Recalculated AI Model. Thi api must be used when registraation a new subscriptions'''
+    '''Restart mechanism of AI Model. Thi api should  be used when registraation a new subscriptions'''
     try:
         number = await restartCalucatedModule(DB)
         

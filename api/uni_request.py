@@ -13,7 +13,7 @@ async def get_all_uni():
 
 @app.get("/getAllUniByCourse/{course}", tags=["Universities"])
 async def get_all_uni_by_course(course: str):
-    '''Get all the universities by course'''
+    '''Return all the universities by course'''
     try:
         
         input= course.lower()
@@ -26,7 +26,7 @@ async def get_all_uni_by_course(course: str):
 
 @app.get("/getAllUniByRegion/{region}", tags=["Universities"])
 async def get_all_uni_by_region(region: str):
-    '''Get all the universities by region'''
+    '''Return all the universities by region'''
     try:
         
         input = region.lower()
@@ -39,7 +39,7 @@ async def get_all_uni_by_region(region: str):
 
 @app.get("/getAllUniByProvince/{province}", tags=["Universities"])
 async def get_all_uni_by_province(province: str):
-    '''Get all the universities by province'''
+    '''Return all the universities by province'''
     try:
         
         input = province.lower()

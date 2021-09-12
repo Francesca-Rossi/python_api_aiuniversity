@@ -777,7 +777,7 @@ async def getMarkAveragebyCourse(course, uni, db):
         dictionary=db.subscriptions.find({'$and':
            [{'university': uni },
             {'degree_course': course}]})
-        avg=average_dict(dictionary, 'average_grade')
+        avg=average_dict(dictionary, 'average_grade', 18)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -790,7 +790,7 @@ async def getMarkAveragebyCourseAndYear(course, uni, year,  db):
                                            {'degree_course': course},
                                            {'degree_year': year}
                                            ]})
-        avg = average_dict(dictionary, 'average_grade')
+        avg = average_dict(dictionary, 'average_grade', 18)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -802,7 +802,7 @@ async def getGradeAveragebyCourse(course, uni, db):
                                           [{'university': uni},
                                            {'degree_course': course}
                                            ]})
-        avg = average_dict(dictionary, 'graduation_grade')
+        avg = average_dict(dictionary, 'graduation_grade', 60)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -839,7 +839,7 @@ async def getExamNotDoneAveragebyCourse(course, uni, db):
                                                  [{'university': uni},
                                                   {'degree_course': course}
                                                   ]})
-         avg = average_dict(dictionary, 'numb_exams_not_done')
+         avg = average_dict(dictionary, 'numb_exams_not_done', 0)
          logging.warning('-----Method finish whit success------')
          return avg
      except:
@@ -852,7 +852,7 @@ async def getExamNotDoneAveragebyCourseAndYear(course, uni,  year, db):
                                                  {'degree_course': course},
                                                  {'degree_year': year}
                                                  ]})
-        avg = average_dict(dictionary, 'numb_exams_not_done')
+        avg = average_dict(dictionary, 'numb_exams_not_done', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -900,7 +900,7 @@ async def getReviewAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'stars')
+        avg = average_dict(dictionary, 'stars', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -913,7 +913,7 @@ async def getReviewAverangebyCourseAndYear(course, uni, year,  db):
                                                  {'degree_course': course},
                                                  {'degree_year': year}
                                                  ]})
-        avg = average_dict(dictionary, 'stars')
+        avg = average_dict(dictionary, 'stars', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -924,7 +924,7 @@ async def getReviewAverangebyUni(uni, db):
         dictionary = db.subscriptions.find({'$and':
                                                 [{'university': uni}
                                                  ]})
-        avg = average_dict(dictionary, 'stars')
+        avg = average_dict(dictionary, 'stars', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -939,7 +939,7 @@ async def getDidacticQualityAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'didactic_quality')
+        avg = average_dict(dictionary, 'didactic_quality', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -952,7 +952,7 @@ async def getTeachingQualityAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'teaching_quality')
+        avg = average_dict(dictionary, 'teaching_quality', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -965,7 +965,7 @@ async def getExamDifficultAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'exams_difficulties')
+        avg = average_dict(dictionary, 'exams_difficulties', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -977,7 +977,7 @@ async def getSubjectsDifficultAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'subjects_difficulties')
+        avg = average_dict(dictionary, 'subjects_difficulties', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -989,7 +989,7 @@ async def getEnviromentalQualityAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'environment_quality')
+        avg = average_dict(dictionary, 'environment_quality', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -1001,7 +1001,7 @@ async def getStudentsRelationshipAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'students_relationship')
+        avg = average_dict(dictionary, 'students_relationship', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:
@@ -1040,7 +1040,7 @@ async def getLaboratoryAverangebyCourse(course, uni, db):
                                                 [{'university': uni},
                                                  {'degree_course': course}
                                                  ]})
-        avg = average_dict(dictionary, 'laboratories')
+        avg = average_dict(dictionary, 'laboratories', 0)
         logging.warning('-----Method finish whit success------')
         return avg
     except:

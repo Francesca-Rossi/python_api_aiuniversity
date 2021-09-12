@@ -2,7 +2,7 @@ from .apiClass import  *
 
 @app.get("/getAllCourses", tags=["Degree courses"])
 async def get_all_course():
-    '''Get all italian courses in the DB'''
+    '''Return all Italian bachelor's degree registered in the database'''
     try:
         list = await getAllCourse(DB)
         return {'result': list}
@@ -11,7 +11,7 @@ async def get_all_course():
 
 @app.get("/getAllCoursesByUni/{university}", tags=["Degree courses"])
 async def get_all_course_by_uni(university: str):
-    '''Get all the courses given by an university'''
+    '''Return all Italian bachelor's degree given by an university'''
     try:
         input = university.lower()
         input = input.strip()

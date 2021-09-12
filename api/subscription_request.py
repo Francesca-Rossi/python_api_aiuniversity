@@ -2,7 +2,7 @@ from .apiClass import  *
 
 @app.get("/getNumberOfPeopleByCourseAndUni/{university}/{course}", tags=["Number of subscriptions"])
 async def get_people_by_uni_and_course(university: str, course: str):
-    '''How many people there are in a course? '''
+    '''Return the number of people that attend a specific degree course of an university'''
     try:
         
         uni_input = university.lower()
@@ -18,8 +18,8 @@ async def get_people_by_uni_and_course(university: str, course: str):
 @app.get("/getNumberOfPeopleByCourse/{course}", tags=["Number of subscriptions"])
 async def get_people_by_course( course: str):
     try:
-        '''How many people study in this course? '''
-        
+        '''Return the number of people that attend a specific degree course '''
+
         course_input = course.lower()
         course_input = course_input.strip()
         number =  await getNumberOfPeopleByCourse(course_input,  DB)
@@ -30,7 +30,7 @@ async def get_people_by_course( course: str):
 
 @app.get("/getNumberOfPeopleByUni/{university}", tags=["Number of subscriptions"])
 async def get_people_by_uni(university: str):
-    '''How many people there are in a university? '''
+    '''Return the number of people that attend a specific university '''
     try:
         
         uni_input = university.lower()
@@ -43,7 +43,7 @@ async def get_people_by_uni(university: str):
 
 @app.get("/getNumberOfPeopleWithSameProvinceOfUni/{university}", tags=["Number of subscriptions"])
 async def get_people_whit_same_province_of_uni(university: str):
-    '''How many people there are in a province? '''
+    '''Return the number of students that have the same province of the university'''
     try:
         
         uni_input = university.lower()
@@ -56,7 +56,7 @@ async def get_people_whit_same_province_of_uni(university: str):
 
 @app.get("/getNumberOfPeopleWithSameRegionOfUni/{university}", tags=["Number of subscriptions"])
 async def get_people_whit_same_region_of_uni(university: str):
-    '''How many people there are in a region? '''
+    '''Return the number of students that have the same region of the university '''
     try:
         
         uni_input = university.lower()
@@ -69,7 +69,7 @@ async def get_people_whit_same_region_of_uni(university: str):
 
 @app.get("/getNumberOfPeopleByRegion/{region}", tags=["Number of subscriptions"])
 async def get_people_by_region(region: str):
-    '''How many people there are in a region? '''
+    '''Return the number of students living  in a specific region '''
     try:
         
         input = region.lower()
@@ -82,7 +82,7 @@ async def get_people_by_region(region: str):
 
 @app.get("/getNumberOfPeopleGroupbyRegion", tags=["Number of subscriptions"])
 async def get_people_groupby_region():
-    '''How many people there are in all regions? '''
+    '''Return the number of students group by their living region '''
     try:
         
         number =  await getNumberOfPeopleGroupbyRegion(DB)
@@ -93,7 +93,7 @@ async def get_people_groupby_region():
 
 @app.get("/getNumberOfPeopleStudyatHomeRegion", tags=["Number of subscriptions"])
 async def get_people_study_at_home_region():
-    '''How many people study at the home region? '''
+    '''Return the number of students that study in their living region '''
     try:
         
         number =  await getNumberOfPeopleStudyatHomeRegion(DB)
@@ -104,7 +104,7 @@ async def get_people_study_at_home_region():
 
 @app.get("/getNumberOfPeopleStudyOutsideRegion", tags=["Number of subscriptions"])
 async def get_people_study_outside_region():
-    '''How many people study outside the region? '''
+    '''Return the number that study outside their living region  '''
     try:
         
         number =  await getNumberOfPeopleStudyOutsideRegion(DB)
@@ -115,7 +115,7 @@ async def get_people_study_outside_region():
 
 @app.get("/getNumberOfPeopleByProvince/{province}", tags=["Number of subscriptions"])
 async def get_people_by_province(province: str):
-    '''How many people there are in a province? '''
+    '''Return the number of students living  in a specific province'''
     try:
         
         input = province.lower()
@@ -128,7 +128,7 @@ async def get_people_by_province(province: str):
 
 @app.get("/getNumberOfPeopleGroupbyProvince", tags=["Number of subscriptions"])
 async def get_people_groupby_province():
-    '''How many people there are in all provinces? '''
+    '''Return the number of students by their living province'''
     try:
         
         list =  await getNumberOfPeopleGroupbyProvince( DB)
@@ -139,7 +139,7 @@ async def get_people_groupby_province():
 
 @app.get("/getNumberOfPeopleStudyatHomeProvince", tags=["Number of subscriptions"])
 async def get_people_study_at_home_province():
-    '''How many people study at the home province? '''
+    '''Return the number of students that study in their living province  '''
     try:
         
         number =  await getNumberOfPeopleStudyatHomeProvince(DB)
@@ -150,7 +150,7 @@ async def get_people_study_at_home_province():
 
 @app.get("/getNumberOfPeopleStudyOutsideProvince", tags=["Number of subscriptions"])
 async def get_people_study_outside_province():
-    '''How many people study outside the province? '''
+    '''Return the number of students that study outside their living region '''
     try:
         
         number = await getNumberOfPeopleStudyOutsideProvince(DB)
@@ -161,7 +161,7 @@ async def get_people_study_outside_province():
 
 @app.get("/getDateOfLastSubscription", tags=["Subscriptions"])
 async def get_date_of_last_subscription():
-    '''How many people study outside the province? '''
+    '''Return date of  the last students exeperience registered '''
     try:
         
         date = await getDateOfLastSubscription(DB)
@@ -172,7 +172,7 @@ async def get_date_of_last_subscription():
 
 @app.get("/getSubscriptionsByDate", tags=["Subscriptions"])
 async def get_subscriptions_by_date():
-    '''How many people study outside the province? '''
+    '''Return a students exeperience by date '''
     try:
         
         date = await getSubscriptionsByDate(DB)

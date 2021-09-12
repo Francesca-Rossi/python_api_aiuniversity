@@ -2,7 +2,7 @@ from .apiClass import  *
 
 @app.get("/getMarkAveragebyCourse/{university}/{course}", tags=["Mark"])
 async def get_mark_average_by_course(university: str, course: str):
-    '''Get the average of the marks given the course'''
+    '''Returns the average of the marks given the bachelor’s degree'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -15,7 +15,7 @@ async def get_mark_average_by_course(university: str, course: str):
 
 @app.get("/getMarkAveragebyCourseAndYear/{university}/{course}/{year_of_course}", tags=["Mark"])
 async def get_mark_average_by_course_and_year(university: str, course: str, year_of_course: int):
-    '''Get the average of the marks given the course and the year'''
+    '''Returns the average of the marks given the bachelor’s degree and the year of course'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -30,7 +30,7 @@ async def get_mark_average_by_course_and_year(university: str, course: str, year
 
 @app.get("/getGradeAveragebyCourse/{university}/{course}", tags=["Grade"])
 async def get_grade_average_by_course(university: str, course: str):
-    '''Get the average of the grade given the course'''
+    '''Returns the average of the grades given the bachelor’s degree'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -43,7 +43,7 @@ async def get_grade_average_by_course(university: str, course: str):
 
 @app.get("/getDurationAveragebyCourse/{university}/{course}", tags=["Duration"])
 async def get_duratiion_average_by_course(university: str, course: str):
-    '''Get the average of the duration given the course'''
+    '''Returns the average of the duration given the bachelor’s degree'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()
@@ -56,7 +56,7 @@ async def get_duratiion_average_by_course(university: str, course: str):
 
 @app.get("/getExamNotDoneAveragebyCourseAndYear/{university}/{course}/{year_of_course}", tags=["Subjects & Exams"])
 async def get_exam_not_done_by_course_and_year(university: str, course: str, year_of_course:int ):
-    '''Get the average of exame not done given the course and the year'''
+    '''Returns the average of the exams not done given the bachelor’s degree and years'''
     try:
         input_uni = university.lower()
         input_uni = input_uni.strip()

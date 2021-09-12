@@ -2,7 +2,7 @@ from .apiClass import  *
 
 @app.get("/getNumberOfMenByCourseAndUni/{university}/{course}", tags=["Number of men"])
 async def get_men_by_uni_and_course(university: str, course: str):
-    '''How many men there are in a course? '''
+    '''Return the number of men that attend a specific degree course of an university'''
     try:
         uni_input = university.lower()
         uni_input = uni_input.strip()
@@ -15,7 +15,7 @@ async def get_men_by_uni_and_course(university: str, course: str):
 
 @app.get("/getNumberOfMenByCourse/{course}", tags=["Number of men"])
 async def get_men_by_course( course: str):
-    '''How many men study in this course? '''
+    '''Return the number of men that attend a specific degree course '''
     try:
         course_input = course.lower()
         course_input = course_input.strip()
@@ -26,7 +26,7 @@ async def get_men_by_course( course: str):
 
 @app.get("/getNumberOfMenByUni/{university}", tags=["Number of men"])
 async def get_men_by_uni(university: str):
-    '''How many men there are in a university? '''
+    '''Return the number of men that attend a specific university '''
     try:
         uni_input = university.lower()
         uni_input = uni_input.strip()
@@ -37,7 +37,7 @@ async def get_men_by_uni(university: str):
 
 @app.get("/getNumberOfMenWithSameProvinceOfUni/{university}", tags=["Number of men"])
 async def get_men_whit_same_province_of_uni(university: str):
-    '''How many men there are in a province? '''
+    '''Return the number of men that have the same province of the university'''
     try:
         uni_input = university.lower()
         uni_input = uni_input.strip()
@@ -48,7 +48,7 @@ async def get_men_whit_same_province_of_uni(university: str):
 
 @app.get("/getNumberOfMenWithSameRegionOfUni/{university}", tags=["Number of men"])
 async def get_men_whit_same_region_of_uni(university: str):
-    '''How many men there are in a region? '''
+    '''Return the number of men that have the same region of the university '''
     try:
         uni_input = university.lower()
         uni_input = uni_input.strip()
@@ -59,7 +59,7 @@ async def get_men_whit_same_region_of_uni(university: str):
 
 @app.get("/getNumberOfMenByRegion/{region}", tags=["Number of men"])
 async def get_men_by_region(region: str):
-    '''How many men there are in a region? '''
+    '''Return the number of men living  in a specific region '''
     try:
         input = region.lower()
         input = input.strip()
@@ -70,7 +70,7 @@ async def get_men_by_region(region: str):
 
 @app.get("/getNumberOfMenGroupbyRegion", tags=["Number of men"])
 async def get_men_groupby_region():
-    '''How many men there are in all regions? '''
+    '''Return the number of men group by their living region '''
     try:
         number =  await getNumberOfManGroupbyRegion(DB)
         return {'result': number}
@@ -79,7 +79,7 @@ async def get_men_groupby_region():
 
 @app.get("/getNumberOfMenStudyatHomeRegion", tags=["Number of men"])
 async def get_men_study_at_home_region():
-    '''How many men study at the home region? '''
+    '''Return the number of men that study in their living region '''
     try:
         number =  await getNumberOfManStudyatHomeRegion(DB)
         return {'result': number}
@@ -88,7 +88,7 @@ async def get_men_study_at_home_region():
 
 @app.get("/getNumberOfMenStudyOutsideRegion", tags=["Number of men"])
 async def get_men_study_outside_region():
-    '''How many men study outside the region? '''
+    '''Return the number that study outside their living region  '''
     try:
         number =  await getNumberOfManStudyOutsideRegion(DB)
         return {'result': number}
@@ -97,7 +97,7 @@ async def get_men_study_outside_region():
 
 @app.get("/getNumberOfMenByProvince/{province}", tags=["Number of men"])
 async def get_men_by_province(province: str):
-    '''How many men there are in a province? '''
+    '''Return the number of men living  in a specific province'''
     try:
         input = province.lower()
         input = input.strip()
@@ -108,7 +108,7 @@ async def get_men_by_province(province: str):
 
 @app.get("/getNumberOfMenGroupbyProvince", tags=["Number of men"])
 async def get_men_groupby_province():
-    '''How many men there are in all provinces? '''
+    '''Return the number of men by their living province'''
     try:
         number =  await getNumberOfManGroupbyProvince( DB)
         return {'result': number}
@@ -117,7 +117,7 @@ async def get_men_groupby_province():
 
 @app.get("/getNumberOfMenStudyatHomeProvince", tags=["Number of men"])
 async def get_men_study_at_home_province():
-    '''How many men study at the home province? '''
+    '''Return the number of men that study in their living province  '''
     try:
         number =  await getNumberOfManStudyatHomeProvince(DB)
         return {'result': number}
@@ -126,7 +126,7 @@ async def get_men_study_at_home_province():
 
 @app.get("/getNumberOfMenStudyOutsideProvince", tags=["Number of men"])
 async def get_men_study_outside_province():
-    '''How many men study outside the province? '''
+    '''Return the number of men that study outside their living region '''
     try:
         number = await getNumberOfManStudyOutsideProvince(DB)
         return {'result': number}
