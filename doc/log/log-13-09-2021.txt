@@ -822,3 +822,7 @@ ValueError: could not convert string to float: 'string'
 13-Sep-21 13:30:28- root - db_operations.py - AddNewAdvice - WARNING - -----New advice added in db------
 13-Sep-21 13:30:28- root - db_operations.py - AddNewAdvice - WARNING - -----Method finish whit success------
 13-Sep-21 13:31:13- root - db_operations.py - getNumberOfManByUNi - WARNING - -----Method finish whit success------
+13-Sep-21 13:45:48- uvicorn.error - server.py - shutdown - INFO - Shutting down
+13-Sep-21 13:45:48- uvicorn.error - on.py - shutdown - INFO - Waiting for application shutdown.
+13-Sep-21 13:45:48- uvicorn.error - on.py - shutdown - INFO - Application shutdown complete.
+13-Sep-21 13:45:48- uvicorn.error - server.py - serve - INFO - Finished server process [22288]
