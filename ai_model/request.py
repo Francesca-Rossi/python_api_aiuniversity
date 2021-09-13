@@ -109,6 +109,7 @@ async def predict_request(high_school, subject, prefered_subject, hobby, work_dr
         logging.warning('****START PREDICT****')
         print('****START PREDICT****')
         df_request = feature_engireering_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
+        print(df_request)
         model = joblib.load('doc/model.joblib')
         print('file model',  model)
         prediction_uni = model.predict(df_request.values)

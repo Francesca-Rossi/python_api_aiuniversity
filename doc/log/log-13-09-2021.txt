@@ -878,3 +878,11 @@ ValueError: could not convert string to float: 'string'
 13-Sep-21 20:31:21- root - request.py - predict_request - WARNING - -----Method finish whit success------
 13-Sep-21 20:31:22- root - db_operations.py - AddNewAdvice - WARNING - -----New advice added in db------
 13-Sep-21 20:31:22- root - db_operations.py - AddNewAdvice - WARNING - -----Method finish whit success------
+13-Sep-21 20:41:48- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 20:41:49- uvicorn.error - server.py - serve - INFO - Started server process [27968]
+13-Sep-21 20:41:49- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 20:41:49- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 20:54:37- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 20:54:37- uvicorn.error - server.py - serve - INFO - Started server process [30900]
+13-Sep-21 20:54:37- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 20:54:37- uvicorn.error - on.py - startup - INFO - Application startup complete.
