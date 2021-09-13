@@ -107,6 +107,7 @@ def feature_engireering_request(high_school, subject, prefered_subject, hobby, w
 async def predict_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study):
     try:
         logging.warning('****START PREDICT****')
+        print('****START PREDICT****')
         df_request = feature_engireering_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
         model = joblib.load('doc/model')
         prediction_uni = model.predict(df_request.values)
@@ -121,4 +122,5 @@ async def predict_request(high_school, subject, prefered_subject, hobby, work_dr
         logging.warning('-----Method finish whit success------')
         return  df2.iloc[1]
     except:
+        print('errore')
         logging.error("Exception occurred", exc_info=True)
