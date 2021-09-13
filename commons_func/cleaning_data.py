@@ -20,7 +20,7 @@ def data_cleaning(feature, regex_list):
     feature = feature.apply(lambda x: x.lower())  # lowercase
     feature = feature.str.strip()  # elimination of white spaces at the beginning and at the end
     for regex in regex_list:
-        feature = feature.str.replace(regex, ' ')
+        feature = feature.str.replace(regex, ' ', regex=False)
     for char in string.punctuation:
-        feature = feature.str.replace(char, ' ')
+        feature = feature.str.replace(char, ' ', regex=False)
     return feature

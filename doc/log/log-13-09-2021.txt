@@ -826,3 +826,29 @@ ValueError: could not convert string to float: 'string'
 13-Sep-21 13:45:48- uvicorn.error - on.py - shutdown - INFO - Waiting for application shutdown.
 13-Sep-21 13:45:48- uvicorn.error - on.py - shutdown - INFO - Application shutdown complete.
 13-Sep-21 13:45:48- uvicorn.error - server.py - serve - INFO - Finished server process [22288]
+13-Sep-21 20:04:06- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 20:04:06- uvicorn.error - server.py - serve - INFO - Started server process [28340]
+13-Sep-21 20:04:06- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 20:04:06- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 20:04:50- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 20:04:51- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 20:04:51- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['liceo scientifico' '' 'string' 'string' 'string' 'string' 'string'
+  'si']]
+13-Sep-21 20:04:51- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 20:04:51- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['liceo scientifico' '' 'string' 'string' 'string' 'string' 'string'
+  'si']]
+13-Sep-21 20:04:51- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 20:04:51- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 20:04:51- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [[14 '' 'string' 'string' 'string' 'string' 'string' 1]]
+13-Sep-21 20:04:52- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 20:04:52- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 20:04:52- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [[14.  1.  0. ...  0.  0.  0.]]
+13-Sep-21 20:04:52- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 20:04:52- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 20:04:52- root - request.py - predict_request - WARNING - -----Method finish whit success------
+13-Sep-21 20:04:53- root - db_operations.py - AddNewAdvice - WARNING - -----New advice added in db------
+13-Sep-21 20:04:53- root - db_operations.py - AddNewAdvice - WARNING - -----Method finish whit success------
+13-Sep-21 20:19:14- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 20:19:14- uvicorn.error - server.py - serve - INFO - Started server process [21392]
+13-Sep-21 20:19:14- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 20:19:14- uvicorn.error - on.py - startup - INFO - Application startup complete.
