@@ -1,0 +1,824 @@
+13-Sep-21 03:38:35- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 03:38:35- uvicorn.error - server.py - serve - INFO - Started server process [16240]
+13-Sep-21 03:38:35- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 03:38:35- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 04:06:10- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 04:06:10- uvicorn.error - server.py - serve - INFO - Started server process [16828]
+13-Sep-21 04:06:10- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 04:06:10- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 04:08:17- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 04:08:18- uvicorn.error - server.py - serve - INFO - Started server process [24356]
+13-Sep-21 04:08:18- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 04:08:18- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 04:10:15- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 04:10:16- uvicorn.error - server.py - serve - INFO - Started server process [6372]
+13-Sep-21 04:10:16- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 04:10:16- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 04:12:53- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 04:12:54- uvicorn.error - server.py - serve - INFO - Started server process [25896]
+13-Sep-21 04:12:54- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 04:12:54- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 04:21:03- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 04:21:04- uvicorn.error - server.py - serve - INFO - Started server process [23884]
+13-Sep-21 04:21:04- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 04:21:04- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 05:33:44- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 05:33:45- uvicorn.error - server.py - serve - INFO - Started server process [13428]
+13-Sep-21 05:33:45- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 05:33:45- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 05:40:01- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 05:40:01- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:40:01- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto professionale economico' 'economia, diritto, italiano'
+  'economia, diritto' 'videogiochi, sport, leggere' 'manager'
+  'mi aspetto di imparare tante cose'
+  'voglio approfondire il lato economico e commerciale' 'si']]
+13-Sep-21 05:40:01- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:40:01- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto professionale economico' 'econom diritt ital' 'econom diritt'
+  'videogioc sport legg' 'manager' 'aspett impar tant cos'
+  'vogl approfond lat econom commercial' 'si']]
+13-Sep-21 05:40:01- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:40:01- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:40:01- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [['istituto professionale economico' 'econom diritt ital' 'econom diritt'
+  'videogioc sport legg' 'manager' 'aspett impar tant cos'
+  'vogl approfond lat econom commercial' 1]]
+13-Sep-21 05:40:01- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 05:40:01- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 05:40:01- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [['istituto professionale economico' 1 0 ... 0.0 0.0 0.0]]
+13-Sep-21 05:40:01- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 05:40:01- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:40:01- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\request.py", line 116, in predict_request
+    prediction_uni = model.predict(df_request.values)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 677, in predict
+    predicted_probabilitiy = self.predict_proba(X)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 720, in predict_proba
+    all_proba = Parallel(n_jobs=n_jobs, verbose=self.verbose,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 1041, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 859, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 777, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\fixes.py", line 222, in __call__
+    return self.function(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 129, in _parallel_predict_proba
+    proba_estimator = estimator.predict_proba(X[:, features])
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 935, in predict_proba
+    X = self._validate_X_predict(X, check_input)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 407, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr",
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\base.py", line 421, in _validate_data
+    X = check_array(X, **check_params)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 63, in inner_f
+    return f(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 673, in check_array
+    array = np.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: 'istituto professionale economico'
+13-Sep-21 05:43:36- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 05:43:36- uvicorn.error - server.py - serve - INFO - Started server process [13392]
+13-Sep-21 05:43:36- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 05:43:36- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 05:44:03- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 05:44:03- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:44:03- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto professionale economico' 'italiano' 'italiano' 'leggere'
+  'giornalista' 'ne ho tante, voglio imparare molto'
+  'voglio continuare ad imparare' 'no']]
+13-Sep-21 05:44:03- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:44:03- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto professionale economico' 'ital' 'ital' 'legg' 'giornal'
+  'tant vogl impar molt' 'vogl continu impar' 'no']]
+13-Sep-21 05:44:03- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:44:03- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:44:03- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [['istituto professionale economico' 'ital' 'ital' 'legg' 'giornal'
+  'tant vogl impar molt' 'vogl continu impar' 0]]
+13-Sep-21 05:44:03- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 05:44:03- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 05:44:03- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [['istituto professionale economico' 0 0 ... 0.0 0.0 0.0]]
+13-Sep-21 05:44:03- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 05:44:03- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:44:04- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\request.py", line 117, in predict_request
+    prediction_uni = model.predict(df_request.values)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 677, in predict
+    predicted_probabilitiy = self.predict_proba(X)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 720, in predict_proba
+    all_proba = Parallel(n_jobs=n_jobs, verbose=self.verbose,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 1041, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 859, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 777, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\fixes.py", line 222, in __call__
+    return self.function(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 129, in _parallel_predict_proba
+    proba_estimator = estimator.predict_proba(X[:, features])
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 935, in predict_proba
+    X = self._validate_X_predict(X, check_input)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 407, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr",
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\base.py", line 421, in _validate_data
+    X = check_array(X, **check_params)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 63, in inner_f
+    return f(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 673, in check_array
+    array = np.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: 'istituto professionale economico'
+13-Sep-21 05:45:24- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 05:45:24- uvicorn.error - server.py - serve - INFO - Started server process [30924]
+13-Sep-21 05:45:24- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 05:45:24- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 05:47:01- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 05:47:01- uvicorn.error - server.py - serve - INFO - Started server process [25672]
+13-Sep-21 05:47:01- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 05:47:01- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 05:48:37- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 05:48:38- uvicorn.error - server.py - serve - INFO - Started server process [20872]
+13-Sep-21 05:48:38- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 05:48:38- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 05:48:59- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 05:48:59- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:48:59- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto professionale economico' 'italiano' 'italiano' 'leggere'
+  'giornalista' 'non lo so' 'non lo so' 'si']]
+13-Sep-21 05:48:59- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:48:59- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto professionale economico' 'ital' 'ital' 'legg' 'giornal' 'so'
+  'so' 'si']]
+13-Sep-21 05:48:59- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:48:59- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:48:59- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [['istituto professionale economico' 'ital' 'ital' 'legg' 'giornal' 'so'
+  'so' 1]]
+13-Sep-21 05:48:59- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 05:48:59- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 05:48:59- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [['istituto professionale economico' 1 0 ... 0.0 0.0 0.0]]
+13-Sep-21 05:48:59- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 05:48:59- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:48:59- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\request.py", line 117, in predict_request
+    prediction_uni = model.predict(df_request.values)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 677, in predict
+    predicted_probabilitiy = self.predict_proba(X)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 720, in predict_proba
+    all_proba = Parallel(n_jobs=n_jobs, verbose=self.verbose,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 1041, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 859, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 777, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\fixes.py", line 222, in __call__
+    return self.function(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 129, in _parallel_predict_proba
+    proba_estimator = estimator.predict_proba(X[:, features])
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 935, in predict_proba
+    X = self._validate_X_predict(X, check_input)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 407, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr",
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\base.py", line 421, in _validate_data
+    X = check_array(X, **check_params)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 63, in inner_f
+    return f(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 673, in check_array
+    array = np.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: 'istituto professionale economico'
+13-Sep-21 05:51:31- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 05:51:31- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:51:31- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto professionale economico' 'economia, diritto' 'economia'
+  'viaggiare, investire' 'manager' 'non lo so, non mi aspetto nulla'
+  "voglio imparare di più l'economia e la finanza" 'si']]
+13-Sep-21 05:51:32- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:51:32- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto professionale economico' 'econom diritt' 'econom'
+  'viagg invest' 'manager' 'so aspett null' 'vogl impar econom finanz'
+  'si']]
+13-Sep-21 05:51:32- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:51:32- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:51:32- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [['istituto professionale economico' 'econom diritt' 'econom'
+  'viagg invest' 'manager' 'so aspett null' 'vogl impar econom finanz' 1]]
+13-Sep-21 05:51:32- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 05:51:32- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 05:51:32- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [['istituto professionale economico' 1 0 ... 0.0 0.0 0.0]]
+13-Sep-21 05:51:32- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 05:51:32- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:51:32- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\request.py", line 117, in predict_request
+    prediction_uni = model.predict(df_request.values)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 677, in predict
+    predicted_probabilitiy = self.predict_proba(X)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 720, in predict_proba
+    all_proba = Parallel(n_jobs=n_jobs, verbose=self.verbose,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 1041, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 859, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 777, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\fixes.py", line 222, in __call__
+    return self.function(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 129, in _parallel_predict_proba
+    proba_estimator = estimator.predict_proba(X[:, features])
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 935, in predict_proba
+    X = self._validate_X_predict(X, check_input)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 407, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr",
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\base.py", line 421, in _validate_data
+    X = check_array(X, **check_params)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 63, in inner_f
+    return f(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 673, in check_array
+    array = np.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: 'istituto professionale economico'
+13-Sep-21 05:53:00- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 05:53:00- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:53:00- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto professionale economico' 'economia, diritto' 'economia'
+  'viaggiare, leggere' 'economista, manager' 'non lo so'
+  "voglio imparare meglio l'economia" 'si']]
+13-Sep-21 05:53:00- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:53:00- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto professionale economico' 'econom diritt' 'econom'
+  'viagg legg' 'econom manager' 'so' 'vogl impar megl econom' 'si']]
+13-Sep-21 05:53:01- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:53:01- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:53:01- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [['istituto professionale economico' 'econom diritt' 'econom'
+  'viagg legg' 'econom manager' 'so' 'vogl impar megl econom' 1]]
+13-Sep-21 05:53:01- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 05:53:01- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 05:53:01- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [['istituto professionale economico' 1 0 ... 0.0 0.0 0.0]]
+13-Sep-21 05:53:01- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 05:53:01- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:53:01- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\request.py", line 117, in predict_request
+    prediction_uni = model.predict(df_request.values)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 677, in predict
+    predicted_probabilitiy = self.predict_proba(X)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 720, in predict_proba
+    all_proba = Parallel(n_jobs=n_jobs, verbose=self.verbose,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 1041, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 859, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 777, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\fixes.py", line 222, in __call__
+    return self.function(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 129, in _parallel_predict_proba
+    proba_estimator = estimator.predict_proba(X[:, features])
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 935, in predict_proba
+    X = self._validate_X_predict(X, check_input)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 407, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr",
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\base.py", line 421, in _validate_data
+    X = check_array(X, **check_params)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 63, in inner_f
+    return f(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 673, in check_array
+    array = np.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: 'istituto professionale economico'
+13-Sep-21 05:59:44- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 05:59:45- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:59:45- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto professionale economico' 'er' 'sfd' 'sdfds' 'dsffd' 'dfd'
+  'dfd' 'si']]
+13-Sep-21 05:59:45- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:59:45- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto professionale economico' 'er' 'sfd' 'sdfds' 'dsffd' 'dfd'
+  'dfd' 'si']]
+13-Sep-21 05:59:45- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:59:45- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 05:59:45- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [['istituto professionale economico' 'er' 'sfd' 'sdfds' 'dsffd' 'dfd'
+  'dfd' 1]]
+13-Sep-21 05:59:45- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 05:59:45- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 05:59:45- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [['istituto professionale economico' 1 0 ... 0.0 0.0 0.0]]
+13-Sep-21 05:59:45- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 05:59:45- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 05:59:45- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\request.py", line 117, in predict_request
+    prediction_uni = model.predict(df_request.values)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 677, in predict
+    predicted_probabilitiy = self.predict_proba(X)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 720, in predict_proba
+    all_proba = Parallel(n_jobs=n_jobs, verbose=self.verbose,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 1041, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 859, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 777, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\fixes.py", line 222, in __call__
+    return self.function(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 129, in _parallel_predict_proba
+    proba_estimator = estimator.predict_proba(X[:, features])
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 935, in predict_proba
+    X = self._validate_X_predict(X, check_input)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 407, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr",
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\base.py", line 421, in _validate_data
+    X = check_array(X, **check_params)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 63, in inner_f
+    return f(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 673, in check_array
+    array = np.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: 'istituto professionale economico'
+13-Sep-21 06:00:54- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 06:00:54- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:54- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['liceo scientifico' 'dytfyg' 'werewer' 'erwrer' 'rer' 'ree' 'erre' 'si']]
+13-Sep-21 06:00:54- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:54- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['liceo scientifico' 'dytfyg' 'werewer' 'erwrer' 'rer' 'ree' 'erre' 'si']]
+13-Sep-21 06:00:54- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:54- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:54- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [[14 'dytfyg' 'werewer' 'erwrer' 'rer' 'ree' 'erre' 1]]
+13-Sep-21 06:00:54- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:55- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:55- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [[14.  1.  0. ...  0.  0.  0.]]
+13-Sep-21 06:00:55- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 06:00:55- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:55- root - request.py - predict_request - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:56- root - db_operations.py - AddNewAdvice - WARNING - -----New advice added in db------
+13-Sep-21 06:00:56- root - db_operations.py - AddNewAdvice - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:56- root - db_operations.py - getAllUnByCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:57- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:58- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:58- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:58- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:58- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:58- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:58- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:59- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:59- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:59- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:59- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:59- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:59- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:00:59- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:00- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:00- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:00- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:00- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:01- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:01- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:01- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:01- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:01- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:01- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:02- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:02- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:02- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:02- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:03- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:03- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:03- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:03- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:03- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:03- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:04- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:04- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:04- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:04- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:04- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:04- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:05- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:05- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:05- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:05- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:05- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:05- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:06- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:06- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:06- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:06- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:06- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:06- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:07- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:07- root - db_operations.py - getDurationAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:07- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:07- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:07- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:07- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:08- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:08- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:08- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:08- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:08- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:08- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:08- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:09- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:09- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:09- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:09- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:09- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:10- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:10- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:10- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:10- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:10- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:11- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:11- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:11- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:11- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:11- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:12- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:12- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:12- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:12- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:12- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:12- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:12- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:13- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:13- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:13- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:13- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 06:01:14- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 06:28:56- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 06:28:56- uvicorn.error - server.py - serve - INFO - Started server process [4256]
+13-Sep-21 06:28:56- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 06:28:56- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 06:30:39- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 06:30:39- uvicorn.error - server.py - serve - INFO - Started server process [29740]
+13-Sep-21 06:30:39- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 06:30:40- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 07:27:43- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 07:27:43- uvicorn.error - server.py - serve - INFO - Started server process [21724]
+13-Sep-21 07:27:43- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 07:27:43- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 08:23:03- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 08:23:03- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 08:23:03- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto tecnico economico'
+  'economia, diritto, informatica, matematica' 'informatica, matematica'
+  'programmare, tv, film, musica, viaggiare, animali'
+  'programmatore, sviluppatore mobile, project manager, allevatore di cani'
+  'imparare nuovi linguaggi di programmazione'
+  'perchè mi sembrava molto pratico e inerente al mio lavoro. inoltre dal piano di studi ho visto che si studiavano diverse tecnologie.'
+  'si']]
+13-Sep-21 08:23:03- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 08:23:03- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto tecnico economico' 'econom diritt informat matemat'
+  'informat matemat' 'programm tv film music viagg animal'
+  'programm svilupp mobil project manager allev can'
+  'impar nuov linguagg programm'
+  'perc sembr molt pratic inerent lavor inoltr pian stud vist stud divers tecnolog'
+  'si']]
+13-Sep-21 08:23:03- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 08:23:03- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 08:23:03- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [[7 'econom diritt informat matemat' 'informat matemat'
+  'programm tv film music viagg animal'
+  'programm svilupp mobil project manager allev can'
+  'impar nuov linguagg programm'
+  'perc sembr molt pratic inerent lavor inoltr pian stud vist stud divers tecnolog'
+  1]]
+13-Sep-21 08:23:04- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 08:23:04- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 08:23:04- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [[7. 1. 0. ... 0. 0. 0.]]
+13-Sep-21 08:23:04- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 08:23:04- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 08:23:04- root - request.py - predict_request - WARNING - -----Method finish whit success------
+13-Sep-21 08:23:05- root - db_operations.py - AddNewAdvice - WARNING - -----New advice added in db------
+13-Sep-21 08:23:05- root - db_operations.py - AddNewAdvice - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:46- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 08:47:46- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:46- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto tecnico economico'
+  'economia, diritto, informatica, matematica' 'informatica, matematica'
+  'programamare, film, serie tv, musica, animali, viaggiare'
+  'programmatore, sviluppatore videogiochi' 'imparare nuovi linguaggi'
+  'perchè mi sembrava molto pratico' 'si']]
+13-Sep-21 08:47:47- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:47- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto tecnico economico' 'econom diritt informat matemat'
+  'informat matemat' 'programam film ser tv music animal viagg'
+  'programm svilupp videogioc' 'impar nuov linguagg'
+  'perc sembr molt pratic' 'si']]
+13-Sep-21 08:47:47- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:47- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:47- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [[7 'econom diritt informat matemat' 'informat matemat'
+  'programam film ser tv music animal viagg' 'programm svilupp videogioc'
+  'impar nuov linguagg' 'perc sembr molt pratic' 1]]
+13-Sep-21 08:47:47- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:47- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:47- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [[7. 1. 0. ... 0. 0. 0.]]
+13-Sep-21 08:47:47- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 08:47:47- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:47- root - request.py - predict_request - WARNING - -----Method finish whit success------
+13-Sep-21 08:47:47- root - db_operations.py - AddNewAdvice - WARNING - -----New advice added in db------
+13-Sep-21 08:47:47- root - db_operations.py - AddNewAdvice - WARNING - -----Method finish whit success------
+13-Sep-21 08:48:55- root - db_operations.py - addReviewOfMachineLearning - WARNING - -----Method finish whit success------
+13-Sep-21 09:15:25- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 09:15:25- uvicorn.error - server.py - serve - INFO - Started server process [4036]
+13-Sep-21 09:15:25- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 09:15:25- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 09:20:59- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 09:20:59- uvicorn.error - server.py - serve - INFO - Started server process [21576]
+13-Sep-21 09:20:59- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 09:20:59- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 09:23:23- root - db_operations.py - getDateOfLastSubscription - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:29- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 09:48:29- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:29- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['istituto tecnico economico'
+  'economia, diritto, informatica, matematica' 'informatica'
+  'viaggiare, musica, informatica, animali'
+  'sviluppatore di videogiochi, programmatore' 'non mi aspettavo niene'
+  'mi sembrava molto pratico' 'si']]
+13-Sep-21 09:48:30- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:30- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['istituto tecnico economico' 'econom diritt informat matemat'
+  'informat' 'viagg music informat animal' 'svilupp videogioc programm'
+  'aspett nien' 'sembr molt pratic' 'si']]
+13-Sep-21 09:48:30- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:30- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:30- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [[7 'econom diritt informat matemat' 'informat'
+  'viagg music informat animal' 'svilupp videogioc programm'
+  'aspett nien' 'sembr molt pratic' 1]]
+13-Sep-21 09:48:30- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:30- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:30- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [[7. 1. 0. ... 0. 0. 0.]]
+13-Sep-21 09:48:30- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 09:48:30- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:30- root - request.py - predict_request - WARNING - -----Method finish whit success------
+13-Sep-21 09:48:30- root - db_operations.py - AddNewAdvice - WARNING - -----New advice added in db------
+13-Sep-21 09:48:30- root - db_operations.py - AddNewAdvice - WARNING - -----Method finish whit success------
+13-Sep-21 09:50:15- root - db_operations.py - addNewSubscriptions - WARNING - -----New subscriptions added in db------
+13-Sep-21 09:50:15- root - db_operations.py - addNewSubscriptions - WARNING - -----Method finish whit success------
+13-Sep-21 09:52:26- root - db_operations.py - addNewSubscriptions - WARNING - -----New subscriptions added in db------
+13-Sep-21 09:52:26- root - db_operations.py - addNewSubscriptions - WARNING - -----Method finish whit success------
+13-Sep-21 09:52:26- root - db_operations.py - addReviewOfMachineLearning - WARNING - -----Method finish whit success------
+13-Sep-21 09:52:26- root - db_operations.py - addNewStudent - WARNING - -----New student added in db------
+13-Sep-21 09:52:26- root - db_operations.py - addNewStudent - WARNING - -----Method finish whit success------
+13-Sep-21 09:54:50- root - db_operations.py - getAllCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:15- root - db_operations.py - getAllUnByCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:15- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:15- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:16- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:16- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:16- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:16- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:16- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:16- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:16- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:16- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:17- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:17- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:17- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:22- root - db_operations.py - getAllUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:34- root - db_operations.py - getReviewAverangebyUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:35- root - db_operations.py - getNumberOfPeopleByUNi - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:35- root - db_operations.py - getAllCourseByUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:36- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:36- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:36- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:36- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:36- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:38- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:38- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:38- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:38- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:38- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:38- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:38- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:38- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:39- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:39- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:39- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:39- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:39- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:39- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:39- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:39- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:40- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:40- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:40- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:40- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:40- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:40- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:40- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:41- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:41- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:41- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:41- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:41- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:41- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:41- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:41- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:42- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:42- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:42- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:42- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:42- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:42- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:42- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:42- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:43- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:43- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:43- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:43- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:43- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:43- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:43- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:43- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:44- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:44- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:44- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:44- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:44- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:44- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:44- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:55:45- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:03- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:03- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:04- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:04- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:05- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:05- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:05- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:06- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:06- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:06- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:06- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:06- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 09:56:07- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 09:57:45- root - db_operations.py - getDateOfLastSubscription - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:09- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:09- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:10- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:10- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:10- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:11- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:11- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:11- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:11- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:11- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:11- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:12- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 10:03:13- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:37- root - db_operations.py - getNumberOfPeopleByCourseAndUni - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:38- root - db_operations.py - getDidacticQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:38- root - db_operations.py - getReviewAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:38- root - db_operations.py - getGradeAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:38- root - db_operations.py - getMarkAveragebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:39- root - db_operations.py - getExamDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:39- root - db_operations.py - getSubjectsDifficultAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:39- root - db_operations.py - getTeachingQualityAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:39- root - db_operations.py - getLaboratoryAverangebyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:40- root - db_operations.py - getAllSubjectByUni - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:40- root - db_operations.py - getReviewListbyCourse - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:40- root - db_operations.py - getAllEasyExam - WARNING - -----Method finish whit success------
+13-Sep-21 10:20:40- root - db_operations.py - getAllDifficultExam - WARNING - -----Method finish whit success------
+13-Sep-21 13:21:55- uvicorn.error - config.py - load - ERROR - Error loading ASGI app. Attribute "app" not found in module "main".
+13-Sep-21 13:23:46- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 13:23:46- uvicorn.error - server.py - serve - INFO - Started server process [34256]
+13-Sep-21 13:23:46- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 13:23:46- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 13:23:46- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 13:23:46- root - request.py - feature_engireering_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\ai_model\request.py", line 86, in feature_engireering_request
+    encoder_choice= joblib.load('../doc/encoder_choice_model')
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\numpy_pickle.py", line 577, in load
+    with open(filename, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '../doc/encoder_choice_model'
+13-Sep-21 13:23:46- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\ai_model\request.py", line 111, in predict_request
+    model = joblib.load('../doc/model')
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\numpy_pickle.py", line 577, in load
+    with open(filename, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '../doc/model'
+13-Sep-21 13:24:56- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 13:24:56- root - request.py - feature_engireering_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\ai_model\request.py", line 86, in feature_engireering_request
+    encoder_choice= joblib.load('../doc/encoder_choice_model')
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\numpy_pickle.py", line 577, in load
+    with open(filename, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '../doc/encoder_choice_model'
+13-Sep-21 13:24:56- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\ai_model\request.py", line 111, in predict_request
+    model = joblib.load('../doc/model')
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\numpy_pickle.py", line 577, in load
+    with open(filename, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '../doc/model'
+13-Sep-21 13:28:24- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 13:28:24- uvicorn.error - server.py - serve - INFO - Started server process [22288]
+13-Sep-21 13:28:24- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 13:28:24- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 13:28:43- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 13:28:43- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 13:28:43- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['string' 'string' 'string' 'string' 'string' 'string' 'string' 'string']]
+13-Sep-21 13:28:44- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 13:28:44- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['string' 'string' 'string' 'string' 'string' 'string' 'string' 'string']]
+13-Sep-21 13:28:44- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 13:28:44- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 13:28:44- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [['string' 'string' 'string' 'string' 'string' 'string' 'string' 'string']]
+13-Sep-21 13:28:44- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 13:28:44- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 13:28:44- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [['string' 'string' 0 ... 0.0 0.0 0.0]]
+13-Sep-21 13:28:44- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 13:28:44- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 13:28:44- root - request.py - predict_request - ERROR - Exception occurred
+Traceback (most recent call last):
+  File ".\ai_model\request.py", line 112, in predict_request
+    prediction_uni = model.predict(df_request.values)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 677, in predict
+    predicted_probabilitiy = self.predict_proba(X)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 720, in predict_proba
+    all_proba = Parallel(n_jobs=n_jobs, verbose=self.verbose,
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 1041, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 859, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 777, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\fixes.py", line 222, in __call__
+    return self.function(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\ensemble\_bagging.py", line 129, in _parallel_predict_proba
+    proba_estimator = estimator.predict_proba(X[:, features])
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 935, in predict_proba
+    X = self._validate_X_predict(X, check_input)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\tree\_classes.py", line 407, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr",
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\base.py", line 421, in _validate_data
+    X = check_array(X, **check_params)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 63, in inner_f
+    return f(*args, **kwargs)
+  File "c:\users\francesca rossi\desktop\aiuniversity\venv\lib\site-packages\sklearn\utils\validation.py", line 673, in check_array
+    array = np.asarray(array, order=order, dtype=dtype)
+ValueError: could not convert string to float: 'string'
+13-Sep-21 13:30:27- root - request.py - predict_request - WARNING - ****START PREDICT****
+13-Sep-21 13:30:27- root - request.py - set_request - WARNING - -----Method finish whit success------
+13-Sep-21 13:30:27- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE: [['liceo scientifico' 'string' 'string' 'string' 'string' 'string'
+  'string' 'no']]
+13-Sep-21 13:30:27- root - request.py - clean_request - WARNING - -----Method finish whit success------
+13-Sep-21 13:30:27- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE CLEANS: [['liceo scientifico' 'string' 'string' 'string' 'string' 'string'
+  'string' 'no']]
+13-Sep-21 13:30:27- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 13:30:27- root - request.py - hot_encoding - WARNING - -----Method finish whit success------
+13-Sep-21 13:30:27- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE ENCODING CATEGORICAL: [[14 'string' 'string' 'string' 'string' 'string' 'string' 0]]
+13-Sep-21 13:30:27- root - request.py - reverse_bag_of_word - WARNING - -----Method finish whit success------
+13-Sep-21 13:30:27- root - request.py - reverse_td_if - WARNING - -----Method finish whit success------
+13-Sep-21 13:30:27- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN: [[14.  0.  0. ...  0.  0.  0.]]
+13-Sep-21 13:30:27- root - request.py - feature_engireering_request - WARNING - REQUEST VALUE AFTER FEAURES ENGIN=>shape: (1, 1932)
+13-Sep-21 13:30:27- root - request.py - feature_engireering_request - WARNING - -----Method finish whit success------
+13-Sep-21 13:30:27- root - request.py - predict_request - WARNING - -----Method finish whit success------
+13-Sep-21 13:30:28- root - db_operations.py - AddNewAdvice - WARNING - -----New advice added in db------
+13-Sep-21 13:30:28- root - db_operations.py - AddNewAdvice - WARNING - -----Method finish whit success------
+13-Sep-21 13:31:13- root - db_operations.py - getNumberOfManByUNi - WARNING - -----Method finish whit success------
