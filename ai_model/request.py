@@ -87,18 +87,18 @@ def feature_engireering_request(high_school, subject, prefered_subject, hobby, w
         encoder_school = joblib.load('doc/encoder_school_model.joblib')
         print(encoder_school.classes_)
         df_request = set_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
-        logging.warning(f'REQUEST VALUE: {df_request.values}')
+        print(f'REQUEST VALUE: {df_request.values}')
         df_request_clean = clean_request(df_request)
-        logging.warning(f'REQUEST VALUE CLEANS: {df_request_clean.values}')
+        print(f'REQUEST VALUE CLEANS: {df_request_clean.values}')
         df_request_clean = hot_encoding(encoder_choice, df_request_clean, 'continuos_study')
         df_request_clean= hot_encoding(encoder_school, df_request_clean, 'high_school')
-        logging.warning(f'REQUEST VALUE ENCODING CATEGORICAL: {df_request_clean.values}')
+        print(f'REQUEST VALUE ENCODING CATEGORICAL: {df_request_clean.values}')
         df_after_bof = reverse_bag_of_word(df_request_clean)
         print(df_after_bof.values)
         df_after_tfid = reverse_td_if(df_after_bof)
-        logging.warning(f'REQUEST VALUE AFTER FEAURES ENGIN: {df_after_tfid.values}')
-        logging.warning(f'REQUEST VALUE AFTER FEAURES ENGIN=>shape: {df_after_tfid.shape}')
-        logging.warning('-----Method finish whit success------')
+        print(f'REQUEST VALUE AFTER FEAURES ENGIN: {df_after_tfid.values}')
+        print(f'REQUEST VALUE AFTER FEAURES ENGIN=>shape: {df_after_tfid.shape}')
+        print('-----Method finish whit success------')
         return df_after_tfid
     except:
         logging.error("Exception occurred", exc_info=True)
@@ -110,6 +110,7 @@ async def predict_request(high_school, subject, prefered_subject, hobby, work_dr
         print('****START PREDICT****')
         df_request = feature_engireering_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
         model = joblib.load('doc/model.joblib')
+        print('file model',  model)
         prediction_uni = model.predict(df_request.values)
         for i in prediction_uni:
             uni = i
