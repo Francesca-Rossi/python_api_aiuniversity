@@ -90,6 +90,7 @@ def feature_engireering_request(high_school, subject, prefered_subject, hobby, w
     try:
         encoder_choice= joblib.load('doc/encoder_choice_model')
         encoder_school = joblib.load('doc/encoder_school_model')
+        print(encoder_school.classes_)
         df_request = set_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
         logging.warning(f'REQUEST VALUE: {df_request.values}')
         df_request_clean = clean_request(df_request)

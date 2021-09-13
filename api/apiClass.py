@@ -125,7 +125,7 @@ class SubscriptionInfo(BaseModel):
     difficulties_list:  Optional[str] = "" #TODO: si può togliere
     study_type: str
     university: str
-    other_uni: str
+    other_uni: Optional[str] = "" #TODO: solo se non c'è uni
     uni_type:  str
     department: str
     degree_course: str
@@ -143,8 +143,8 @@ class SubscriptionInfo(BaseModel):
     hard_exams: str
     redo_choice: str
     reason_redo_choice: Optional[str] = "" #TODO: si può togliere
-    decision_choice: Optional[str] = "" #TODO: si può togliere
     expectations: str
+    decision_choice: str
     expectations_met: Optional[str] = "" #TODO: si può togliere
     expectations_no: Optional[str] = "" #TODO: si può togliere
     advice: Optional[str] = "" #TODO: si può togliere
@@ -172,7 +172,7 @@ class SubscriptionInfo(BaseModel):
     triennial_grade: Optional[str] = "" #TODO: si può togliere
     master_choice_related_studies: Optional[str] = "" #TODO: si può togliere
     high_school: str
-    other_high_school: str
+    other_high_school: Optional[str] = "" #TODO: solo se non c'è school
     main_subject: str
     favorite_subject: str
     baccalaureate: int
@@ -199,13 +199,12 @@ class PredictResult(BaseModel):
     degree_course_input: str #corso inserito dall'utente
     degree_predict: str #corso che gli abbiamo consigliato
     university_input: str #università inserita
-    degree_predict_correct: bool
+    degree_predict_correct: str
     difference_between_course: int #quanto è lontano il tuo corso da quello che ti abbiamo consigliato
     choosing_course_if_back: int #se tornassi indietro che scelta faresti
     degree_dream: str #scelta da fare se tornasse indietro
     uni_dream: str
-    aiuniversity_is_utils: bool
-    start_utilities_aiuniversity: bool
+    aiuniversity_is_util: str
     stars_aiuniversity: int
     review_aiuniversity: str
     subscription_date: Optional[str] = todayToString()

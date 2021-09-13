@@ -5363,3 +5363,11 @@ TypeError: average_dict() missing 1 required positional argument: 'minimum'
 12-Sep-21 18:57:05- uvicorn.error - server.py - serve - INFO - Started server process [18104]
 12-Sep-21 18:57:05- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
 12-Sep-21 18:57:05- uvicorn.error - on.py - startup - INFO - Application startup complete.
+12-Sep-21 21:39:56- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+12-Sep-21 21:39:56- uvicorn.error - server.py - serve - INFO - Started server process [17828]
+12-Sep-21 21:39:56- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+12-Sep-21 21:39:56- uvicorn.error - on.py - startup - INFO - Application startup complete.
+12-Sep-21 21:40:20- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+12-Sep-21 21:40:20- uvicorn.error - server.py - serve - INFO - Started server process [31684]
+12-Sep-21 21:40:20- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+12-Sep-21 21:40:20- uvicorn.error - on.py - startup - INFO - Application startup complete.
