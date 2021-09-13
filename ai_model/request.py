@@ -1,6 +1,6 @@
 from .feature_engineering import *
 from commons_func.logging_config import *
-import joblib
+
 
 def set_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study):
     try:

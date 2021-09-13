@@ -886,3 +886,8 @@ ValueError: could not convert string to float: 'string'
 13-Sep-21 20:54:37- uvicorn.error - server.py - serve - INFO - Started server process [30900]
 13-Sep-21 20:54:37- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
 13-Sep-21 20:54:37- uvicorn.error - on.py - startup - INFO - Application startup complete.
+13-Sep-21 20:57:50- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 20:58:20- root - db_operations.py - dbOpenConnection - WARNING - ---CONNECT DB SUCCESS---
+13-Sep-21 20:58:20- uvicorn.error - server.py - serve - INFO - Started server process [26500]
+13-Sep-21 20:58:20- uvicorn.error - on.py - startup - INFO - Waiting for application startup.
+13-Sep-21 20:58:20- uvicorn.error - on.py - startup - INFO - Application startup complete.
