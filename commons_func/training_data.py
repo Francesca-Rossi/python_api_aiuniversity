@@ -1,6 +1,6 @@
 # TRAINING DATASET
 def fit_dataset(model, X_train, y_train):
-    model.fit(X_train, y_train)  # training the model on the train dataset
+    model.fit(X_train, y_train)  # training the model.joblib on the train dataset
     return model
 
 def predict_dataset(model, X_test):

@@ -24,7 +24,7 @@ def create_clustering_degree_course():
         # clustering
         km = KMeans(n_clusters=120, random_state=0)
         km.fit_transform(similarity_df)
-        filename = 'doc/degree_cluster_model'
+        filename = 'doc/degree_cluster_model.joblib'
         joblib.dump(km, filename)
         cluster_labels = km.labels_
         cluster_labels_degree_course = pd.DataFrame(cluster_labels, columns=['ClusterLabel'])
@@ -73,8 +73,8 @@ def encoding_categorical_features():
               choice_labels = encoder_choice.fit_transform(df_clean_features[feature])
               df_clean_features[feature]=one_hot_encoding( df_clean_features[feature], feature, choice_labels,encoder_choice )
 
-        joblib.dump(encoder_choice, 'doc/encoder_choice_model')
-        joblib.dump(encoder_school, 'doc/encoder_school_model')
+        joblib.dump(encoder_choice, 'doc/encoder_choice_model.joblib')
+        joblib.dump(encoder_school, 'doc/encoder_school_model.joblib')
         logging.warning('-----Method finish whit success------')
         return df_clean_features
     except:
@@ -91,7 +91,7 @@ def bag_of_words_text_features():
             item = df_clean_features['bag_of_words'].iloc[index]
             listToStr = ' '.join([str(i) for i in item])
             df_clean_features['bag_of_words'].iloc[index] = listToStr
-        # fit the model
+        # fit the model.joblib
         vectorizer_train = CountVectorizer(min_df=0, binary=True)
         df_bow_dict = bag_of_words(vectorizer_train, df_clean_features['bag_of_words'])
         # delete the old columns

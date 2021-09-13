@@ -63,7 +63,7 @@ def voting_alghoritm(X_train_list, y_train_list, X_test_list, y_test_list, keys_
             #voting_score[keys_list[i]]['wrong_class'] = wrong_classification(X_test_list[i], voting_predict[keys_list[i]],y_test_list[i])
             voting_report[keys_list[i]] = classification_report(y_test_list[i], voting_predict[keys_list[i]],output_dict=True)
             voting_score[keys_list[i]]['accuracy'] = voting_report[keys_list[i]]['accuracy']
-            logging.warning(f'Finish {i} train set in voting model')
+            logging.warning(f'Finish {i} train set in voting model.joblib')
         logging.warning('-----Method finish whit success------')
         return voting_score, voting_model , voting_predict, voting_report
     except:
@@ -83,7 +83,7 @@ def bagging_algorithm(X_train_list, y_train_list, X_test_list, y_test_list, keys
             #bagging_score[keys_list[i]]['wrong_class'] = wrong_classification(X_test_list[i], bagging_predict[keys_list[i]],y_test_list[i])
             bagging_report[keys_list[i]] = classification_report(y_test_list[i], bagging_predict[keys_list[i]],output_dict=True)
             bagging_score[keys_list[i]]['accuracy'] = bagging_report[keys_list[i]]['accuracy']
-            logging.warning(f'Finish {i} train set in bagging model')
+            logging.warning(f'Finish {i} train set in bagging model.joblib')
         logging.warning('-----Method finish whit success------')
         return  bagging_score, bagging_model, bagging_predict, bagging_report
     except:
@@ -103,7 +103,7 @@ def boosting_alghoritm(X_train_list, y_train_list, X_test_list, y_test_list, key
             #boosting_score[keys_list[i]]['wrong_class'] = wrong_classification(X_test_list[i],boosting_predict[keys_list[i]], y_test_list[i])
             boosting_report[keys_list[i]] = classification_report(y_test_list[i], boosting_predict[keys_list[i]], output_dict=True)
             boosting_score[keys_list[i]]['accuracy'] = boosting_report[keys_list[i]]['accuracy']
-            logging.warning(f'Finish {i} train set in boosting model')
+            logging.warning(f'Finish {i} train set in boosting model.joblib')
         logging.warning('-----Method finish whit success------')
         return boosting_score, boosting_model, boosting_predict, boosting_report
     except:
@@ -123,7 +123,7 @@ def stacking_alghortim(X_train_list, y_train_list, X_test_list, y_test_list, key
             #stacking_score[keys_list[i]]['wrong_class'] = wrong_classification(X_test_list[i],stacking_predict[keys_list[i]],y_test_list[i])
             stacking_report[keys_list[i]] = classification_report(y_test_list[i], stacking_predict[keys_list[i]],output_dict=True)
             stacking_score[keys_list[i]]['accuracy'] = stacking_report[keys_list[i]]['accuracy']
-            logging.warning(f'Finish {i} train set in stacking model')
+            logging.warning(f'Finish {i} train set in stacking model.joblib')
         logging.warning('-----Method finish whit success------')
         return stacking_score, stacking_model, stacking_predict, stacking_report
     except:
@@ -212,7 +212,7 @@ def save_best_model():
             logging.error('Errore nella scelta del modello')
             error = 1
             clf=""
-        filename = 'doc/model'
+        filename = 'doc/model.joblib'
         logging.warning('-----Method finish whit success------')
         joblib.dump(clf, filename)
     except:

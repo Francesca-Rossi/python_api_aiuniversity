@@ -42,7 +42,7 @@ def hot_encoding(encoder, df, label):
 
 def reverse_bag_of_word(df):
     try:
-        vectorizer_train = joblib.load('doc/bag_of_word_model')
+        vectorizer_train = joblib.load('doc/bag_of_word_model.joblib')
         df['bag_of_words'] = df[['subject', 'hobby', 'prefered_subject', 'work_dream']].values.tolist()
         for index in df['bag_of_words'].index:
             item = df['bag_of_words'].iloc[index]
@@ -63,7 +63,7 @@ def reverse_bag_of_word(df):
 
 def reverse_td_if(df):
     try:
-        tv = joblib.load('doc/tf_id_model')
+        tv = joblib.load('doc/tf_id_model.joblib')
         df['tf_if'] = df[['aspectations_uni', 'decision_choice_uni']].values.tolist()
         for index in df['tf_if'].index:
             item = df['tf_if'].iloc[index]
@@ -83,8 +83,8 @@ def reverse_td_if(df):
 
 def feature_engireering_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study):
     try:
-        encoder_choice= joblib.load('doc/encoder_choice_model')
-        encoder_school = joblib.load('doc/encoder_school_model')
+        encoder_choice= joblib.load('doc/encoder_choice_model.joblib')
+        encoder_school = joblib.load('doc/encoder_school_model.joblib')
         print(encoder_school.classes_)
         df_request = set_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
         logging.warning(f'REQUEST VALUE: {df_request.values}')
@@ -109,7 +109,7 @@ async def predict_request(high_school, subject, prefered_subject, hobby, work_dr
         logging.warning('****START PREDICT****')
         print('****START PREDICT****')
         df_request = feature_engireering_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study)
-        model = joblib.load('doc/model')
+        model = joblib.load('doc/model.joblib')
         prediction_uni = model.predict(df_request.values)
         for i in prediction_uni:
             uni = i
