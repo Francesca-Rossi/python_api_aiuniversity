@@ -125,4 +125,4 @@ async def predict_request(high_school, subject, prefered_subject, hobby, work_dr
         return  df2.iloc[1]
     except:
         print('errore')
-        logging.error("Exception occurred", exc_info=True)
+        print("Exception occurred", exc_info=True)
