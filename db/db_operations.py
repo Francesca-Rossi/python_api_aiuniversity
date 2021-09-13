@@ -1,9 +1,7 @@
-import pandas as pd
 import pymongo
 from bson.json_util import *
-from commons_func.generic_func import  *
 from datetime import datetime
-from model import *
+from ai_model.model import *
 
 #region ---CONNECTION METHOD---
 def dbOpenConnection():

@@ -1,5 +1,4 @@
-from recovery_data import *
-from commons_func.generic_func import *
+from .recovery_data import *
 from commons_func.cleaning_data import *
 from commons_func.preprocessing_data import *
 from commons_func.logging_config import  *

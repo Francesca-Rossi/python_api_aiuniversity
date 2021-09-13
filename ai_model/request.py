@@ -1,9 +1,4 @@
-import pandas as pd
-from cleaning_data import *
-from sklearn.preprocessing import LabelEncoder
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from feature_engineering import *
+from .feature_engineering import *
 from commons_func.logging_config import *
 import joblib
 

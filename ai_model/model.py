@@ -1,4 +1,4 @@
-from feature_engineering import *
+from .feature_engineering import *
 from collections import Counter
 from imblearn.over_sampling import RandomOverSampler
 from sklearn.model_selection import train_test_split
@@ -13,7 +13,6 @@ from sklearn.ensemble import StackingClassifier
 from sklearn.linear_model import LogisticRegression
 from commons_func.training_data import *
 import joblib
-import multiprocessing as mp
 
 model_1 = MultinomialNB()
 model_2 = DecisionTreeClassifier()

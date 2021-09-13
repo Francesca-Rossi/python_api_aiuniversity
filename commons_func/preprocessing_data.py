@@ -1,7 +1,5 @@
-import string
-from nltk.corpus import stopwords
 from nltk.stem.snowball import ItalianStemmer
-from cleaning_data import lang_stop_words
+from ai_model.cleaning_data import lang_stop_words
 import nltk
 
 def preprocessing_text(dataframe, feature, key, lang):

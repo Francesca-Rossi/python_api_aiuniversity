@@ -17,7 +17,7 @@ from api.review_request import  *
 from api.evalutation_request import  *
 from api.other_request import *
 from api.post_api import *
-from recovery_data import *
+from ai_model.recovery_data import *
 from datetime import date
 from commons_func.logging_config import *
 
@@ -42,7 +42,7 @@ from commons_func.logging_config import *
 
 if __name__ == '__main__':
 
-    logging.warning('prova')
+    #logging.warning('prova')
     '''# inserisco di nuovo tutto nel dataset
     today=date.today()
     date_today =  today.strftime("%d-%m-%Y")

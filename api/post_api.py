@@ -1,5 +1,5 @@
 from .apiClass import  *
-from request import predict_request
+from ai_model.request import predict_request
 
 @app.post("/predict", status_code=200, tags=["Add"])
 async def prediction_degree(payload: UserInfo):
