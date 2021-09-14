@@ -1,5 +1,8 @@
 from .feature_engineering import *
 from commons_func.logging_config import *
+import traceback
+import sys
+
 
 
 def set_request(high_school, subject, prefered_subject, hobby, work_dream, aspectations_uni, decision_choice_uni, continuos_study):
@@ -125,4 +128,4 @@ async def predict_request(high_school, subject, prefered_subject, hobby, work_dr
         return  df2.iloc[1]
     except:
         print('errore')
-        print("Exception occurred", exc_info=True)
+        traceback.print_exception(*sys.exc_info())
