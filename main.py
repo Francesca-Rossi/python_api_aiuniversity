@@ -41,7 +41,7 @@ from commons_func.logging_config import *
 
 
 if __name__ == '__main__':
-
+    save_best_model()
     #logging.warning('prova')
     '''# inserisco di nuovo tutto nel dataset
     today=date.today()
