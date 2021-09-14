@@ -3,7 +3,7 @@ from ai_model.request import predict_request
 
 @app.post("/predict", status_code=200, tags=["Add"])
 async def prediction_degree(payload: UserInfo):
-    '''api per prevedere una laurea dato le informazioni in ingresso ( da usare sia per studenti superiori sia come check per gli studenti universitari)'''
+    '''This api allow to predict a degree course and save the result on the database'''
     try:
         dictionary = payload.dict()
         for key in dictionary.keys():
@@ -23,7 +23,7 @@ async def prediction_degree(payload: UserInfo):
 
 @app.post("/addNewSubscriptions", response_model= BoolResult, status_code=200, tags=["Add"])
 async def add_new_subscription(payload: SubscriptionInfo):
-    '''Aggiunta di una compilazione al database'''
+    '''Add a form answers to database'''
     try:
         dictionary = payload.dict()
         for key in dictionary.keys():
@@ -42,7 +42,7 @@ async def add_new_subscription(payload: SubscriptionInfo):
 
 @app.post("/addNewStudent", response_model= BoolResult, status_code=200,  tags=["Add"])
 async def add_new_students(payload: SubscriptionInfo):
-    '''Aggiunta di uno studente al database'''
+    '''Add a students answers to database'''
     try:
         dictionary = payload.dict()
 
@@ -61,7 +61,7 @@ async def add_new_students(payload: SubscriptionInfo):
 
 @app.post("/addNewGraduate", response_model= BoolResult, status_code=200,  tags=["Add"] )
 async def add_new_graduate(payload: SubscriptionInfo):
-    '''Aggiunta di un laureato al database'''
+    '''Add a degree answers to database'''
     try:
         dictionary = payload.dict()
         for key in dictionary.keys():
@@ -81,7 +81,7 @@ async def add_new_graduate(payload: SubscriptionInfo):
 
 @app.post("/addPredictReview", response_model= BoolResult, status_code=200,  tags=["Add"])
 async def add_predict_review(payload: PredictResult):
-    '''Aggiunta di un laureato al database'''
+    '''Add feedback for a specific predict on database'''
     try:
         dictionary = payload.dict()
         for key in dictionary.keys():
