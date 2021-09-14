@@ -135,7 +135,7 @@ class SubscriptionInfo(BaseModel):
     enrolment_type: str
     graduation_grade:  Optional[int] = 0 #TODO: solo per laureati
     degree_year: Optional[int] = 0  #TODO: solo per studenti
-    average_grade: Optional[int] = 0 #TODO: solo per studenti
+    average_grade: Optional[float] = 0 #TODO: solo per studenti
     exams_not_done: Optional[str] = "" #TODO: solo per studenti
     numb_exams_not_done: Optional[int] = 0 #TODO: solo per studenti
     difficult_aspect: str
