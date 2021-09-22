@@ -8,10 +8,6 @@ from fastapi.security import OAuth2PasswordBearer
 
 tags_metadata = [
     {
-        "name": "Resources",
-        "description": "This APIs aim to return all the data present in the database",
-    },
-    {
         "name": "Add",
         "description": "This APIs allow to register some information about the Italian bachelor's degree  in the database",
     },
