@@ -17,6 +17,7 @@ from api.review_request import  *
 from api.evalutation_request import  *
 from api.other_request import *
 from api.post_api import *
+from api.resources import *
 from ai_model.recovery_data import *
 from datetime import date
 from commons_func.logging_config import *
