@@ -75,6 +75,7 @@ def getAllStudents(db):
         df = df.iloc[:, 1:]
         df.to_json('doc/students_original_dataset.json')
         logging.warning('-----Method finish whit success------')
+        return dumps(cursor)
     except:
         logging.error("Exception occurred", exc_info=True)
 
@@ -85,6 +86,7 @@ def getAllGraduates(db):
         df = df.iloc[:, 1:]
         df.to_json('doc/graduates_original_dataset.json')
         logging.warning('-----Method finish whit success------')
+        return dumps(cursor)
     except:
         logging.error("Exception occurred", exc_info=True)
 
@@ -96,6 +98,7 @@ def getAllSubscription(db):
         df = df.iloc[:, 1:]
         df.to_json('doc/subscriptions_original_dataset.json')
         logging.warning('-----Method finish whit success------')
+        return dumps(cursor)
     except:
         logging.error("Exception occurred", exc_info=True)
 
