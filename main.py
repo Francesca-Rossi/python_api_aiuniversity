@@ -43,6 +43,8 @@ from commons_func.logging_config import *
 if __name__ == '__main__':
     save_best_model()
     #logging.warning('prova')
+    #pippo=getAllSubscription(DB)
+
     '''# inserisco di nuovo tutto nel dataset
     today=date.today()
     date_today =  today.strftime("%d-%m-%Y")

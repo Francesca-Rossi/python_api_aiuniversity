@@ -2,12 +2,13 @@ import pymongo
 from bson.json_util import *
 from datetime import datetime
 from ai_model.model import *
+import certifi
 
 #region ---CONNECTION METHOD---
 def dbOpenConnection():
     try:
         client = pymongo.MongoClient(
-            "mongodb+srv://ai_university_admin:Pippo@dbserveraiuniversity.yfbov.mongodb.net/ai_university_db?retryWrites=true&w=majority")
+            "mongodb+srv://ai_university_admin:Pippo@dbserveraiuniversity.yfbov.mongodb.net/ai_university_db?retryWrites=true&w=majority", tlsCAFile=certifi.where())
         logging.warning('---CONNECT DB SUCCESS---')
         return client
     except:
